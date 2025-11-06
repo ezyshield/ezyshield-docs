@@ -1,12 +1,12 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "ezyshield",
+        "title": "Laravel",
         "version": "0.0.1"
     },
     "servers": [
         {
-            "url": "https:\/\/local-vj8qtz.ezyshield.com.au\/api\/verification"
+            "url": "http://localhost/api/verification"
         }
     ],
     "tags": [
@@ -23,7 +23,7 @@
         }
     ],
     "paths": {
-        "\/verifications": {
+        "/verifications": {
             "get": {
                 "operationId": "verification.verifications.index",
                 "summary": "List all verifications",
@@ -34,14 +34,14 @@
                     "200": {
                         "description": "Array of `VerificationResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#\/components\/schemas\/VerificationResource"
+                                                "$ref": "#/components/schemas/VerificationResource"
                                             }
                                         }
                                     },
@@ -53,10 +53,10 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -69,9 +69,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/StoreVerificationRequest"
+                                "$ref": "#/components/schemas/StoreVerificationRequest"
                             }
                         }
                     }
@@ -80,12 +80,12 @@
                     "201": {
                         "description": "`VerificationResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/VerificationResource"
+                                            "$ref": "#/components/schemas/VerificationResource"
                                         }
                                     },
                                     "required": [
@@ -96,18 +96,18 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             }
         },
-        "\/verifications\/{verification}": {
+        "/verifications/{verification}": {
             "get": {
                 "operationId": "verification.verifications.show",
                 "summary": "Get a verification",
@@ -130,12 +130,12 @@
                     "200": {
                         "description": "`VerificationResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/VerificationResource"
+                                            "$ref": "#/components/schemas/VerificationResource"
                                         }
                                     },
                                     "required": [
@@ -146,15 +146,15 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             }
         },
-        "\/verifications\/{verification}\/checks": {
+        "/verifications/{verification}/checks": {
             "get": {
                 "operationId": "verification.verifications.checks.index",
                 "summary": "List all checks for a verification",
@@ -177,14 +177,14 @@
                     "200": {
                         "description": "Array of `CheckResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#\/components\/schemas\/CheckResource"
+                                                "$ref": "#/components/schemas/CheckResource"
                                             }
                                         }
                                     },
@@ -196,10 +196,10 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -224,9 +224,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/StoreCheckRequest"
+                                "$ref": "#/components/schemas/StoreCheckRequest"
                             }
                         }
                     }
@@ -235,12 +235,12 @@
                     "201": {
                         "description": "`CheckResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/CheckResource"
+                                            "$ref": "#/components/schemas/CheckResource"
                                         }
                                     },
                                     "required": [
@@ -251,18 +251,18 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             }
         },
-        "\/verifications\/{verification}\/checks\/{check}": {
+        "/verifications/{verification}/checks/{check}": {
             "get": {
                 "operationId": "verification.verifications.checks.show",
                 "summary": "Get a check for a verification",
@@ -295,12 +295,12 @@
                     "200": {
                         "description": "`CheckResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/CheckResource"
+                                            "$ref": "#/components/schemas/CheckResource"
                                         }
                                     },
                                     "required": [
@@ -311,13 +311,13 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "404": {
-                        "$ref": "#\/components\/responses\/ModelNotFoundException"
+                        "$ref": "#/components/responses/ModelNotFoundException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             }
@@ -335,15 +335,22 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The check ID."
                     },
                     "result": {
-                        "type": "string",
-                        "description": "The result of the check."
+                        "description": "The result of the check.",
+                        "$ref": "#/components/schemas/CheckResult"
                     },
                     "created_at": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
                         "description": "ISO 8601 formatted date-time."
                     }
                 },
@@ -353,6 +360,14 @@
                     "created_at"
                 ],
                 "title": "CheckResource"
+            },
+            "CheckResult": {
+                "type": "string",
+                "enum": [
+                    "uncompromised",
+                    "compromised"
+                ],
+                "title": "CheckResult"
             },
             "StoreCheckRequest": {
                 "type": "object",
@@ -444,7 +459,7 @@
                     },
                     "status": {
                         "description": "The current status of the verification.",
-                        "$ref": "#\/components\/schemas\/VerificationStatus"
+                        "$ref": "#/components/schemas/VerificationStatus"
                     },
                     "created_at": {
                         "type": [
@@ -490,7 +505,7 @@
             "AuthorizationException": {
                 "description": "Authorization error",
                 "content": {
-                    "application\/json": {
+                    "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -509,7 +524,7 @@
             "AuthenticationException": {
                 "description": "Unauthenticated",
                 "content": {
-                    "application\/json": {
+                    "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -528,7 +543,7 @@
             "ValidationException": {
                 "description": "Validation error",
                 "content": {
-                    "application\/json": {
+                    "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -558,7 +573,7 @@
             "ModelNotFoundException": {
                 "description": "Not found",
                 "content": {
-                    "application\/json": {
+                    "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {

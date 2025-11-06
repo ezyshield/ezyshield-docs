@@ -1,12 +1,12 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "ezyshield",
+        "title": "Laravel",
         "version": "0.0.1"
     },
     "servers": [
         {
-            "url": "https:\/\/local-vj8qtz.ezyshield.com.au\/api\/management"
+            "url": "http://localhost/api/management"
         }
     ],
     "tags": [
@@ -29,7 +29,7 @@
         }
     ],
     "paths": {
-        "\/organization": {
+        "/organization": {
             "get": {
                 "operationId": "management.organization.show",
                 "summary": "Get the current organization",
@@ -40,12 +40,12 @@
                     "200": {
                         "description": "`OrganizationResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/OrganizationResource"
+                                            "$ref": "#/components/schemas/OrganizationResource"
                                         }
                                     },
                                     "required": [
@@ -56,10 +56,10 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -72,9 +72,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/UpdateOrganizationRequest"
+                                "$ref": "#/components/schemas/UpdateOrganizationRequest"
                             }
                         }
                     }
@@ -83,12 +83,12 @@
                     "200": {
                         "description": "`OrganizationResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/OrganizationResource"
+                                            "$ref": "#/components/schemas/OrganizationResource"
                                         }
                                     },
                                     "required": [
@@ -99,18 +99,18 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             }
         },
-        "\/api-keys": {
+        "/api-keys": {
             "get": {
                 "operationId": "management.api-keys.index",
                 "summary": "List all Organization API keys",
@@ -121,14 +121,14 @@
                     "200": {
                         "description": "Array of `ApiKeyResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#\/components\/schemas\/ApiKeyResource"
+                                                "$ref": "#/components/schemas/ApiKeyResource"
                                             }
                                         }
                                     },
@@ -140,10 +140,10 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -157,9 +157,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/StoreApiKeyRequest"
+                                "$ref": "#/components/schemas/StoreApiKeyRequest"
                             }
                         }
                     }
@@ -168,12 +168,12 @@
                     "201": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/ApiKeyResource"
+                                            "$ref": "#/components/schemas/ApiKeyResource"
                                         }
                                     },
                                     "required": [
@@ -184,18 +184,18 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             }
         },
-        "\/api-keys\/{apiKey}": {
+        "/api-keys/{apiKey}": {
             "get": {
                 "operationId": "management.api-keys.show",
                 "summary": "Get an Organization API key",
@@ -218,12 +218,12 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/ApiKeyResource"
+                                            "$ref": "#/components/schemas/ApiKeyResource"
                                         }
                                     },
                                     "required": [
@@ -234,10 +234,10 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -261,9 +261,9 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/UpdateApiKeyRequest"
+                                "$ref": "#/components/schemas/UpdateApiKeyRequest"
                             }
                         }
                     }
@@ -272,12 +272,12 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/ApiKeyResource"
+                                            "$ref": "#/components/schemas/ApiKeyResource"
                                         }
                                     },
                                     "required": [
@@ -288,13 +288,13 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             },
@@ -320,7 +320,7 @@
                     "204": {
                         "description": "No content",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -334,15 +334,15 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             }
         },
-        "\/entities": {
+        "/entities": {
             "get": {
                 "operationId": "management.entities.index",
                 "summary": "List all entities",
@@ -353,14 +353,14 @@
                     "200": {
                         "description": "Array of `EntityResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#\/components\/schemas\/EntityResource"
+                                                "$ref": "#/components/schemas/EntityResource"
                                             }
                                         }
                                     },
@@ -372,10 +372,10 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -388,9 +388,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/StoreEntityRequest"
+                                "$ref": "#/components/schemas/StoreEntityRequest"
                             }
                         }
                     }
@@ -399,12 +399,12 @@
                     "201": {
                         "description": "`EntityResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/EntityResource"
+                                            "$ref": "#/components/schemas/EntityResource"
                                         }
                                     },
                                     "required": [
@@ -415,18 +415,18 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             }
         },
-        "\/entities\/{entity}": {
+        "/entities/{entity}": {
             "get": {
                 "operationId": "management.entities.show",
                 "summary": "Get an entity",
@@ -449,12 +449,12 @@
                     "200": {
                         "description": "`EntityResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/EntityResource"
+                                            "$ref": "#/components/schemas/EntityResource"
                                         }
                                     },
                                     "required": [
@@ -465,10 +465,10 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -493,9 +493,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/UpdateEntityRequest"
+                                "$ref": "#/components/schemas/UpdateEntityRequest"
                             }
                         }
                     }
@@ -504,12 +504,12 @@
                     "200": {
                         "description": "`EntityResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/EntityResource"
+                                            "$ref": "#/components/schemas/EntityResource"
                                         }
                                     },
                                     "required": [
@@ -520,13 +520,13 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             },
@@ -552,7 +552,7 @@
                     "204": {
                         "description": "No content",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -566,15 +566,15 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             }
         },
-        "\/entities\/{entity}\/api-keys": {
+        "/entities/{entity}/api-keys": {
             "get": {
                 "operationId": "management.entities.api-keys.index",
                 "summary": "List all Entity API keys",
@@ -597,14 +597,14 @@
                     "200": {
                         "description": "Array of `ApiKeyResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#\/components\/schemas\/ApiKeyResource"
+                                                "$ref": "#/components/schemas/ApiKeyResource"
                                             }
                                         }
                                     },
@@ -616,10 +616,10 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -645,9 +645,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/StoreEntityApiKeyRequest"
+                                "$ref": "#/components/schemas/StoreEntityApiKeyRequest"
                             }
                         }
                     }
@@ -656,12 +656,12 @@
                     "201": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/ApiKeyResource"
+                                            "$ref": "#/components/schemas/ApiKeyResource"
                                         }
                                     },
                                     "required": [
@@ -672,18 +672,18 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             }
         },
-        "\/entities\/{entity}\/api-keys\/{apiKey}": {
+        "/entities/{entity}/api-keys/{apiKey}": {
             "get": {
                 "operationId": "management.entities.api-keys.show",
                 "summary": "Get an Entity API key",
@@ -716,12 +716,12 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/ApiKeyResource"
+                                            "$ref": "#/components/schemas/ApiKeyResource"
                                         }
                                     },
                                     "required": [
@@ -732,13 +732,13 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "404": {
-                        "$ref": "#\/components\/responses\/ModelNotFoundException"
+                        "$ref": "#/components/responses/ModelNotFoundException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             },
@@ -772,9 +772,9 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application\/json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#\/components\/schemas\/UpdateEntityApiKeyRequest"
+                                "$ref": "#/components/schemas/UpdateEntityApiKeyRequest"
                             }
                         }
                     }
@@ -783,12 +783,12 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#\/components\/schemas\/ApiKeyResource"
+                                            "$ref": "#/components/schemas/ApiKeyResource"
                                         }
                                     },
                                     "required": [
@@ -799,16 +799,16 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "404": {
-                        "$ref": "#\/components\/responses\/ModelNotFoundException"
+                        "$ref": "#/components/responses/ModelNotFoundException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     },
                     "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             },
@@ -844,7 +844,7 @@
                     "204": {
                         "description": "No content",
                         "content": {
-                            "application\/json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "array",
                                     "items": {
@@ -858,13 +858,13 @@
                         }
                     },
                     "403": {
-                        "$ref": "#\/components\/responses\/AuthorizationException"
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "404": {
-                        "$ref": "#\/components\/responses\/ModelNotFoundException"
+                        "$ref": "#/components/responses/ModelNotFoundException"
                     },
                     "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
+                        "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
             }
@@ -898,13 +898,13 @@
                     },
                     "abilities": {
                         "type": "array",
-                        "description": "The abilities\/permissions for the API key.",
+                        "description": "The abilities/permissions for the API key.",
                         "items": {
                             "type": "string"
                         }
                     },
                     "creator": {
-                        "$ref": "#\/components\/schemas\/UserResource"
+                        "$ref": "#/components/schemas/UserResource"
                     },
                     "created_at": {
                         "type": [
@@ -1035,7 +1035,7 @@
                     },
                     "abilities": {
                         "type": "array",
-                        "description": "The abilities\/permissions for the API key.",
+                        "description": "The abilities/permissions for the API key.",
                         "items": {
                             "type": "string",
                             "enum": [
@@ -1068,7 +1068,7 @@
                     },
                     "abilities": {
                         "type": "array",
-                        "description": "The abilities\/permissions for the API key.",
+                        "description": "The abilities/permissions for the API key.",
                         "items": {
                             "type": "string",
                             "enum": [
@@ -1197,7 +1197,7 @@
             "AuthorizationException": {
                 "description": "Authorization error",
                 "content": {
-                    "application\/json": {
+                    "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -1216,7 +1216,7 @@
             "AuthenticationException": {
                 "description": "Unauthenticated",
                 "content": {
-                    "application\/json": {
+                    "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -1235,7 +1235,7 @@
             "ValidationException": {
                 "description": "Validation error",
                 "content": {
-                    "application\/json": {
+                    "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -1265,7 +1265,7 @@
             "ModelNotFoundException": {
                 "description": "Not found",
                 "content": {
-                    "application\/json": {
+                    "application/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
