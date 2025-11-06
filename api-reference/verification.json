@@ -1,12 +1,13 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "Laravel",
-        "version": "0.0.1"
+        "title": "ezyshield Verification API",
+        "version": "1.0.0",
+        "description": "API for the verification of entities."
     },
     "servers": [
         {
-            "url": "http://localhost/api/verification"
+            "url": "https://ezyshield.com.au/api/verification/v1"
         }
     ],
     "tags": [
@@ -19,13 +20,13 @@
     ],
     "security": [
         {
-            "verification": []
+            "verification-api-key": []
         }
     ],
     "paths": {
         "/verifications": {
             "get": {
-                "operationId": "verification.verifications.index",
+                "operationId": "verification.v1.verifications.index",
                 "summary": "List all verifications",
                 "tags": [
                     "Verification"
@@ -61,7 +62,7 @@
                 }
             },
             "post": {
-                "operationId": "verification.verifications.store",
+                "operationId": "verification.v1.verifications.store",
                 "summary": "Create a verification",
                 "tags": [
                     "Verification"
@@ -109,7 +110,7 @@
         },
         "/verifications/{verification}": {
             "get": {
-                "operationId": "verification.verifications.show",
+                "operationId": "verification.v1.verifications.show",
                 "summary": "Get a verification",
                 "tags": [
                     "Verification"
@@ -156,7 +157,7 @@
         },
         "/verifications/{verification}/checks": {
             "get": {
-                "operationId": "verification.verifications.checks.index",
+                "operationId": "verification.v1.verifications.checks.index",
                 "summary": "List all checks for a verification",
                 "tags": [
                     "Check"
@@ -204,7 +205,7 @@
                 }
             },
             "post": {
-                "operationId": "verification.verifications.checks.store",
+                "operationId": "verification.v1.verifications.checks.store",
                 "summary": "Create (check) a verification",
                 "tags": [
                     "Check"
@@ -264,7 +265,7 @@
         },
         "/verifications/{verification}/checks/{check}": {
             "get": {
-                "operationId": "verification.verifications.checks.show",
+                "operationId": "verification.v1.verifications.checks.show",
                 "summary": "Get a check for a verification",
                 "tags": [
                     "Check"
@@ -325,7 +326,7 @@
     },
     "components": {
         "securitySchemes": {
-            "verification": {
+            "verification-api-key": {
                 "type": "http",
                 "scheme": "bearer"
             }

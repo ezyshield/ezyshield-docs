@@ -1,12 +1,13 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "Laravel",
-        "version": "0.0.1"
+        "title": "ezyshield Management API",
+        "version": "1.0.0",
+        "description": "API for the management of the organization and its entities."
     },
     "servers": [
         {
-            "url": "http://localhost/api/management"
+            "url": "https://ezyshield.com.au/api/management/v1"
         }
     ],
     "tags": [
@@ -25,13 +26,13 @@
     ],
     "security": [
         {
-            "management": []
+            "management-api-key": []
         }
     ],
     "paths": {
         "/organization": {
             "get": {
-                "operationId": "management.organization.show",
+                "operationId": "management.v1.organization.show",
                 "summary": "Get the current organization",
                 "tags": [
                     "Organization"
@@ -64,7 +65,7 @@
                 }
             },
             "put": {
-                "operationId": "management.organization.update",
+                "operationId": "management.v1.organization.update",
                 "summary": "Update the current organization",
                 "tags": [
                     "Organization"
@@ -112,7 +113,7 @@
         },
         "/api-keys": {
             "get": {
-                "operationId": "management.api-keys.index",
+                "operationId": "management.v1.api-keys.index",
                 "summary": "List all Organization API keys",
                 "tags": [
                     "Organization API Key"
@@ -148,7 +149,7 @@
                 }
             },
             "post": {
-                "operationId": "management.api-keys.store",
+                "operationId": "management.v1.api-keys.store",
                 "description": "The plain text token is only returned once and should be stored securely.",
                 "summary": "Create an Organization API key",
                 "tags": [
@@ -197,7 +198,7 @@
         },
         "/api-keys/{apiKey}": {
             "get": {
-                "operationId": "management.api-keys.show",
+                "operationId": "management.v1.api-keys.show",
                 "summary": "Get an Organization API key",
                 "tags": [
                     "Organization API Key"
@@ -242,7 +243,7 @@
                 }
             },
             "put": {
-                "operationId": "management.api-keys.update",
+                "operationId": "management.v1.api-keys.update",
                 "summary": "Update an Organization API key",
                 "tags": [
                     "Organization API Key"
@@ -299,7 +300,7 @@
                 }
             },
             "delete": {
-                "operationId": "management.api-keys.destroy",
+                "operationId": "management.v1.api-keys.destroy",
                 "summary": "Delete an Organization API key",
                 "tags": [
                     "Organization API Key"
@@ -344,7 +345,7 @@
         },
         "/entities": {
             "get": {
-                "operationId": "management.entities.index",
+                "operationId": "management.v1.entities.index",
                 "summary": "List all entities",
                 "tags": [
                     "Entity"
@@ -380,7 +381,7 @@
                 }
             },
             "post": {
-                "operationId": "management.entities.store",
+                "operationId": "management.v1.entities.store",
                 "summary": "Create an entity",
                 "tags": [
                     "Entity"
@@ -428,7 +429,7 @@
         },
         "/entities/{entity}": {
             "get": {
-                "operationId": "management.entities.show",
+                "operationId": "management.v1.entities.show",
                 "summary": "Get an entity",
                 "tags": [
                     "Entity"
@@ -473,7 +474,7 @@
                 }
             },
             "put": {
-                "operationId": "management.entities.update",
+                "operationId": "management.v1.entities.update",
                 "summary": "Update an entity",
                 "tags": [
                     "Entity"
@@ -531,7 +532,7 @@
                 }
             },
             "delete": {
-                "operationId": "management.entities.destroy",
+                "operationId": "management.v1.entities.destroy",
                 "summary": "Delete an entity",
                 "tags": [
                     "Entity"
@@ -576,7 +577,7 @@
         },
         "/entities/{entity}/api-keys": {
             "get": {
-                "operationId": "management.entities.api-keys.index",
+                "operationId": "management.v1.entities.api-keys.index",
                 "summary": "List all Entity API keys",
                 "tags": [
                     "Entity API Key"
@@ -624,7 +625,7 @@
                 }
             },
             "post": {
-                "operationId": "management.entities.api-keys.store",
+                "operationId": "management.v1.entities.api-keys.store",
                 "description": "The plain text token is only returned once and should be stored securely.",
                 "summary": "Create an Entity API key",
                 "tags": [
@@ -685,7 +686,7 @@
         },
         "/entities/{entity}/api-keys/{apiKey}": {
             "get": {
-                "operationId": "management.entities.api-keys.show",
+                "operationId": "management.v1.entities.api-keys.show",
                 "summary": "Get an Entity API key",
                 "tags": [
                     "Entity API Key"
@@ -743,7 +744,7 @@
                 }
             },
             "put": {
-                "operationId": "management.entities.api-keys.update",
+                "operationId": "management.v1.entities.api-keys.update",
                 "summary": "Update an Entity API key",
                 "tags": [
                     "Entity API Key"
@@ -813,7 +814,7 @@
                 }
             },
             "delete": {
-                "operationId": "management.entities.api-keys.destroy",
+                "operationId": "management.v1.entities.api-keys.destroy",
                 "summary": "Delete an Entity API key",
                 "tags": [
                     "Entity API Key"
@@ -872,7 +873,7 @@
     },
     "components": {
         "securitySchemes": {
-            "management": {
+            "management-api-key": {
                 "type": "http",
                 "scheme": "bearer"
             }
