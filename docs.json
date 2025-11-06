@@ -29,14 +29,6 @@
             "pages": [
               "api-reference/introduction"
             ]
-          },
-          {
-            "group": "Management API",
-            "openapi": "api-reference/management.json"
-          },
-          {
-            "group": "Verification API",
-            "openapi": "api-reference/verification.json"
           }
         ]
       }
