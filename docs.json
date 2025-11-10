@@ -28,6 +28,12 @@
               "objects/verification",
               "objects/check"
             ]
+          },
+          {
+            "group": "Testing",
+            "pages": [
+              "testing/test-bank-accounts"
+            ]
           }
         ]
       },
