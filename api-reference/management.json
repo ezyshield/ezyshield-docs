@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://api.staging-2tid4c.ezyshield.com.au//api/management/v1"
+            "url": "https://api.staging-2tid4c.ezyshield.com.au/api/management/v1"
         }
     ],
     "tags": [
@@ -63,12 +63,7 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            },
-            "servers": [
-                {
-                    "url": "https://api.ezyshield.com.au/api/management/v1"
-                }
-            ]
+            }
         },
         "/api-keys": {
             "get": {
@@ -127,11 +122,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.ezyshield.com.au/api/management/v1"
-                }
-            ],
             "post": {
                 "operationId": "management.v1.api-keys.store",
                 "description": "The plain text token is only returned once and should be stored securely.",
@@ -226,11 +216,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.ezyshield.com.au/api/management/v1"
-                }
-            ],
             "put": {
                 "operationId": "management.v1.api-keys.update",
                 "summary": "Update an organization API key",
@@ -389,11 +374,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.ezyshield.com.au/api/management/v1"
-                }
-            ],
             "post": {
                 "operationId": "management.v1.entities.store",
                 "summary": "Create an entity",
@@ -487,11 +467,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.ezyshield.com.au/api/management/v1"
-                }
-            ],
             "put": {
                 "operationId": "management.v1.entities.update",
                 "summary": "Update an entity",
@@ -661,11 +636,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.ezyshield.com.au/api/management/v1"
-                }
-            ],
             "post": {
                 "operationId": "management.v1.entities.api-keys.store",
                 "description": "The plain text token is only returned once and should be stored securely.",
@@ -785,11 +755,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.ezyshield.com.au/api/management/v1"
-                }
-            ],
             "put": {
                 "operationId": "management.v1.entities.api-keys.update",
                 "summary": "Update an entity API key",
