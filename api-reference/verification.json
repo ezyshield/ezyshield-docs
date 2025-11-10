@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://api.staging-2tid4c.ezyshield.com.au/api/verification/v1"
+            "url": "https://api.staging-2tid4c.ezyshield.com.au/verification/v1"
         }
     ],
     "tags": [

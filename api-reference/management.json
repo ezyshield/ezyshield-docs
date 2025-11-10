@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://api.staging-2tid4c.ezyshield.com.au/api/management/v1"
+            "url": "https://api.staging-2tid4c.ezyshield.com.au/management/v1"
         }
     ],
     "tags": [
