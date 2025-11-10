@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://ezyshield.com.au/api/verification/v1"
+            "url": "https://api.staging-2tid4c.ezyshield.com.au//api/verification/v1"
         }
     ],
     "tags": [
@@ -84,6 +84,11 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.ezyshield.com.au/api/verification/v1"
+                }
+            ],
             "post": {
                 "operationId": "verification.v1.verifications.store",
                 "summary": "Create a verification",
@@ -176,7 +181,12 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            }
+            },
+            "servers": [
+                {
+                    "url": "https://api.ezyshield.com.au/api/verification/v1"
+                }
+            ]
         },
         "/verifications/{verification}/checks": {
             "get": {
@@ -245,6 +255,11 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.ezyshield.com.au/api/verification/v1"
+                }
+            ],
             "post": {
                 "operationId": "verification.v1.verifications.checks.store",
                 "summary": "Create (check) a verification",
@@ -362,7 +377,12 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            }
+            },
+            "servers": [
+                {
+                    "url": "https://api.ezyshield.com.au/api/verification/v1"
+                }
+            ]
         }
     },
     "components": {
