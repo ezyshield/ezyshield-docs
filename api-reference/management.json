@@ -12,21 +12,24 @@
     ],
     "tags": [
         {
-            "name": "Organization"
+            "name": "Organizations"
         },
         {
-            "name": "Organization API Key"
+            "name": "Organization API Keys"
         },
         {
-            "name": "Entity"
+            "name": "Entities"
         },
         {
-            "name": "Entity API Key"
+            "name": "Entity API Keys"
         }
     ],
     "security": [
         {
-            "management-api-key": []
+            "http": []
+        },
+        {
+            "http": []
         }
     ],
     "paths": {
@@ -35,7 +38,7 @@
                 "operationId": "management.v1.organization.show",
                 "summary": "Get the current organization",
                 "tags": [
-                    "Organization"
+                    "Organizations"
                 ],
                 "responses": {
                     "200": {
@@ -56,57 +59,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "$ref": "#/components/responses/AuthorizationException"
-                    },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
-                    }
-                }
-            },
-            "put": {
-                "operationId": "management.v1.organization.update",
-                "summary": "Update the current organization",
-                "tags": [
-                    "Organization"
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateOrganizationRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "`OrganizationResource`",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/OrganizationResource"
-                                        }
-                                    },
-                                    "required": [
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/AuthorizationException"
-                    },
-                    "401": {
-                        "$ref": "#/components/responses/AuthenticationException"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             }
@@ -114,9 +68,29 @@
         "/api-keys": {
             "get": {
                 "operationId": "management.v1.api-keys.index",
-                "summary": "List all Organization API keys",
+                "summary": "List all organization API keys",
                 "tags": [
-                    "Organization API Key"
+                    "Organization API Keys"
+                ],
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The number of records to return per page",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number to return",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -151,16 +125,16 @@
             "post": {
                 "operationId": "management.v1.api-keys.store",
                 "description": "The plain text token is only returned once and should be stored securely.",
-                "summary": "Create an Organization API key",
+                "summary": "Create an organization API key",
                 "tags": [
-                    "Organization API Key"
+                    "Organization API Keys"
                 ],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/StoreApiKeyRequest"
+                                "$ref": "#/components/schemas/StoreOrganizationApiKeyRequest"
                             }
                         }
                     }
@@ -199,9 +173,9 @@
         "/api-keys/{apiKey}": {
             "get": {
                 "operationId": "management.v1.api-keys.show",
-                "summary": "Get an Organization API key",
+                "summary": "Get an organization API key",
                 "tags": [
-                    "Organization API Key"
+                    "Organization API Keys"
                 ],
                 "parameters": [
                     {
@@ -244,9 +218,9 @@
             },
             "put": {
                 "operationId": "management.v1.api-keys.update",
-                "summary": "Update an Organization API key",
+                "summary": "Update an organization API key",
                 "tags": [
-                    "Organization API Key"
+                    "Organization API Keys"
                 ],
                 "parameters": [
                     {
@@ -264,7 +238,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateApiKeyRequest"
+                                "$ref": "#/components/schemas/UpdateOrganizationApiKeyRequest"
                             }
                         }
                     }
@@ -301,9 +275,9 @@
             },
             "delete": {
                 "operationId": "management.v1.api-keys.destroy",
-                "summary": "Delete an Organization API key",
+                "summary": "Delete an organization API key",
                 "tags": [
-                    "Organization API Key"
+                    "Organization API Keys"
                 ],
                 "parameters": [
                     {
@@ -348,7 +322,27 @@
                 "operationId": "management.v1.entities.index",
                 "summary": "List all entities",
                 "tags": [
-                    "Entity"
+                    "Entities"
+                ],
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The number of records to return per page",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number to return",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -384,7 +378,7 @@
                 "operationId": "management.v1.entities.store",
                 "summary": "Create an entity",
                 "tags": [
-                    "Entity"
+                    "Entities"
                 ],
                 "requestBody": {
                     "required": true,
@@ -432,7 +426,7 @@
                 "operationId": "management.v1.entities.show",
                 "summary": "Get an entity",
                 "tags": [
-                    "Entity"
+                    "Entities"
                 ],
                 "parameters": [
                     {
@@ -477,7 +471,7 @@
                 "operationId": "management.v1.entities.update",
                 "summary": "Update an entity",
                 "tags": [
-                    "Entity"
+                    "Entities"
                 ],
                 "parameters": [
                     {
@@ -535,7 +529,7 @@
                 "operationId": "management.v1.entities.destroy",
                 "summary": "Delete an entity",
                 "tags": [
-                    "Entity"
+                    "Entities"
                 ],
                 "parameters": [
                     {
@@ -578,9 +572,9 @@
         "/entities/{entity}/api-keys": {
             "get": {
                 "operationId": "management.v1.entities.api-keys.index",
-                "summary": "List all Entity API keys",
+                "summary": "List all entity API keys",
                 "tags": [
-                    "Entity API Key"
+                    "Entity API Keys"
                 ],
                 "parameters": [
                     {
@@ -591,6 +585,24 @@
                         "schema": {
                             "type": "string",
                             "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The number of records to return per page",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number to return",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
                         }
                     }
                 ],
@@ -627,9 +639,9 @@
             "post": {
                 "operationId": "management.v1.entities.api-keys.store",
                 "description": "The plain text token is only returned once and should be stored securely.",
-                "summary": "Create an Entity API key",
+                "summary": "Create an entity API key",
                 "tags": [
-                    "Entity API Key"
+                    "Entity API Keys"
                 ],
                 "parameters": [
                     {
@@ -687,9 +699,9 @@
         "/entities/{entity}/api-keys/{apiKey}": {
             "get": {
                 "operationId": "management.v1.entities.api-keys.show",
-                "summary": "Get an Entity API key",
+                "summary": "Get an entity API key",
                 "tags": [
-                    "Entity API Key"
+                    "Entity API Keys"
                 ],
                 "parameters": [
                     {
@@ -745,9 +757,9 @@
             },
             "put": {
                 "operationId": "management.v1.entities.api-keys.update",
-                "summary": "Update an Entity API key",
+                "summary": "Update an entity API key",
                 "tags": [
-                    "Entity API Key"
+                    "Entity API Keys"
                 ],
                 "parameters": [
                     {
@@ -815,9 +827,9 @@
             },
             "delete": {
                 "operationId": "management.v1.entities.api-keys.destroy",
-                "summary": "Delete an Entity API key",
+                "summary": "Delete an entity API key",
                 "tags": [
-                    "Entity API Key"
+                    "Entity API Keys"
                 ],
                 "parameters": [
                     {
@@ -873,7 +885,7 @@
     },
     "components": {
         "securitySchemes": {
-            "management-api-key": {
+            "http": {
                 "type": "http",
                 "scheme": "bearer"
             }
@@ -1026,39 +1038,6 @@
                 ],
                 "title": "OrganizationResource"
             },
-            "StoreApiKeyRequest": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the API key.",
-                        "maxLength": 255
-                    },
-                    "abilities": {
-                        "type": "array",
-                        "description": "The abilities/permissions for the API key.",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "organization:read",
-                                "organization:write",
-                                "organization_api_key:read",
-                                "organization_api_key:write",
-                                "entity:read",
-                                "entity:write",
-                                "entity_api_key:read",
-                                "entity_api_key:write"
-                            ]
-                        },
-                        "minItems": 1
-                    }
-                },
-                "required": [
-                    "name",
-                    "abilities"
-                ],
-                "title": "StoreApiKeyRequest"
-            },
             "StoreEntityApiKeyRequest": {
                 "type": "object",
                 "properties": {
@@ -1102,16 +1081,36 @@
                 ],
                 "title": "StoreEntityRequest"
             },
-            "UpdateApiKeyRequest": {
+            "StoreOrganizationApiKeyRequest": {
                 "type": "object",
                 "properties": {
                     "name": {
                         "type": "string",
                         "description": "The name of the API key.",
                         "maxLength": 255
+                    },
+                    "abilities": {
+                        "type": "array",
+                        "description": "The abilities/permissions for the API key.",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "organization_api_key:read",
+                                "organization_api_key:write",
+                                "entity:read",
+                                "entity:write",
+                                "entity_api_key:read",
+                                "entity_api_key:write"
+                            ]
+                        },
+                        "minItems": 1
                     }
                 },
-                "title": "UpdateApiKeyRequest"
+                "required": [
+                    "name",
+                    "abilities"
+                ],
+                "title": "StoreOrganizationApiKeyRequest"
             },
             "UpdateEntityApiKeyRequest": {
                 "type": "object",
@@ -1138,19 +1137,16 @@
                 ],
                 "title": "UpdateEntityRequest"
             },
-            "UpdateOrganizationRequest": {
+            "UpdateOrganizationApiKeyRequest": {
                 "type": "object",
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "The name of the organization.",
+                        "description": "The name of the API key.",
                         "maxLength": 255
                     }
                 },
-                "required": [
-                    "name"
-                ],
-                "title": "UpdateOrganizationRequest"
+                "title": "UpdateOrganizationApiKeyRequest"
             },
             "UserResource": {
                 "type": "object",
@@ -1195,8 +1191,8 @@
             }
         },
         "responses": {
-            "AuthorizationException": {
-                "description": "Authorization error",
+            "AuthenticationException": {
+                "description": "Unauthenticated",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -1214,8 +1210,8 @@
                     }
                 }
             },
-            "AuthenticationException": {
-                "description": "Unauthenticated",
+            "AuthorizationException": {
+                "description": "Authorization error",
                 "content": {
                     "application/json": {
                         "schema": {

@@ -12,15 +12,18 @@
     ],
     "tags": [
         {
-            "name": "Verification"
+            "name": "Verifications"
         },
         {
-            "name": "Check"
+            "name": "Checks"
         }
     ],
     "security": [
         {
-            "verification-api-key": []
+            "http": []
+        },
+        {
+            "http": []
         }
     ],
     "paths": {
@@ -29,7 +32,27 @@
                 "operationId": "verification.v1.verifications.index",
                 "summary": "List all verifications",
                 "tags": [
-                    "Verification"
+                    "Verifications"
+                ],
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The number of records to return per page",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number to return",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -65,7 +88,7 @@
                 "operationId": "verification.v1.verifications.store",
                 "summary": "Create a verification",
                 "tags": [
-                    "Verification"
+                    "Verifications"
                 ],
                 "requestBody": {
                     "required": true,
@@ -113,7 +136,7 @@
                 "operationId": "verification.v1.verifications.show",
                 "summary": "Get a verification",
                 "tags": [
-                    "Verification"
+                    "Verifications"
                 ],
                 "parameters": [
                     {
@@ -160,7 +183,7 @@
                 "operationId": "verification.v1.verifications.checks.index",
                 "summary": "List all checks for a verification",
                 "tags": [
-                    "Check"
+                    "Checks"
                 ],
                 "parameters": [
                     {
@@ -171,6 +194,24 @@
                         "schema": {
                             "type": "string",
                             "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The number of records to return per page",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number to return",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
                         }
                     }
                 ],
@@ -208,7 +249,7 @@
                 "operationId": "verification.v1.verifications.checks.store",
                 "summary": "Create (check) a verification",
                 "tags": [
-                    "Check"
+                    "Checks"
                 ],
                 "parameters": [
                     {
@@ -268,7 +309,7 @@
                 "operationId": "verification.v1.verifications.checks.show",
                 "summary": "Get a check for a verification",
                 "tags": [
-                    "Check"
+                    "Checks"
                 ],
                 "parameters": [
                     {
@@ -326,7 +367,7 @@
     },
     "components": {
         "securitySchemes": {
-            "verification-api-key": {
+            "http": {
                 "type": "http",
                 "scheme": "bearer"
             }
@@ -462,6 +503,25 @@
                         "description": "The current status of the verification.",
                         "$ref": "#/components/schemas/VerificationStatus"
                     },
+                    "checks": {
+                        "type": "array",
+                        "description": "The checks performed during the verification.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "label": {
+                                    "type": "string"
+                                },
+                                "result": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "required": [
+                                "label",
+                                "result"
+                            ]
+                        }
+                    },
                     "created_at": {
                         "type": [
                             "string",
@@ -482,6 +542,7 @@
                 "required": [
                     "id",
                     "status",
+                    "checks",
                     "created_at",
                     "updated_at"
                 ],
