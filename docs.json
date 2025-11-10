@@ -18,6 +18,16 @@
             "pages": [
               "index"
             ]
+          },
+          {
+            "group": "Objects",
+            "pages": [
+              "objects/introduction",
+              "objects/organization",
+              "objects/entity",
+              "objects/verification",
+              "objects/check"
+            ]
           }
         ]
       },
@@ -27,16 +37,23 @@
           {
             "group": "Overview",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/introduction",
+              "api-reference/quickstart"
             ]
           },
           {
             "group": "Management API",
-            "openapi": "api-reference/management.json"
+            "openapi": "api-reference/management.json",
+            "pages": [
+              "api-reference/management/overview"
+            ]
           },
           {
             "group": "Verification API",
-            "openapi": "api-reference/verification.json"
+            "openapi": "api-reference/verification.json",
+            "pages": [
+              "api-reference/verification/overview"
+            ]
           }
         ]
       }

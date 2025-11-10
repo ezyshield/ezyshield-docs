@@ -1,0 +1,16 @@
+---
+title: "Overview"
+description: "The Management API allows you to manage your organization, its entities and API keys."
+---
+
+## Authentication
+The ezyshield Management API uses token-based authentication. You may create API keys for your organization via the UI, and all requests are automatically scoped to the organization through the `Authorization` header.
+
+Include your organization API key token in every request:
+```http
+Authorization: Bearer org_sk_da743ce6afad4996a621b8a151045aa7
+```
+
+<Note>Organization tokens always start with `org_sk_`.</Note>
+
+To create an API key, go to the [Dashboard](https://app.ezyshield.com.au), navigate to your organization settings and create an API key.

@@ -1,0 +1,16 @@
+---
+title: "Overview"
+description: "The Verification API allows you to verify business and banking details and ensure details have not been compromised."
+---
+
+## Authentication
+The ezyshield Verification API uses token-based authentication. Each entity in your organisation has its own API keys, and all requests are automatically scoped to that entity through the `Authorization` header.
+
+Include your entity API key token in every request:
+```http
+Authorization: Bearer ent_sk_d3021f779f004bb88d88ac3fbcb75485
+```
+
+<Note>Entity tokens always start with `ent_sk_`.</Note>
+
+To create an API key via the [Management API](/api-reference/management/overview), first [create an entity](/api-reference/entities/create-an-entity) and then [create an entity API key](/api-reference/entity-api-keys/create-an-entity-api-key).
