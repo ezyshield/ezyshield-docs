@@ -60,7 +60,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.ezyshield.com.au"
+      "href": "https://app.ezyshield.com.au"
     }
   },
   "contextual": {
