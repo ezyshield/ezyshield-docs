@@ -48,6 +48,22 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "filter[status]",
+                        "in": "query",
+                        "description": "The current status of the verification.",
+                        "schema": {
+                            "$ref": "#/components/schemas/VerificationStatus"
+                        }
+                    },
+                    {
+                        "name": "filter[attribution_id]",
+                        "in": "query",
+                        "description": "The attribution ID.",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -596,10 +612,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "description": "The check ID."
                     },
                     "result": {
@@ -722,10 +735,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "description": "The verification ID."
                     },
                     "status": {

@@ -1227,10 +1227,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "description": "The API key ID."
                     },
                     "name": {
@@ -1291,10 +1288,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "description": "The entity ID."
                     },
                     "name": {
@@ -1330,10 +1324,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "description": "The organization ID."
                     },
                     "name": {
