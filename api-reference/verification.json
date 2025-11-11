@@ -648,7 +648,8 @@
                     },
                     "account_name": {
                         "type": "string",
-                        "description": "The bank account name."
+                        "description": "The bank account name.",
+                        "maxLength": 255
                     },
                     "account_bsb": {
                         "type": "string",
@@ -687,7 +688,8 @@
                     },
                     "account_name": {
                         "type": "string",
-                        "description": "The bank account name."
+                        "description": "The bank account name.",
+                        "maxLength": 255
                     },
                     "account_bsb": {
                         "type": "string",

@@ -343,6 +343,7 @@
                     }
                 ],
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1114,6 +1115,7 @@
                     }
                 ],
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1387,8 +1389,7 @@
                                 "check:read",
                                 "check:write"
                             ]
-                        },
-                        "minItems": 1
+                        }
                     }
                 },
                 "required": [
@@ -1450,6 +1451,9 @@
                         "maxLength": 255
                     }
                 },
+                "required": [
+                    "name"
+                ],
                 "title": "UpdateEntityApiKeyRequest"
             },
             "UpdateEntityRequest": {
@@ -1475,6 +1479,9 @@
                         "maxLength": 255
                     }
                 },
+                "required": [
+                    "name"
+                ],
                 "title": "UpdateOrganizationApiKeyRequest"
             },
             "UserResource": {
