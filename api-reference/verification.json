@@ -21,9 +21,6 @@
     "security": [
         {
             "http": []
-        },
-        {
-            "http": []
         }
     ],
     "paths": {
