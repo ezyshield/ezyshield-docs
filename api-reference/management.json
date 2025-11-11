@@ -1432,8 +1432,7 @@
                                 "entity_api_key:read",
                                 "entity_api_key:write"
                             ]
-                        },
-                        "minItems": 1
+                        }
                     }
                 },
                 "required": [
