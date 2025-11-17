@@ -22,3 +22,28 @@ The ezyshield API is split into two APIs, each designed for a specific function.
     Verify business/banking details and check for compromises.
   </Card>
 </Columns>
+
+## Headers
+All API requests must include the following headers:
+
+```http
+Accept: application/json
+Content-Type: application/json
+```
+
+## Errors
+The ezyshield API uses standard HTTP status codes to indicate the success or failure of an API request. Common status codes include:
+
+| Code | Description |
+|-----:|-------------|
+| `200` | Success |
+| `201` | Created |
+| `204` | No content |
+| `400` | Bad request |
+| `401` | Unauthorized (API key is invalid) |
+| `403` | Forbidden |
+| `404` | Not found |
+| `422` | Unprocessable entity (validation error) |
+| `429` | Too many requests |
+| `500` | Internal server error |
+| `503` | Service unavailable (API offline for maintenance) |

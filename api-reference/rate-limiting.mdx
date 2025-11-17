@@ -1,0 +1,27 @@
+---
+title: "Rate Limiting"
+description: "Learn about API rate limits and how to handle them."
+---
+
+<Note>Rate limiting is currently in development and will be available soon.</Note>
+
+The API implements rate limiting to ensure fair usage and protect against abuse.
+
+For specific rate limits, see the [Management API](/api-reference/management/overview#rate-limits) and [Verification API](/api-reference/verification/overview#rate-limits) overview pages.
+
+API responses include the `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers to provide information about the rate limit.
+
+## Response headers
+
+<ParamField header="X-RateLimit-Limit" type="integer">
+The maximum number of requests allowed per minute.
+</ParamField>
+
+<ParamField header="X-RateLimit-Remaining" type="integer">
+The number of requests remaining in the current rate limit window.
+</ParamField>
+
+<ParamField header="X-RateLimit-Reset" type="integer">
+Unix timestamp indicating when the rate limit window resets.
+</ParamField>
+

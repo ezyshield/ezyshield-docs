@@ -435,6 +435,14 @@
                 ],
                 "parameters": [
                     {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Available sorts are `name`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-name`.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",

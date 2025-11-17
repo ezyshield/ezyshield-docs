@@ -44,7 +44,11 @@
             "group": "Overview",
             "pages": [
               "api-reference/introduction",
-              "api-reference/quickstart"
+              "api-reference/quickstart",
+              "api-reference/authentication",
+              "api-reference/pagination",
+              "api-reference/filtering",
+              "api-reference/rate-limiting"
             ]
           },
           {
@@ -58,7 +62,8 @@
             "group": "Verification API",
             "openapi": "api-reference/verification.json",
             "pages": [
-              "api-reference/verification/overview"
+              "api-reference/verification/overview",
+              "api-reference/verification/webhooks"
             ]
           }
         ]

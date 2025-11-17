@@ -1,0 +1,31 @@
+---
+title: "Pagination"
+description: "Learn how to navigate through paginated API responses."
+---
+
+All endpoints that return multiple items support pagination. By default, 10 items are returned per page. You can specify the number of items to return per page by passing the `page[size]` parameter. To navigate between pages, use the `page[number]` parameter.
+
+## Query Parameters
+
+<ParamField query="page[size]" type="integer" default="10">
+The number of results that will be returned per page.
+</ParamField> 
+
+<ParamField query="page[number]" type="integer">
+The page number. Page numbers start at 1.
+</ParamField>
+
+## Response structure
+
+<ResponseField name="data" type="array" required>
+Array containing the requested items for the current page.
+</ResponseField>
+
+<ResponseField name="links" type="object" required>
+Navigation links for pagination.
+</ResponseField>
+
+<ResponseField name="meta" type="object" required>
+Pagination metadata for navigating through results.
+</ResponseField>
+

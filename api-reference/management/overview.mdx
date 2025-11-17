@@ -3,17 +3,27 @@ title: "Overview"
 description: "The Management API allows you to manage your organization, its entities and API keys."
 ---
 
-## Authentication
-The ezyshield Management API uses token-based authentication. You may create API keys for your organization via the UI, and all requests are automatically scoped to the organization through the `Authorization` header.
-
-Include your organization API key token in every request:
-```http
-Authorization: Bearer org_sk_da743ce6afad4996a621b8a151045aa7
+## Base URL
+The base URL for the Management API is
 ```
+https://api.ezyshield.com.au/management/v1
+```
+
+## Authentication
+
+The Management API uses organization API keys for authentication. See [Authentication](/api-reference/authentication) for details.
+
+Organization API keys are scoped to your organization, and all requests are automatically scoped to the organization through the `Authorization` header.
 
 <Note>Organization tokens always start with `org_sk_`.</Note>
 
-To create an API key, go to the [Dashboard](https://app.ezyshield.com.au), navigate to your organization settings and create an API key.
+To create an organization API key:
+- Via the [Dashboard](https://app.ezyshield.com.au): Navigate to your organization settings and create an API key
+- Via the API: Once you have created your first API key, you may [create additional keys via the API](/api-reference/organization-api-keys/create-an-organization-api-key). These keys will be associated with owner of the key used to create them and can be created with the same or reduced permissions.
+
+## Rate limits
+
+The Management API has a rate limit of **60 requests per minute per organization**. See the [Rate Limiting](/api-reference/rate-limiting) documentation for more information.
 
 ## OpenAPI specification
 
