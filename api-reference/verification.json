@@ -651,9 +651,22 @@
                         "description": "The business name.",
                         "maxLength": 255
                     },
-                    "phone": {
+                    "business_phone": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The business phone number.",
+                        "maxLength": 255
+                    },
+                    "contact_name": {
                         "type": "string",
-                        "description": "An Australian mobile phone number."
+                        "description": "The authorised contact's name. There must be a space between the first name(s) and last name, such as \"John Michael Doe\".",
+                        "maxLength": 255
+                    },
+                    "contact_mobile": {
+                        "type": "string",
+                        "description": "The authorised contact's Australian mobile number."
                     },
                     "account_abn": {
                         "type": "string",
@@ -675,7 +688,8 @@
                 },
                 "required": [
                     "business_name",
-                    "phone",
+                    "contact_name",
+                    "contact_mobile",
                     "account_abn",
                     "account_name",
                     "account_bsb",
@@ -691,9 +705,22 @@
                         "description": "The business name.",
                         "maxLength": 255
                     },
-                    "phone": {
+                    "business_phone": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The business phone number.",
+                        "maxLength": 255
+                    },
+                    "contact_name": {
                         "type": "string",
-                        "description": "An Australian mobile phone number."
+                        "description": "The authorised contact's name. There must be a space between the first name(s) and last name, such as \"John Michael Doe\".",
+                        "maxLength": 255
+                    },
+                    "contact_mobile": {
+                        "type": "string",
+                        "description": "The authorised contact's Australian mobile number."
                     },
                     "account_abn": {
                         "type": "string",
@@ -723,7 +750,8 @@
                 },
                 "required": [
                     "business_name",
-                    "phone",
+                    "contact_name",
+                    "contact_mobile",
                     "account_abn",
                     "account_name",
                     "account_bsb",
