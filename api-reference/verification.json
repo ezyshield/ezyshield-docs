@@ -27,6 +27,7 @@
         "/verifications": {
             "get": {
                 "operationId": "verification.v1.verifications.index",
+                "description": "Requires the `verification:read` ability.",
                 "summary": "List all verifications",
                 "tags": [
                     "Verifications"
@@ -210,6 +211,7 @@
             },
             "post": {
                 "operationId": "verification.v1.verifications.store",
+                "description": "Requires the `verification:write` ability.",
                 "summary": "Create a verification",
                 "tags": [
                     "Verifications"
@@ -258,6 +260,7 @@
         "/verifications/{verification}": {
             "get": {
                 "operationId": "verification.v1.verifications.show",
+                "description": "Requires the `verification:read` ability.",
                 "summary": "Get a verification",
                 "tags": [
                     "Verifications"
@@ -305,6 +308,7 @@
         "/verifications/{verification}/checks": {
             "get": {
                 "operationId": "verification.v1.verifications.checks.index",
+                "description": "Requires the `check:read` ability.",
                 "summary": "List all checks for a verification",
                 "tags": [
                     "Checks"
@@ -482,6 +486,7 @@
             },
             "post": {
                 "operationId": "verification.v1.verifications.checks.store",
+                "description": "Requires the `check:write` ability.",
                 "summary": "Create (check) a verification",
                 "tags": [
                     "Checks"
@@ -542,6 +547,7 @@
         "/verifications/{verification}/checks/{check}": {
             "get": {
                 "operationId": "verification.v1.verifications.checks.show",
+                "description": "Requires the `check:read` ability.",
                 "summary": "Get a check for a verification",
                 "tags": [
                     "Checks"
