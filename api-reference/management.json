@@ -41,7 +41,7 @@
                     "200": {
                         "description": "`OrganizationResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -93,7 +93,7 @@
                     "200": {
                         "description": "Paginated set of `ApiKeyResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -107,18 +107,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -194,12 +212,6 @@
                                                 "to",
                                                 "total"
                                             ]
-                                        },
-                                        "included": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/UserResource"
-                                            }
                                         }
                                     },
                                     "required": [
@@ -240,18 +252,12 @@
                     "201": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
-                                        },
-                                        "included": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/UserResource"
-                                            }
                                         }
                                     },
                                     "required": [
@@ -297,18 +303,12 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
-                                        },
-                                        "included": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/UserResource"
-                                            }
                                         }
                                     },
                                     "required": [
@@ -359,18 +359,12 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
-                                        },
-                                        "included": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/UserResource"
-                                            }
                                         }
                                     },
                                     "required": [
@@ -475,7 +469,7 @@
                     "200": {
                         "description": "Paginated set of `EntityResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -489,18 +483,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -616,7 +628,7 @@
                     "201": {
                         "description": "`EntityResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -667,7 +679,7 @@
                     "200": {
                         "description": "`EntityResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -723,7 +735,7 @@
                     "200": {
                         "description": "`EntityResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -835,7 +847,7 @@
                     "200": {
                         "description": "Paginated set of `ApiKeyResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -849,18 +861,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -936,12 +966,6 @@
                                                 "to",
                                                 "total"
                                             ]
-                                        },
-                                        "included": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/UserResource"
-                                            }
                                         }
                                     },
                                     "required": [
@@ -994,18 +1018,12 @@
                     "201": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
-                                        },
-                                        "included": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/UserResource"
-                                            }
                                         }
                                     },
                                     "required": [
@@ -1061,18 +1079,12 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
-                                        },
-                                        "included": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/UserResource"
-                                            }
                                         }
                                     },
                                     "required": [
@@ -1136,18 +1148,12 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
-                                        },
-                                        "included": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/UserResource"
-                                            }
                                         }
                                     },
                                     "required": [
@@ -1242,95 +1248,60 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
-                    },
-                    "type": {
                         "type": "string",
-                        "enum": [
-                            "api-keys"
-                        ]
+                        "description": "The API key ID."
                     },
-                    "attributes": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "The name of the API key."
-                            },
-                            "token": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "description": "The plain text token, only shown once when created."
-                            },
-                            "abilities": {
-                                "type": "array",
-                                "description": "The abilities/permissions for the API key.",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "created_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            },
-                            "last_used_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            },
-                            "expires_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            }
-                        },
-                        "required": [
-                            "name",
-                            "abilities",
-                            "created_at",
-                            "last_used_at",
-                            "expires_at"
-                        ]
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the API key."
                     },
-                    "relationships": {
-                        "type": "object",
-                        "properties": {
-                            "creator": {
-                                "type": "object",
-                                "properties": {
-                                    "data": {
-                                        "anyOf": [
-                                            {
-                                                "$ref": "#/components/schemas/UserResourceIdentifier"
-                                            },
-                                            {
-                                                "type": "null"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "data"
-                                ]
-                            }
+                    "token": {
+                        "type": "string",
+                        "description": "The plain text token, only shown once when created."
+                    },
+                    "abilities": {
+                        "type": "array",
+                        "description": "The abilities/permissions for the API key.",
+                        "items": {
+                            "type": "string"
                         }
+                    },
+                    "creator": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
+                    },
+                    "last_used_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
+                    },
+                    "expires_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
                     }
                 },
                 "required": [
                     "id",
-                    "type"
+                    "name",
+                    "abilities",
+                    "creator",
+                    "created_at",
+                    "last_used_at",
+                    "expires_at"
                 ],
                 "title": "ApiKeyResource"
             },
@@ -1338,48 +1309,35 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
-                    },
-                    "type": {
                         "type": "string",
-                        "enum": [
-                            "entities"
-                        ]
+                        "description": "The entity ID."
                     },
-                    "attributes": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "The name of the entity."
-                            },
-                            "created_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            },
-                            "updated_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            }
-                        },
-                        "required": [
-                            "name",
-                            "created_at",
-                            "updated_at"
-                        ]
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the entity."
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
                     }
                 },
                 "required": [
                     "id",
-                    "type"
+                    "name",
+                    "created_at",
+                    "updated_at"
                 ],
                 "title": "EntityResource"
             },
@@ -1387,53 +1345,40 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
-                    },
-                    "type": {
                         "type": "string",
-                        "enum": [
-                            "organizations"
-                        ]
+                        "description": "The organization ID."
                     },
-                    "attributes": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "The name of the organization."
-                            },
-                            "slug": {
-                                "type": "string",
-                                "description": "The organization's unique slug."
-                            },
-                            "created_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            },
-                            "updated_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            }
-                        },
-                        "required": [
-                            "name",
-                            "slug",
-                            "created_at",
-                            "updated_at"
-                        ]
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the organization."
+                    },
+                    "slug": {
+                        "type": "string",
+                        "description": "The organization's unique slug."
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
                     }
                 },
                 "required": [
                     "id",
-                    "type"
+                    "name",
+                    "slug",
+                    "created_at",
+                    "updated_at"
                 ],
                 "title": "OrganizationResource"
             },
@@ -1551,140 +1496,46 @@
                 ],
                 "title": "UpdateOrganizationApiKeyRequest"
             },
-            "User": {
+            "UserResource": {
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
-                    },
-                    "prefixed_id": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The user ID."
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The name of the user."
                     },
                     "email": {
-                        "type": "string"
-                    },
-                    "email_verified_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time"
-                    },
-                    "timezone": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
-                    },
-                    "mobile": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "description": "The email address of the user."
                     },
                     "created_at": {
                         "type": [
                             "string",
                             "null"
                         ],
-                        "format": "date-time"
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
                     },
                     "updated_at": {
                         "type": [
                             "string",
                             "null"
                         ],
-                        "format": "date-time"
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
                     }
                 },
                 "required": [
                     "id",
-                    "prefixed_id",
                     "name",
                     "email",
-                    "email_verified_at",
-                    "timezone",
-                    "mobile",
                     "created_at",
                     "updated_at"
                 ],
-                "title": "User"
-            },
-            "UserResource": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "users"
-                        ]
-                    },
-                    "attributes": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "The name of the user."
-                            },
-                            "email": {
-                                "type": "string",
-                                "description": "The email address of the user."
-                            },
-                            "created_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            },
-                            "updated_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            }
-                        },
-                        "required": [
-                            "name",
-                            "email",
-                            "created_at",
-                            "updated_at"
-                        ]
-                    }
-                },
-                "required": [
-                    "id",
-                    "type"
-                ],
                 "title": "UserResource"
-            },
-            "UserResourceIdentifier": {
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "users"
-                        ]
-                    },
-                    "id": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "type",
-                    "id"
-                ],
-                "title": "UserResourceIdentifier"
             }
         },
         "responses": {

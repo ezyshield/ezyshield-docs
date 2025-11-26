@@ -71,7 +71,7 @@
                     "200": {
                         "description": "Paginated set of `VerificationResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -85,18 +85,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -212,7 +230,7 @@
                     "201": {
                         "description": "`VerificationResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -263,7 +281,7 @@
                     "200": {
                         "description": "`VerificationResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -328,7 +346,7 @@
                     "200": {
                         "description": "Paginated set of `CheckResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -342,18 +360,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -481,7 +517,7 @@
                     "201": {
                         "description": "`CheckResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -542,7 +578,7 @@
                     "200": {
                         "description": "`CheckResource`",
                         "content": {
-                            "application/vnd.api+json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -582,39 +618,26 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
-                    },
-                    "type": {
                         "type": "string",
-                        "enum": [
-                            "checks"
-                        ]
+                        "description": "The check ID."
                     },
-                    "attributes": {
-                        "type": "object",
-                        "properties": {
-                            "result": {
-                                "description": "The result of the check.",
-                                "$ref": "#/components/schemas/CheckResult"
-                            },
-                            "created_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            }
-                        },
-                        "required": [
-                            "result",
-                            "created_at"
-                        ]
+                    "result": {
+                        "description": "The result of the check.",
+                        "$ref": "#/components/schemas/CheckResult"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
                     }
                 },
                 "required": [
                     "id",
-                    "type"
+                    "result",
+                    "created_at"
                 ],
                 "title": "CheckResource"
             },
@@ -746,76 +769,63 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
-                    },
-                    "type": {
                         "type": "string",
-                        "enum": [
-                            "verifications"
-                        ]
+                        "description": "The verification ID."
                     },
-                    "attributes": {
-                        "type": "object",
-                        "properties": {
-                            "status": {
-                                "description": "The current status of the verification.",
-                                "$ref": "#/components/schemas/VerificationStatus"
-                            },
-                            "checks": {
-                                "type": "array",
-                                "description": "The checks performed during the verification.",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "label": {
-                                            "type": "string"
-                                        },
-                                        "result": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "required": [
-                                        "label",
-                                        "result"
-                                    ]
+                    "status": {
+                        "description": "The current status of the verification.",
+                        "$ref": "#/components/schemas/VerificationStatus"
+                    },
+                    "checks": {
+                        "type": "array",
+                        "description": "The checks performed during the verification.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "label": {
+                                    "type": "string"
+                                },
+                                "result": {
+                                    "type": "boolean"
                                 }
                             },
-                            "attribution_id": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "description": "The attribution ID optionally provided upon creation."
-                            },
-                            "created_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            },
-                            "updated_at": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "format": "date-time",
-                                "description": "ISO 8601 formatted date-time."
-                            }
-                        },
-                        "required": [
-                            "status",
-                            "checks",
-                            "attribution_id",
-                            "created_at",
-                            "updated_at"
-                        ]
+                            "required": [
+                                "label",
+                                "result"
+                            ]
+                        }
+                    },
+                    "attribution_id": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The attribution ID optionally provided upon creation."
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "ISO 8601 formatted date-time."
                     }
                 },
                 "required": [
                     "id",
-                    "type"
+                    "status",
+                    "checks",
+                    "attribution_id",
+                    "created_at",
+                    "updated_at"
                 ],
                 "title": "VerificationResource"
             },
