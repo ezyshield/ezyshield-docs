@@ -1,4 +1,94 @@
 ---
 title: "Verification"
-description: "An immutable record created when you call the verifications API, belonging to a single entity and optionally grouped by attribution ID for reporting."
+description: "An immutable record representing a point-in-time verification of business identity and payment details."
 ---
+
+There are three core components to a verification:
+* The **business** details
+* The **contact person** authorised to act on behalf of the business
+* The **bank account** details
+
+To begin a verification, [create a verification](/api-reference/verifications/create-a-verification) using the Verification API.
+
+ezyshield's Verification Engine then performs a comprehensive series of checks in real-time to verify the integrity of the details provided.
+
+## Statuses
+
+A verification can be in one of the following statuses:
+
+| Status      | Description                                                                  |
+|-------------|------------------------------------------------------------------------------|
+|  🟡 `pending`  | The verification is in progress. **All verifications begin in this status.**     |
+|  🟢 `verified`  | ezyshield was able to verify the integrity of the details provided.          |
+|  🔴 `failed`   | ezyshield was unable to verify the integrity of the details provided.        |
+|  🔴 `rejected`  | The verification has been rejected by the contact person.                    |
+|  🔴 `error`     | The verification has encountered an unexpected error.                        |
+|  ⚪ `cancelled` | The verification has been cancelled by a newer verification.                 |
+|  ⚪ `expired`    | The verification has expired.                                                |
+
+
+## Flow
+
+<Steps>
+  <Step title="Create a verification">
+    Call the [create verification](/api-reference/verifications/create-a-verification) endpoint with the business details, contact person information, and bank account details.
+    
+    The verification begins in `pending` status while ezyshield performs automated checks.
+  </Step>
+
+  <Step title="Automated verification checks">
+    ezyshield's Verification Engine performs a comprehensive series of checks in real-time to verify the integrity of the details provided.
+    
+    This includes validating business registration, bank account ownership, and contact person details.
+  </Step>
+
+  <Step title="Contact person verification">
+    Once automated checks complete, the contact person receives an SMS to their mobile number with instructions to complete identity verification.
+    
+    <Info>
+    The SMS is sent automatically by ezyshield. No action is required from your application.
+    </Info>
+  </Step>
+
+  <Step title="Biometric authentication">
+    The contact person completes biometric authentication to confirm their identity:
+  </Step>
+
+  <Step title="Listen for webhook">
+    ezyshield sends a [`verification.status.updated` webhook](/api-reference/verification/webhooks) when the verification completes.
+    
+    If the verification is successful, the verification will transition to the `verified` status. Otherwise, it will transition one of the remaining statuses.
+
+    See [Statuses](#statuses) for details on each status.
+  </Step>
+</Steps>
+
+## Attribution
+
+Use attribution to link multiple verifications to the same entity in your system (e.g., a payer or payee). This allows you to track verification history when details are updated.
+
+Provide an `attribution_id` when creating a verification to group related verifications together.
+
+<Tip>
+Retrieve all verifications for a specific entity using the `attribution_id` parameter in the [list verifications](/api-reference/verifications/list-verifications) endpoint.
+</Tip>
+
+**Example use case:** When a customer updates their bank account details, create a new verification with the same `attribution_id`. This creates a complete audit trail of all verification attempts for that customer.
+
+## Biometric authentication
+
+During the verification process, ezyshield will send a SMS message to the contact person's mobile number to verify their identity.
+
+To verify the identity of the contact person, they must provide a government-issued ID image and then complete a face scan.
+
+For customers that have an existing KYC process, ezyshield allows an existing government-issued ID image to be provided with the `contact_identity_portrait` parameter. This prevents the need for the customer to upload a government-issued ID image, resulting in a faster verification process.
+
+Verifications linked by the same `attribution_id` will reuse the same government-issued ID image, when provided.
+
+## Fingerprint
+
+When a verification is initiated, ezyshield stores the business identity and payment details and provides a verification ID. This ID is designed to be stored in your system against a record.
+
+The verification ID can later be supplied to [check a verification](/api-reference/checks/check-a-verification), which compares the current, supplied details against those store by ezyshield.
+
+**Example use case:** Before processing a payment, check if saved details have been compromised in your system by comparing against the verification fingerprint.
