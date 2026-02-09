@@ -289,7 +289,7 @@
                 }
             }
         },
-        "/admin-keys/{admin_key}": {
+        "/admin-keys/{adminKey}": {
             "get": {
                 "operationId": "management.v1.admin-keys.show",
                 "description": "Requires the `admin_key:read` ability.",
@@ -299,15 +299,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "admin_key",
+                        "name": "adminKey",
                         "in": "path",
                         "required": true,
+                        "description": "The admin key prefixed id",
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "apiKey",
+                        "name": "admin_key",
                         "in": "path",
                         "required": true,
                         "description": "The API key ID",
@@ -345,6 +346,9 @@
                     "403": {
                         "$ref": "#/components/responses/AuthorizationException"
                     },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
                     }
@@ -364,15 +368,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "admin_key",
+                        "name": "adminKey",
                         "in": "path",
                         "required": true,
+                        "description": "The admin key prefixed id",
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "apiKey",
+                        "name": "admin_key",
                         "in": "path",
                         "required": true,
                         "description": "The API key ID",
@@ -420,6 +425,9 @@
                     "403": {
                         "$ref": "#/components/responses/AuthorizationException"
                     },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
                     },
@@ -437,15 +445,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "admin_key",
+                        "name": "adminKey",
                         "in": "path",
                         "required": true,
+                        "description": "The admin key prefixed id",
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "apiKey",
+                        "name": "admin_key",
                         "in": "path",
                         "required": true,
                         "description": "The API key ID",
@@ -474,6 +483,9 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
                     },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
