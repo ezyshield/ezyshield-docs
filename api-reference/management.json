@@ -3,11 +3,11 @@
     "info": {
         "title": "ezyshield Management API",
         "version": "1.0.0",
-        "description": "API for the management of the organization and its entities."
+        "description": "API for the management of the organization and its workspaces."
     },
     "servers": [
         {
-            "url": "https://api.staging-2tid4c.ezyshield.com.au/management/v1"
+            "url": "https://https://api.local-vj8qtz.ezyshield.com.au/management/v1"
         }
     ],
     "tags": [
@@ -15,13 +15,13 @@
             "name": "Organizations"
         },
         {
-            "name": "Organization API Keys"
+            "name": "Admin Keys"
         },
         {
-            "name": "Entities"
+            "name": "Workspaces"
         },
         {
-            "name": "Entity API Keys"
+            "name": "API Keys"
         }
     ],
     "security": [
@@ -41,7 +41,7 @@
                     "200": {
                         "description": "`OrganizationResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -60,15 +60,20 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            }
+            },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
+                }
+            ]
         },
-        "/api-keys": {
+        "/admin-keys": {
             "get": {
-                "operationId": "management.v1.api-keys.index",
-                "description": "Requires the `organization_api_key:read` ability.",
-                "summary": "List all organization API keys",
+                "operationId": "management.v1.admin-keys.index",
+                "description": "Requires the `admin_key:read` ability.",
+                "summary": "List all admin keys",
                 "tags": [
-                    "Organization API Keys"
+                    "Admin Keys"
                 ],
                 "parameters": [
                     {
@@ -93,7 +98,7 @@
                     "200": {
                         "description": "Paginated set of `ApiKeyResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -107,51 +112,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "last": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "prev": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "next": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 }
-                                            },
-                                            "required": [
-                                                "first",
-                                                "last",
-                                                "prev",
-                                                "next"
-                                            ]
+                                            }
                                         },
                                         "meta": {
                                             "type": "object",
                                             "properties": {
                                                 "current_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "from": {
                                                     "type": [
                                                         "integer",
                                                         "null"
-                                                    ]
+                                                    ],
+                                                    "minimum": 1
                                                 },
                                                 "last_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "links": {
                                                     "type": "array",
@@ -188,18 +178,21 @@
                                                 },
                                                 "per_page": {
                                                     "type": "integer",
-                                                    "description": "Number of items shown per page."
+                                                    "description": "Number of items shown per page.",
+                                                    "minimum": 0
                                                 },
                                                 "to": {
                                                     "type": [
                                                         "integer",
                                                         "null"
                                                     ],
-                                                    "description": "Number of the last item in the slice."
+                                                    "description": "Number of the last item in the slice.",
+                                                    "minimum": 1
                                                 },
                                                 "total": {
                                                     "type": "integer",
-                                                    "description": "Total number of items being paginated."
+                                                    "description": "Total number of items being paginated.",
+                                                    "minimum": 0
                                                 }
                                             },
                                             "required": [
@@ -212,6 +205,12 @@
                                                 "to",
                                                 "total"
                                             ]
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -231,19 +230,24 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
+                }
+            ],
             "post": {
-                "operationId": "management.v1.api-keys.store",
-                "description": "The plain text token is only returned once and should be stored securely.\n\nRequires the `organization_api_key:write` ability.",
-                "summary": "Create an organization API key",
+                "operationId": "management.v1.admin-keys.store",
+                "description": "The plain text token is only returned once and should be stored securely.\n\nRequires the `admin_key:write` ability.",
+                "summary": "Create an admin key",
                 "tags": [
-                    "Organization API Keys"
+                    "Admin Keys"
                 ],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/StoreOrganizationApiKeyRequest"
+                                "$ref": "#/components/schemas/StoreAdminKeyRequest"
                             }
                         }
                     }
@@ -252,12 +256,18 @@
                     "201": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -279,15 +289,23 @@
                 }
             }
         },
-        "/api-keys/{apiKey}": {
+        "/admin-keys/{admin_key}": {
             "get": {
-                "operationId": "management.v1.api-keys.show",
-                "description": "Requires the `organization_api_key:read` ability.",
-                "summary": "Get an organization API key",
+                "operationId": "management.v1.admin-keys.show",
+                "description": "Requires the `admin_key:read` ability.",
+                "summary": "Get an admin key",
                 "tags": [
-                    "Organization API Keys"
+                    "Admin Keys"
                 ],
                 "parameters": [
+                    {
+                        "name": "admin_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "apiKey",
                         "in": "path",
@@ -303,12 +321,18 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -326,14 +350,27 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
+                }
+            ],
             "put": {
-                "operationId": "management.v1.api-keys.update",
-                "description": "Requires the `organization_api_key:write` ability.",
-                "summary": "Update an organization API key",
+                "operationId": "management.v1.admin-keys.update",
+                "description": "Requires the `admin_key:write` ability.",
+                "summary": "Update an admin key",
                 "tags": [
-                    "Organization API Keys"
+                    "Admin Keys"
                 ],
                 "parameters": [
+                    {
+                        "name": "admin_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "apiKey",
                         "in": "path",
@@ -350,7 +387,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateOrganizationApiKeyRequest"
+                                "$ref": "#/components/schemas/UpdateAdminKeyRequest"
                             }
                         }
                     }
@@ -359,12 +396,18 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -386,13 +429,21 @@
                 }
             },
             "delete": {
-                "operationId": "management.v1.api-keys.destroy",
-                "description": "Requires the `organization_api_key:write` ability.",
-                "summary": "Delete an organization API key",
+                "operationId": "management.v1.admin-keys.destroy",
+                "description": "Requires the `admin_key:write` ability.",
+                "summary": "Delete an admin key",
                 "tags": [
-                    "Organization API Keys"
+                    "Admin Keys"
                 ],
                 "parameters": [
+                    {
+                        "name": "admin_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "apiKey",
                         "in": "path",
@@ -430,13 +481,13 @@
                 }
             }
         },
-        "/entities": {
+        "/workspaces": {
             "get": {
-                "operationId": "management.v1.entities.index",
-                "description": "Requires the `entity:read` ability.",
-                "summary": "List all entities",
+                "operationId": "management.v1.workspaces.index",
+                "description": "Requires the `workspace:read` ability.",
+                "summary": "List all workspaces",
                 "tags": [
-                    "Entities"
+                    "Workspaces"
                 ],
                 "parameters": [
                     {
@@ -467,67 +518,52 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Paginated set of `EntityResource`",
+                        "description": "Paginated set of `WorkspaceResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/EntityResource"
+                                                "$ref": "#/components/schemas/WorkspaceResource"
                                             }
                                         },
                                         "links": {
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "last": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "prev": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "next": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 }
-                                            },
-                                            "required": [
-                                                "first",
-                                                "last",
-                                                "prev",
-                                                "next"
-                                            ]
+                                            }
                                         },
                                         "meta": {
                                             "type": "object",
                                             "properties": {
                                                 "current_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "from": {
                                                     "type": [
                                                         "integer",
                                                         "null"
-                                                    ]
+                                                    ],
+                                                    "minimum": 1
                                                 },
                                                 "last_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "links": {
                                                     "type": "array",
@@ -564,18 +600,21 @@
                                                 },
                                                 "per_page": {
                                                     "type": "integer",
-                                                    "description": "Number of items shown per page."
+                                                    "description": "Number of items shown per page.",
+                                                    "minimum": 0
                                                 },
                                                 "to": {
                                                     "type": [
                                                         "integer",
                                                         "null"
                                                     ],
-                                                    "description": "Number of the last item in the slice."
+                                                    "description": "Number of the last item in the slice.",
+                                                    "minimum": 1
                                                 },
                                                 "total": {
                                                     "type": "integer",
-                                                    "description": "Total number of items being paginated."
+                                                    "description": "Total number of items being paginated.",
+                                                    "minimum": 0
                                                 }
                                             },
                                             "required": [
@@ -607,33 +646,38 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
+                }
+            ],
             "post": {
-                "operationId": "management.v1.entities.store",
-                "description": "Requires the `entity:write` ability.",
-                "summary": "Create an entity",
+                "operationId": "management.v1.workspaces.store",
+                "description": "Requires the `workspace:write` ability.",
+                "summary": "Create a workspace",
                 "tags": [
-                    "Entities"
+                    "Workspaces"
                 ],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/StoreEntityRequest"
+                                "$ref": "#/components/schemas/StoreWorkspaceRequest"
                             }
                         }
                     }
                 },
                 "responses": {
                     "201": {
-                        "description": "`EntityResource`",
+                        "description": "`WorkspaceResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/components/schemas/EntityResource"
+                                            "$ref": "#/components/schemas/WorkspaceResource"
                                         }
                                     },
                                     "required": [
@@ -655,20 +699,20 @@
                 }
             }
         },
-        "/entities/{entity}": {
+        "/workspaces/{workspace}": {
             "get": {
-                "operationId": "management.v1.entities.show",
-                "description": "Requires the `entity:read` ability.",
-                "summary": "Get an entity",
+                "operationId": "management.v1.workspaces.show",
+                "description": "Requires the `workspace:read` ability.",
+                "summary": "Get a workspace",
                 "tags": [
-                    "Entities"
+                    "Workspaces"
                 ],
                 "parameters": [
                     {
-                        "name": "entity",
+                        "name": "workspace",
                         "in": "path",
                         "required": true,
-                        "description": "The entity ID",
+                        "description": "The workspace ID",
                         "schema": {
                             "type": "string",
                             "format": "uuid"
@@ -677,14 +721,14 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "`EntityResource`",
+                        "description": "`WorkspaceResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/components/schemas/EntityResource"
+                                            "$ref": "#/components/schemas/WorkspaceResource"
                                         }
                                     },
                                     "required": [
@@ -702,19 +746,24 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
+                }
+            ],
             "put": {
-                "operationId": "management.v1.entities.update",
-                "description": "Requires the `entity:write` ability.",
-                "summary": "Update an entity",
+                "operationId": "management.v1.workspaces.update",
+                "description": "Requires the `workspace:write` ability.",
+                "summary": "Update a workspace",
                 "tags": [
-                    "Entities"
+                    "Workspaces"
                 ],
                 "parameters": [
                     {
-                        "name": "entity",
+                        "name": "workspace",
                         "in": "path",
                         "required": true,
-                        "description": "The entity ID",
+                        "description": "The workspace ID",
                         "schema": {
                             "type": "string",
                             "format": "uuid"
@@ -726,21 +775,21 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateEntityRequest"
+                                "$ref": "#/components/schemas/UpdateWorkspaceRequest"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "`EntityResource`",
+                        "description": "`WorkspaceResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/components/schemas/EntityResource"
+                                            "$ref": "#/components/schemas/WorkspaceResource"
                                         }
                                     },
                                     "required": [
@@ -762,18 +811,18 @@
                 }
             },
             "delete": {
-                "operationId": "management.v1.entities.destroy",
-                "description": "Requires the `entity:write` ability.",
-                "summary": "Delete an entity",
+                "operationId": "management.v1.workspaces.destroy",
+                "description": "Requires the `workspace:write` ability.",
+                "summary": "Delete a workspace",
                 "tags": [
-                    "Entities"
+                    "Workspaces"
                 ],
                 "parameters": [
                     {
-                        "name": "entity",
+                        "name": "workspace",
                         "in": "path",
                         "required": true,
-                        "description": "The entity ID",
+                        "description": "The workspace ID",
                         "schema": {
                             "type": "string",
                             "format": "uuid"
@@ -806,13 +855,13 @@
                 }
             }
         },
-        "/entities/{entity}/api-keys": {
+        "/workspaces/{workspace}/api-keys": {
             "get": {
-                "operationId": "management.v1.entities.api-keys.index",
-                "description": "Requires the `entity_api_key:read` ability.",
-                "summary": "List all entity API keys",
+                "operationId": "management.v1.workspaces.api-keys.index",
+                "description": "Requires the `api_key:read` ability.",
+                "summary": "List all API keys",
                 "tags": [
-                    "Entity API Keys"
+                    "API Keys"
                 ],
                 "parameters": [
                     {
@@ -833,10 +882,10 @@
                         }
                     },
                     {
-                        "name": "entity",
+                        "name": "workspace",
                         "in": "path",
                         "required": true,
-                        "description": "The entity ID",
+                        "description": "The workspace ID",
                         "schema": {
                             "type": "string",
                             "format": "uuid"
@@ -847,7 +896,7 @@
                     "200": {
                         "description": "Paginated set of `ApiKeyResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -861,51 +910,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "last": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "prev": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "next": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 }
-                                            },
-                                            "required": [
-                                                "first",
-                                                "last",
-                                                "prev",
-                                                "next"
-                                            ]
+                                            }
                                         },
                                         "meta": {
                                             "type": "object",
                                             "properties": {
                                                 "current_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "from": {
                                                     "type": [
                                                         "integer",
                                                         "null"
-                                                    ]
+                                                    ],
+                                                    "minimum": 1
                                                 },
                                                 "last_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "links": {
                                                     "type": "array",
@@ -942,18 +976,21 @@
                                                 },
                                                 "per_page": {
                                                     "type": "integer",
-                                                    "description": "Number of items shown per page."
+                                                    "description": "Number of items shown per page.",
+                                                    "minimum": 0
                                                 },
                                                 "to": {
                                                     "type": [
                                                         "integer",
                                                         "null"
                                                     ],
-                                                    "description": "Number of the last item in the slice."
+                                                    "description": "Number of the last item in the slice.",
+                                                    "minimum": 1
                                                 },
                                                 "total": {
                                                     "type": "integer",
-                                                    "description": "Total number of items being paginated."
+                                                    "description": "Total number of items being paginated.",
+                                                    "minimum": 0
                                                 }
                                             },
                                             "required": [
@@ -966,6 +1003,12 @@
                                                 "to",
                                                 "total"
                                             ]
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -985,19 +1028,24 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
+                }
+            ],
             "post": {
-                "operationId": "management.v1.entities.api-keys.store",
-                "description": "The plain text token is only returned once and should be stored securely.\n\nRequires the `entity_api_key:write` ability.",
-                "summary": "Create an entity API key",
+                "operationId": "management.v1.workspaces.api-keys.store",
+                "description": "The plain text token is only returned once and should be stored securely.\n\nRequires the `api_key:write` ability.",
+                "summary": "Create an API key",
                 "tags": [
-                    "Entity API Keys"
+                    "API Keys"
                 ],
                 "parameters": [
                     {
-                        "name": "entity",
+                        "name": "workspace",
                         "in": "path",
                         "required": true,
-                        "description": "The entity ID",
+                        "description": "The workspace ID",
                         "schema": {
                             "type": "string",
                             "format": "uuid"
@@ -1009,7 +1057,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/StoreEntityApiKeyRequest"
+                                "$ref": "#/components/schemas/StoreWorkspaceApiKeyRequest"
                             }
                         }
                     }
@@ -1018,12 +1066,18 @@
                     "201": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -1045,20 +1099,20 @@
                 }
             }
         },
-        "/entities/{entity}/api-keys/{apiKey}": {
+        "/workspaces/{workspace}/api-keys/{apiKey}": {
             "get": {
-                "operationId": "management.v1.entities.api-keys.show",
-                "description": "Requires the `entity_api_key:read` ability.",
-                "summary": "Get an entity API key",
+                "operationId": "management.v1.workspaces.api-keys.show",
+                "description": "Requires the `api_key:read` ability.",
+                "summary": "Get an API key",
                 "tags": [
-                    "Entity API Keys"
+                    "API Keys"
                 ],
                 "parameters": [
                     {
-                        "name": "entity",
+                        "name": "workspace",
                         "in": "path",
                         "required": true,
-                        "description": "The entity ID",
+                        "description": "The workspace ID",
                         "schema": {
                             "type": "string",
                             "format": "uuid"
@@ -1079,12 +1133,18 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -1105,19 +1165,24 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
+                }
+            ],
             "put": {
-                "operationId": "management.v1.entities.api-keys.update",
-                "description": "Requires the `entity_api_key:write` ability.",
-                "summary": "Update an entity API key",
+                "operationId": "management.v1.workspaces.api-keys.update",
+                "description": "Requires the `api_key:write` ability.",
+                "summary": "Update an API key",
                 "tags": [
-                    "Entity API Keys"
+                    "API Keys"
                 ],
                 "parameters": [
                     {
-                        "name": "entity",
+                        "name": "workspace",
                         "in": "path",
                         "required": true,
-                        "description": "The entity ID",
+                        "description": "The workspace ID",
                         "schema": {
                             "type": "string",
                             "format": "uuid"
@@ -1139,7 +1204,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateEntityApiKeyRequest"
+                                "$ref": "#/components/schemas/UpdateWorkspaceApiKeyRequest"
                             }
                         }
                     }
@@ -1148,12 +1213,18 @@
                     "200": {
                         "description": "`ApiKeyResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/ApiKeyResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
                                         }
                                     },
                                     "required": [
@@ -1178,18 +1249,18 @@
                 }
             },
             "delete": {
-                "operationId": "management.v1.entities.api-keys.destroy",
-                "description": "Requires the `entity_api_key:write` ability.",
-                "summary": "Delete an entity API key",
+                "operationId": "management.v1.workspaces.api-keys.destroy",
+                "description": "Requires the `api_key:write` ability.",
+                "summary": "Delete an API key",
                 "tags": [
-                    "Entity API Keys"
+                    "API Keys"
                 ],
                 "parameters": [
                     {
-                        "name": "entity",
+                        "name": "workspace",
                         "in": "path",
                         "required": true,
-                        "description": "The entity ID",
+                        "description": "The workspace ID",
                         "schema": {
                             "type": "string",
                             "format": "uuid"
@@ -1248,141 +1319,183 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string",
-                        "description": "The API key ID."
+                        "type": "string"
                     },
-                    "name": {
+                    "type": {
                         "type": "string",
-                        "description": "The name of the API key."
+                        "enum": [
+                            "api-keys"
+                        ]
                     },
-                    "token": {
-                        "type": "string",
-                        "description": "The plain text token, only shown once when created."
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the API key."
+                            },
+                            "token": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "The plain text token, only shown once when created."
+                            },
+                            "abilities": {
+                                "type": "array",
+                                "description": "The abilities/permissions for the API key.",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "last_used_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "expires_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "abilities",
+                            "created_at",
+                            "last_used_at",
+                            "expires_at"
+                        ]
                     },
-                    "abilities": {
-                        "type": "array",
-                        "description": "The abilities/permissions for the API key.",
-                        "items": {
-                            "type": "string"
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "creator": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "anyOf": [
+                                            {
+                                                "$ref": "#/components/schemas/UserResourceIdentifier"
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
                         }
-                    },
-                    "creator": {
-                        "$ref": "#/components/schemas/UserResource"
-                    },
-                    "created_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
-                    },
-                    "last_used_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
-                    },
-                    "expires_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
                     }
                 },
                 "required": [
                     "id",
-                    "name",
-                    "abilities",
-                    "creator",
-                    "created_at",
-                    "last_used_at",
-                    "expires_at"
+                    "type"
                 ],
                 "title": "ApiKeyResource"
-            },
-            "EntityResource": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "The entity ID."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the entity."
-                    },
-                    "created_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
-                    },
-                    "updated_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
-                    }
-                },
-                "required": [
-                    "id",
-                    "name",
-                    "created_at",
-                    "updated_at"
-                ],
-                "title": "EntityResource"
             },
             "OrganizationResource": {
                 "type": "object",
                 "properties": {
                     "id": {
+                        "type": "string"
+                    },
+                    "type": {
                         "type": "string",
-                        "description": "The organization ID."
+                        "enum": [
+                            "organizations"
+                        ]
                     },
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the organization."
-                    },
-                    "slug": {
-                        "type": "string",
-                        "description": "The organization's unique slug."
-                    },
-                    "created_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
-                    },
-                    "updated_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the organization."
+                            },
+                            "slug": {
+                                "type": "string",
+                                "description": "The organization's unique slug."
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "updated_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "slug",
+                            "created_at",
+                            "updated_at"
+                        ]
                     }
                 },
                 "required": [
                     "id",
-                    "name",
-                    "slug",
-                    "created_at",
-                    "updated_at"
+                    "type"
                 ],
                 "title": "OrganizationResource"
             },
-            "StoreEntityApiKeyRequest": {
+            "StoreAdminKeyRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the API key.",
+                        "maxLength": 255
+                    },
+                    "abilities": {
+                        "type": "array",
+                        "description": "The abilities/permissions for the API key.",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "admin_key:read",
+                                "admin_key:write",
+                                "workspace:read",
+                                "workspace:write",
+                                "api_key:read",
+                                "api_key:write"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "name",
+                    "abilities"
+                ],
+                "title": "StoreAdminKeyRequest"
+            },
+            "StoreWorkspaceApiKeyRequest": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -1399,7 +1512,10 @@
                                 "verification:read",
                                 "verification:write",
                                 "check:read",
-                                "check:write"
+                                "check:write",
+                                "webhook_subscription:read",
+                                "webhook_subscription:write",
+                                "webhook_event:read"
                             ]
                         }
                     }
@@ -1408,53 +1524,23 @@
                     "name",
                     "abilities"
                 ],
-                "title": "StoreEntityApiKeyRequest"
+                "title": "StoreWorkspaceApiKeyRequest"
             },
-            "StoreEntityRequest": {
+            "StoreWorkspaceRequest": {
                 "type": "object",
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "The name of the entity.",
+                        "description": "The name of the workspace.",
                         "maxLength": 255
                     }
                 },
                 "required": [
                     "name"
                 ],
-                "title": "StoreEntityRequest"
+                "title": "StoreWorkspaceRequest"
             },
-            "StoreOrganizationApiKeyRequest": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the API key.",
-                        "maxLength": 255
-                    },
-                    "abilities": {
-                        "type": "array",
-                        "description": "The abilities/permissions for the API key.",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "organization_api_key:read",
-                                "organization_api_key:write",
-                                "entity:read",
-                                "entity:write",
-                                "entity_api_key:read",
-                                "entity_api_key:write"
-                            ]
-                        }
-                    }
-                },
-                "required": [
-                    "name",
-                    "abilities"
-                ],
-                "title": "StoreOrganizationApiKeyRequest"
-            },
-            "UpdateEntityApiKeyRequest": {
+            "UpdateAdminKeyRequest": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -1466,23 +1552,9 @@
                 "required": [
                     "name"
                 ],
-                "title": "UpdateEntityApiKeyRequest"
+                "title": "UpdateAdminKeyRequest"
             },
-            "UpdateEntityRequest": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the entity.",
-                        "maxLength": 255
-                    }
-                },
-                "required": [
-                    "name"
-                ],
-                "title": "UpdateEntityRequest"
-            },
-            "UpdateOrganizationApiKeyRequest": {
+            "UpdateWorkspaceApiKeyRequest": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -1494,48 +1566,135 @@
                 "required": [
                     "name"
                 ],
-                "title": "UpdateOrganizationApiKeyRequest"
+                "title": "UpdateWorkspaceApiKeyRequest"
+            },
+            "UpdateWorkspaceRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the workspace.",
+                        "maxLength": 255
+                    }
+                },
+                "required": [
+                    "name"
+                ],
+                "title": "UpdateWorkspaceRequest"
             },
             "UserResource": {
                 "type": "object",
                 "properties": {
                     "id": {
+                        "type": "string"
+                    },
+                    "type": {
                         "type": "string",
-                        "description": "The user ID."
+                        "enum": [
+                            "users"
+                        ]
                     },
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the user."
-                    },
-                    "email": {
-                        "type": "string",
-                        "description": "The email address of the user."
-                    },
-                    "created_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
-                    },
-                    "updated_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the user."
+                            },
+                            "email": {
+                                "type": "string",
+                                "description": "The email address of the user."
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "updated_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "email",
+                            "created_at",
+                            "updated_at"
+                        ]
                     }
                 },
                 "required": [
                     "id",
-                    "name",
-                    "email",
-                    "created_at",
-                    "updated_at"
+                    "type"
                 ],
                 "title": "UserResource"
+            },
+            "UserResourceIdentifier": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "users"
+                        ]
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type",
+                    "id"
+                ],
+                "title": "UserResourceIdentifier"
+            },
+            "WorkspaceResource": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "workspaces"
+                        ]
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the workspace."
+                            },
+                            "created_at": {
+                                "type": "string",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "updated_at": {
+                                "type": "string",
+                                "description": "ISO 8601 formatted date-time."
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "created_at",
+                            "updated_at"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "type"
+                ],
+                "title": "WorkspaceResource"
             }
         },
         "responses": {

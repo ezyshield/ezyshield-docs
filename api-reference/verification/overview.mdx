@@ -11,17 +11,17 @@ https://api.ezyshield.com.au/verification/v1
 
 ## Authentication
 
-The Verification API uses entity API keys for authentication. See [Authentication](/api-reference/authentication) for details.
+The Verification API uses API keys for authentication. See [Authentication](/api-reference/authentication) for details.
 
-Entity API keys are scoped to a specific entity, and all requests are automatically scoped to that entity through the `Authorization` header.
+API keys are scoped to a specific workspace, and all requests are automatically scoped to that workspace through the `Authorization` header.
 
-<Note>Entity tokens always start with `ent_sk_`.</Note>
+<Note>API key tokens always start with `wrk_sk_`.</Note>
 
-To create an entity API key, use the [Management API](/api-reference/management/overview) to first [create an entity](/api-reference/entities/create-an-entity) and then [create an entity API key](/api-reference/entity-api-keys/create-an-entity-api-key).
+To create an API key, use the [Management API](/api-reference/management/overview) to first [create a workspace](/api-reference/workspaces/create-a-workspace) and then [create an API key](/api-reference/api-keys/create-an-api-key).
 
 ## Rate limits
 
-The Verification API has a rate limit of **60 requests per minute per entity**. See the [Rate Limiting](/api-reference/rate-limiting) documentation for more information.
+The Verification API has a rate limit of **60 requests per minute per workspace**. See the [Rate Limiting](/api-reference/rate-limiting) documentation for more information.
 
 ## OpenAPI specification
 

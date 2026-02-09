@@ -1,0 +1,169 @@
+---
+title: "Webhooks"
+description: "Receive real-time notifications when verification events occur."
+---
+
+Webhooks allow your application to receive real-time HTTP notifications when events occur in ezyshield. Instead of polling the API, you subscribe to specific events and ezyshield pushes updates to your endpoint.
+
+## Event types
+
+Subscribe to any of the following verification events:
+
+| Event | Description |
+|-------|-------------|
+| `verification.pending` | A verification has been created and is in progress. |
+| `verification.verified` | The verification completed successfully. |
+| `verification.rejected` | The contact person rejected the verification. |
+| `verification.failed` | ezyshield was unable to verify the details provided. |
+| `verification.cancelled` | The verification was cancelled by a newer verification. |
+| `verification.expired` | The verification expired before completion. |
+| `verification.error` | The verification encountered an unexpected error. |
+| `verification.confirmation_notification_sent` | The SMS notification was sent to the contact person. |
+
+## Webhook Subscription object
+
+A webhook subscription defines which events to receive and where to send them.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique identifier for the subscription. |
+| `url` | string | The HTTPS endpoint where events are delivered. |
+| `events` | array | List of event types to subscribe to. |
+| `created_at` | timestamp | When the subscription was created. |
+
+```json Example
+{
+  "id": "wh_sub_abc123",
+  "url": "https://example.com/webhooks/ezyshield",
+  "events": [
+    "verification.verified",
+    "verification.failed"
+  ],
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+## Webhook Event object
+
+When an event occurs, ezyshield sends an HTTP POST request to your endpoint with the following payload:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique identifier for the event. |
+| `type` | string | The event type (e.g., `verification.verified`). |
+| `created_at` | timestamp | When the event occurred. |
+| `data` | object | The [Verification](/objects/verification) object associated with the event. |
+
+```json Example
+{
+  "id": "wh_evt_xyz789",
+  "type": "verification.verified",
+  "created_at": "2024-01-15T10:35:00Z",
+  "data": {
+    "id": "ver_abc123",
+    "status": "verified",
+    // ... full Verification object
+  }
+}
+```
+
+## Verifying signatures
+
+Every webhook request includes a `Signature` header containing an HMAC-SHA256 signature of the request body. Verify this signature to ensure the request originated from ezyshield.
+
+<CodeGroup>
+```php PHP
+$payload = file_get_contents('php://input');
+$signature = $_SERVER['HTTP_SIGNATURE'];
+
+$expected = hash_hmac('sha256', $payload, $webhookSecret);
+
+if (!hash_equals($expected, $signature)) {
+    http_response_code(401);
+    exit('Invalid signature');
+}
+```
+
+```javascript Node.js
+import crypto from 'crypto';
+
+const payload = JSON.stringify(req.body);
+const signature = req.headers['signature'];
+
+const expected = crypto
+  .createHmac('sha256', webhookSecret)
+  .update(payload)
+  .digest('hex');
+
+if (signature !== expected) {
+  return res.status(401).send('Invalid signature');
+}
+```
+
+```python Python
+import hmac
+import hashlib
+
+payload = request.get_data(as_text=True)
+signature = request.headers.get('Signature')
+
+expected = hmac.new(
+    webhook_secret.encode(),
+    payload.encode(),
+    hashlib.sha256
+).hexdigest()
+
+if not hmac.compare_digest(expected, signature):
+    return 'Invalid signature', 401
+```
+</CodeGroup>
+
+<Warning>
+Always use constant-time comparison (e.g., `hash_equals` in PHP, `hmac.compare_digest` in Python) to prevent timing attacks.
+</Warning>
+
+## Retry behavior
+
+ezyshield expects a `2xx` response within **3 seconds**. If your endpoint fails to respond or returns a non-2xx status, ezyshield retries with exponential backoff:
+
+| Attempt | Delay |
+|---------|-------|
+| 1 | Immediate |
+| 2 | 10 seconds |
+| 3 | 100 seconds |
+
+After 3 failed attempts, the event is marked as failed and no further retries occur.
+
+<Warning>
+If 10 consecutive events fail to deliver, ezyshield automatically disables the webhook subscription. You'll need to fix the issue and re-enable the subscription to resume delivery.
+</Warning>
+
+## Best practices
+
+<AccordionGroup>
+<Accordion title="Respond quickly">
+Return a `2xx` response as soon as you receive the webhook. Process the event asynchronously to avoid timeouts.
+
+```javascript
+app.post('/webhooks', (req, res) => {
+  // Acknowledge immediately
+  res.status(200).send('OK');
+  
+  // Process asynchronously
+  processWebhookAsync(req.body);
+});
+```
+</Accordion>
+
+<Accordion title="Handle retries gracefully">
+ezyshield delivers each event exactly once on success. However, if your endpoint fails and ezyshield retries, the retry will have the same event `id`. Use this ID to ensure idempotent processing and avoid duplicate side effects.
+</Accordion>
+
+<Accordion title="Use HTTPS (required)">
+ezyshield only delivers webhooks to HTTPS endpoints. HTTP URLs are rejected when creating a subscription.
+</Accordion>
+
+<Accordion title="Verify signatures">
+Always verify the `Signature` header before processing events to ensure requests originate from ezyshield.
+</Accordion>
+</AccordionGroup>

@@ -3,11 +3,11 @@
     "info": {
         "title": "ezyshield Verification API",
         "version": "1.0.0",
-        "description": "API for the verification of entities."
+        "description": "API for the verification of workspaces."
     },
     "servers": [
         {
-            "url": "https://api.staging-2tid4c.ezyshield.com.au/verification/v1"
+            "url": "https://https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
         }
     ],
     "tags": [
@@ -16,6 +16,12 @@
         },
         {
             "name": "Checks"
+        },
+        {
+            "name": "Webhook Subscriptions"
+        },
+        {
+            "name": "Webhook Events"
         }
     ],
     "security": [
@@ -71,7 +77,7 @@
                     "200": {
                         "description": "Paginated set of `VerificationResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -85,51 +91,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "last": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "prev": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "next": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 }
-                                            },
-                                            "required": [
-                                                "first",
-                                                "last",
-                                                "prev",
-                                                "next"
-                                            ]
+                                            }
                                         },
                                         "meta": {
                                             "type": "object",
                                             "properties": {
                                                 "current_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "from": {
                                                     "type": [
                                                         "integer",
                                                         "null"
-                                                    ]
+                                                    ],
+                                                    "minimum": 1
                                                 },
                                                 "last_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "links": {
                                                     "type": "array",
@@ -166,18 +157,21 @@
                                                 },
                                                 "per_page": {
                                                     "type": "integer",
-                                                    "description": "Number of items shown per page."
+                                                    "description": "Number of items shown per page.",
+                                                    "minimum": 0
                                                 },
                                                 "to": {
                                                     "type": [
                                                         "integer",
                                                         "null"
                                                     ],
-                                                    "description": "Number of the last item in the slice."
+                                                    "description": "Number of the last item in the slice.",
+                                                    "minimum": 1
                                                 },
                                                 "total": {
                                                     "type": "integer",
-                                                    "description": "Total number of items being paginated."
+                                                    "description": "Total number of items being paginated.",
+                                                    "minimum": 0
                                                 }
                                             },
                                             "required": [
@@ -209,6 +203,11 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ],
             "post": {
                 "operationId": "verification.v1.verifications.store",
                 "description": "Requires the `verification:write` ability.",
@@ -230,7 +229,7 @@
                     "201": {
                         "description": "`VerificationResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -281,7 +280,7 @@
                     "200": {
                         "description": "`VerificationResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -303,7 +302,12 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            }
+            },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ]
         },
         "/verifications/{verification}/checks": {
             "get": {
@@ -346,7 +350,7 @@
                     "200": {
                         "description": "Paginated set of `CheckResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -360,51 +364,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "last": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "prev": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 },
                                                 "next": {
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ]
+                                                    "type": "string"
                                                 }
-                                            },
-                                            "required": [
-                                                "first",
-                                                "last",
-                                                "prev",
-                                                "next"
-                                            ]
+                                            }
                                         },
                                         "meta": {
                                             "type": "object",
                                             "properties": {
                                                 "current_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "from": {
                                                     "type": [
                                                         "integer",
                                                         "null"
-                                                    ]
+                                                    ],
+                                                    "minimum": 1
                                                 },
                                                 "last_page": {
-                                                    "type": "integer"
+                                                    "type": "integer",
+                                                    "minimum": 1
                                                 },
                                                 "links": {
                                                     "type": "array",
@@ -441,18 +430,21 @@
                                                 },
                                                 "per_page": {
                                                     "type": "integer",
-                                                    "description": "Number of items shown per page."
+                                                    "description": "Number of items shown per page.",
+                                                    "minimum": 0
                                                 },
                                                 "to": {
                                                     "type": [
                                                         "integer",
                                                         "null"
                                                     ],
-                                                    "description": "Number of the last item in the slice."
+                                                    "description": "Number of the last item in the slice.",
+                                                    "minimum": 1
                                                 },
                                                 "total": {
                                                     "type": "integer",
-                                                    "description": "Total number of items being paginated."
+                                                    "description": "Total number of items being paginated.",
+                                                    "minimum": 0
                                                 }
                                             },
                                             "required": [
@@ -484,10 +476,15 @@
                     }
                 }
             },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ],
             "post": {
                 "operationId": "verification.v1.verifications.checks.store",
                 "description": "Requires the `check:write` ability.",
-                "summary": "Create (check) a verification",
+                "summary": "Check a verification",
                 "tags": [
                     "Checks"
                 ],
@@ -517,7 +514,7 @@
                     "201": {
                         "description": "`CheckResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -578,7 +575,7 @@
                     "200": {
                         "description": "`CheckResource`",
                         "content": {
-                            "application/json": {
+                            "application/vnd.api+json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -603,7 +600,706 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
+            },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ]
+        },
+        "/webhook-subscriptions": {
+            "get": {
+                "operationId": "verification.v1.webhook-subscriptions.index",
+                "description": "Requires the `webhook_subscription:read` ability.",
+                "summary": "List all webhook subscriptions",
+                "tags": [
+                    "Webhook Subscriptions"
+                ],
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The number of results that will be returned per page.",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number to start the pagination from.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paginated set of `WebhookSubscriptionResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/WebhookSubscriptionResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object",
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string"
+                                                },
+                                                "last": {
+                                                    "type": "string"
+                                                },
+                                                "prev": {
+                                                    "type": "string"
+                                                },
+                                                "next": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "object",
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                },
+                                                "from": {
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ],
+                                                    "minimum": 1
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "description": "Generated paginator links.",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ]
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "url",
+                                                            "label",
+                                                            "active"
+                                                        ]
+                                                    }
+                                                },
+                                                "path": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base path for paginator generated URLs."
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "description": "Number of items shown per page.",
+                                                    "minimum": 0
+                                                },
+                                                "to": {
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ],
+                                                    "description": "Number of the last item in the slice.",
+                                                    "minimum": 1
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "description": "Total number of items being paginated.",
+                                                    "minimum": 0
+                                                }
+                                            },
+                                            "required": [
+                                                "current_page",
+                                                "from",
+                                                "last_page",
+                                                "links",
+                                                "path",
+                                                "per_page",
+                                                "to",
+                                                "total"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "links",
+                                        "meta"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ],
+            "post": {
+                "operationId": "verification.v1.webhook-subscriptions.store",
+                "description": "Requires the `webhook_subscription:write` ability.",
+                "summary": "Create a webhook subscription",
+                "tags": [
+                    "Webhook Subscriptions"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreWebhookSubscriptionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "`WebhookSubscriptionResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/WebhookSubscriptionResource"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    }
+                }
             }
+        },
+        "/webhook-subscriptions/{webhookSubscription}": {
+            "get": {
+                "operationId": "verification.v1.webhook-subscriptions.show",
+                "description": "Requires the `webhook_subscription:read` ability.",
+                "summary": "Get a webhook subscription",
+                "tags": [
+                    "Webhook Subscriptions"
+                ],
+                "parameters": [
+                    {
+                        "name": "webhookSubscription",
+                        "in": "path",
+                        "required": true,
+                        "description": "The webhook subscription ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "`WebhookSubscriptionResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/WebhookSubscriptionResource"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ],
+            "put": {
+                "operationId": "verification.v1.webhook-subscriptions.update",
+                "description": "Requires the `webhook_subscription:write` ability.",
+                "summary": "Update a webhook subscription",
+                "tags": [
+                    "Webhook Subscriptions"
+                ],
+                "parameters": [
+                    {
+                        "name": "webhookSubscription",
+                        "in": "path",
+                        "required": true,
+                        "description": "The webhook subscription ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWebhookSubscriptionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "`WebhookSubscriptionResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/WebhookSubscriptionResource"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "verification.v1.webhook-subscriptions.destroy",
+                "description": "Requires the `webhook_subscription:write` ability.",
+                "summary": "Delete a webhook subscription",
+                "tags": [
+                    "Webhook Subscriptions"
+                ],
+                "parameters": [
+                    {
+                        "name": "webhookSubscription",
+                        "in": "path",
+                        "required": true,
+                        "description": "The webhook subscription ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "minItems": 0,
+                                    "maxItems": 0,
+                                    "additionalItems": false
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/webhook-subscriptions/{webhookSubscription}/enable": {
+            "post": {
+                "operationId": "verification.v1.webhook-subscriptions.enable",
+                "description": "Resets the consecutive failure count and re-enables the subscription.\n\nRequires the `webhook_subscription:write` ability.",
+                "summary": "Enable a disabled webhook subscription",
+                "tags": [
+                    "Webhook Subscriptions"
+                ],
+                "parameters": [
+                    {
+                        "name": "webhookSubscription",
+                        "in": "path",
+                        "required": true,
+                        "description": "The webhook subscription ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "`WebhookSubscriptionResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/WebhookSubscriptionResource"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ]
+        },
+        "/webhook-subscriptions/{webhookSubscription}/webhook-events": {
+            "get": {
+                "operationId": "verification.v1.webhook-subscriptions.webhook-events.index",
+                "description": "Requires the `webhook_event:read` ability.",
+                "summary": "List all webhook events for a subscription",
+                "tags": [
+                    "Webhook Events"
+                ],
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The number of results that will be returned per page.",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number to start the pagination from.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "webhookSubscription",
+                        "in": "path",
+                        "required": true,
+                        "description": "The webhook subscription ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "filter[type]",
+                        "in": "query",
+                        "description": "Filter by event type.",
+                        "schema": {
+                            "$ref": "#/components/schemas/WebhookEventType"
+                        }
+                    },
+                    {
+                        "name": "filter[created_at_start]",
+                        "in": "query",
+                        "description": "Filter events created on or after this datetime.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[created_at_end]",
+                        "in": "query",
+                        "description": "Filter events created on or before this datetime.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paginated set of `WebhookEventResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/WebhookEventResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object",
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string"
+                                                },
+                                                "last": {
+                                                    "type": "string"
+                                                },
+                                                "prev": {
+                                                    "type": "string"
+                                                },
+                                                "next": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "object",
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                },
+                                                "from": {
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ],
+                                                    "minimum": 1
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "description": "Generated paginator links.",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ]
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "url",
+                                                            "label",
+                                                            "active"
+                                                        ]
+                                                    }
+                                                },
+                                                "path": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base path for paginator generated URLs."
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "description": "Number of items shown per page.",
+                                                    "minimum": 0
+                                                },
+                                                "to": {
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ],
+                                                    "description": "Number of the last item in the slice.",
+                                                    "minimum": 1
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "description": "Total number of items being paginated.",
+                                                    "minimum": 0
+                                                }
+                                            },
+                                            "required": [
+                                                "current_page",
+                                                "from",
+                                                "last_page",
+                                                "links",
+                                                "path",
+                                                "per_page",
+                                                "to",
+                                                "total"
+                                            ]
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/WebhookEventAttemptResource"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "links",
+                                        "meta"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ]
+        },
+        "/webhook-subscriptions/{webhookSubscription}/webhook-events/{webhookEvent}": {
+            "get": {
+                "operationId": "verification.v1.webhook-subscriptions.webhook-events.show",
+                "description": "Requires the `webhook_event:read` ability.",
+                "summary": "Get a webhook event",
+                "tags": [
+                    "Webhook Events"
+                ],
+                "parameters": [
+                    {
+                        "name": "webhookSubscription",
+                        "in": "path",
+                        "required": true,
+                        "description": "The webhook subscription ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "webhookEvent",
+                        "in": "path",
+                        "required": true,
+                        "description": "The webhook event ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "`WebhookEventResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/WebhookEventResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/WebhookEventAttemptResource"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "servers": [
+                {
+                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+                }
+            ]
         }
     },
     "components": {
@@ -618,26 +1314,39 @@
                 "type": "object",
                 "properties": {
                     "id": {
+                        "type": "string"
+                    },
+                    "type": {
                         "type": "string",
-                        "description": "The check ID."
+                        "enum": [
+                            "checks"
+                        ]
                     },
-                    "result": {
-                        "description": "The result of the check.",
-                        "$ref": "#/components/schemas/CheckResult"
-                    },
-                    "created_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                "description": "The result of the check.",
+                                "$ref": "#/components/schemas/CheckResult"
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            }
+                        },
+                        "required": [
+                            "result",
+                            "created_at"
+                        ]
                     }
                 },
                 "required": [
                     "id",
-                    "result",
-                    "created_at"
+                    "type"
                 ],
                 "title": "CheckResource"
             },
@@ -649,183 +1358,287 @@
                 ],
                 "title": "CheckResult"
             },
+            "IndividualVerificationMode": {
+                "type": "string",
+                "enum": [
+                    "kyc",
+                    "biometric",
+                    "skip"
+                ],
+                "title": "IndividualVerificationMode"
+            },
             "StoreCheckRequest": {
                 "type": "object",
                 "properties": {
-                    "business_name": {
-                        "type": "string",
-                        "description": "The business name.",
-                        "maxLength": 255
+                    "business": {
+                        "type": "object",
+                        "description": "Business owning the bank account.",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Business name.",
+                                "maxLength": 255
+                            },
+                            "abn": {
+                                "type": "string",
+                                "description": "Australian Business Number (ABN). Must be 11 digits."
+                            }
+                        }
                     },
-                    "business_phone": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "The business phone number.",
-                        "maxLength": 255
+                    "account": {
+                        "type": "object",
+                        "description": "Bank account details.",
+                        "properties": {
+                            "bsb": {
+                                "type": "string",
+                                "description": "Bank State Branch (BSB) code. Must be 6 digits."
+                            },
+                            "number": {
+                                "type": "string",
+                                "description": "Bank account number. Must be 6-10 digits."
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "Bank account name.",
+                                "maxLength": 255
+                            }
+                        },
+                        "required": [
+                            "bsb",
+                            "number",
+                            "name"
+                        ]
                     },
-                    "contact_name": {
-                        "type": "string",
-                        "description": "The authorised contact's name. There must be a space between the first name(s) and last name, such as \"John Michael Doe\".",
-                        "maxLength": 255
-                    },
-                    "contact_mobile": {
-                        "type": "string",
-                        "description": "The authorised contact's Australian mobile number."
-                    },
-                    "account_abn": {
-                        "type": "string",
-                        "description": "A valid 11-digit ABN."
-                    },
-                    "account_name": {
-                        "type": "string",
-                        "description": "The bank account name.",
-                        "maxLength": 255
-                    },
-                    "account_bsb": {
-                        "type": "string",
-                        "description": "A valid 6-digit BSB."
-                    },
-                    "account_number": {
-                        "type": "string",
-                        "description": "A valid 6-10-digit account number."
+                    "individual": {
+                        "type": "object",
+                        "description": "Individual details.",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Individual's full legal name. Must include a space between first name(s) and last name (e.g., \"John Michael Doe\").",
+                                "pattern": "^[^\\s]+\\s+[^\\s]+",
+                                "maxLength": 255
+                            },
+                            "mobile": {
+                                "type": "string",
+                                "description": "Individual's Australian mobile number."
+                            }
+                        },
+                        "required": [
+                            "name"
+                        ]
                     }
                 },
                 "required": [
-                    "business_name",
-                    "contact_name",
-                    "contact_mobile",
-                    "account_abn",
-                    "account_name",
-                    "account_bsb",
-                    "account_number"
+                    "account",
+                    "individual"
                 ],
                 "title": "StoreCheckRequest"
             },
             "StoreVerificationRequest": {
                 "type": "object",
                 "properties": {
-                    "business_name": {
-                        "type": "string",
-                        "description": "The business name.",
-                        "maxLength": 255
-                    },
-                    "business_phone": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "The business phone number.",
-                        "maxLength": 255
-                    },
-                    "contact_name": {
-                        "type": "string",
-                        "description": "The authorised contact's name. There must be a space between the first name(s) and last name, such as \"John Michael Doe\".",
-                        "maxLength": 255
-                    },
-                    "contact_mobile": {
-                        "type": "string",
-                        "description": "The authorised contact's Australian mobile number."
-                    },
-                    "account_abn": {
-                        "type": "string",
-                        "description": "A valid 11-digit ABN."
-                    },
-                    "account_name": {
-                        "type": "string",
-                        "description": "The bank account name.",
-                        "maxLength": 255
-                    },
-                    "account_bsb": {
-                        "type": "string",
-                        "description": "A valid 6-digit BSB."
-                    },
-                    "account_number": {
-                        "type": "string",
-                        "description": "A valid 6-10-digit account number."
-                    },
                     "attribution_id": {
                         "type": [
                             "string",
                             "null"
                         ],
-                        "description": "An attribution ID. Used to group related verifications.",
+                        "description": "Attribution identifier for grouping related verifications.",
                         "maxLength": 255
+                    },
+                    "business": {
+                        "type": "object",
+                        "description": "Business owning the bank account.",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Business name.",
+                                "maxLength": 255
+                            },
+                            "abn": {
+                                "type": "string",
+                                "description": "Australian Business Number (ABN). Must be 11 digits."
+                            }
+                        }
+                    },
+                    "account": {
+                        "type": "object",
+                        "description": "Bank account details.",
+                        "properties": {
+                            "bsb": {
+                                "type": "string",
+                                "description": "Bank State Branch (BSB) code. Must be 6 digits."
+                            },
+                            "number": {
+                                "type": "string",
+                                "description": "Bank account number. Must be 6-10 digits."
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "Bank account name.",
+                                "maxLength": 255
+                            }
+                        },
+                        "required": [
+                            "bsb",
+                            "number",
+                            "name"
+                        ]
+                    },
+                    "individual": {
+                        "type": "object",
+                        "description": "Individual details.",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Individual's full legal name. Must include a space between first name(s) and last name (e.g., \"John Michael Doe\").",
+                                "pattern": "^[^\\s]+\\s+[^\\s]+",
+                                "maxLength": 255
+                            },
+                            "mobile": {
+                                "type": "string",
+                                "description": "Individual's Australian mobile number. Required when `individual.confirmation_notification_method` is provided."
+                            },
+                            "verification_mode": {
+                                "description": "Verification mode for the individual.\n- `kyc`: Run full KYC to establish identity (biometric authentication on subsequent verifications).\n- `biometric`: Biometric authentication with client-provided portrait image.\n- `skip`: Skip individual verification entirely.",
+                                "$ref": "#/components/schemas/IndividualVerificationMode"
+                            },
+                            "confirmation_notification_method": {
+                                "type": "array",
+                                "description": "Notification channels to use for sending the confirmation link to the individual. When null, the URL is returned in API response. Must be omitted when `individual.verification_mode` is `skip`.",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "sms"
+                                    ]
+                                }
+                            },
+                            "portrait_image": {
+                                "type": "string",
+                                "description": "Individual's government-issued ID portrait image. Required for biometric authentication when `individual.verification_mode` is `biometric`. The image must be a valid base64-encoded JPEG or PNG image up to 5MB when decoded. The data URI prefix `data:[MIME type];base64,` is optional.\n\nRequired when `individual.verification_mode` is `biometric`, otherwise it must be omitted.",
+                                "example": "data:image/jpeg;base64,/9j/..."
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "verification_mode"
+                        ]
                     }
                 },
                 "required": [
-                    "business_name",
-                    "contact_name",
-                    "contact_mobile",
-                    "account_abn",
-                    "account_name",
-                    "account_bsb",
-                    "account_number"
+                    "account",
+                    "individual"
                 ],
                 "title": "StoreVerificationRequest"
+            },
+            "StoreWebhookSubscriptionRequest": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The webhook endpoint URL.",
+                        "maxLength": 2048
+                    },
+                    "events": {
+                        "type": "array",
+                        "description": "The event types to subscribe to.",
+                        "items": {
+                            "description": "Each event type must be a valid WebhookEventType.",
+                            "$ref": "#/components/schemas/WebhookEventType"
+                        },
+                        "minItems": 1
+                    }
+                },
+                "required": [
+                    "url",
+                    "events"
+                ],
+                "title": "StoreWebhookSubscriptionRequest"
+            },
+            "UpdateWebhookSubscriptionRequest": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The webhook endpoint URL.",
+                        "maxLength": 2048
+                    },
+                    "events": {
+                        "type": "array",
+                        "description": "The event types to subscribe to.",
+                        "items": {
+                            "description": "Each event type must be a valid WebhookEventType.",
+                            "$ref": "#/components/schemas/WebhookEventType"
+                        },
+                        "minItems": 1
+                    }
+                },
+                "required": [
+                    "url",
+                    "events"
+                ],
+                "title": "UpdateWebhookSubscriptionRequest"
             },
             "VerificationResource": {
                 "type": "object",
                 "properties": {
                     "id": {
+                        "type": "string"
+                    },
+                    "type": {
                         "type": "string",
-                        "description": "The verification ID."
+                        "enum": [
+                            "verifications"
+                        ]
                     },
-                    "status": {
-                        "description": "The current status of the verification.",
-                        "$ref": "#/components/schemas/VerificationStatus"
-                    },
-                    "checks": {
-                        "type": "array",
-                        "description": "The checks performed during the verification.",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "label": {
-                                    "type": "string"
-                                },
-                                "result": {
-                                    "type": "boolean"
-                                }
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "description": "The current status of the verification.",
+                                "$ref": "#/components/schemas/VerificationStatus"
                             },
-                            "required": [
-                                "label",
-                                "result"
-                            ]
-                        }
-                    },
-                    "attribution_id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "The attribution ID optionally provided upon creation."
-                    },
-                    "created_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
-                    },
-                    "updated_at": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "date-time",
-                        "description": "ISO 8601 formatted date-time."
+                            "attribution_id": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "The attribution ID optionally provided upon creation."
+                            },
+                            "confirmation_url": {
+                                "type": "string",
+                                "description": "Confirmation URL returned when notification is manual (confirmation_notification_method is null)"
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "updated_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            }
+                        },
+                        "required": [
+                            "status",
+                            "attribution_id",
+                            "created_at",
+                            "updated_at"
+                        ]
                     }
                 },
                 "required": [
                     "id",
-                    "status",
-                    "checks",
-                    "attribution_id",
-                    "created_at",
-                    "updated_at"
+                    "type"
                 ],
                 "title": "VerificationResource"
             },
@@ -842,6 +1655,257 @@
                     "error"
                 ],
                 "title": "VerificationStatus"
+            },
+            "WebhookEventAttemptResource": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "webhook-event-attempts"
+                        ]
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "description": "The status of the delivery attempt.",
+                                "$ref": "#/components/schemas/WebhookEventAttemptStatus"
+                            },
+                            "attempt": {
+                                "type": "integer",
+                                "description": "The attempt number (1-based)."
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            }
+                        },
+                        "required": [
+                            "status",
+                            "attempt",
+                            "created_at"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "type"
+                ],
+                "title": "WebhookEventAttemptResource"
+            },
+            "WebhookEventAttemptResourceIdentifier": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "webhook-event-attempts"
+                        ]
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type",
+                    "id"
+                ],
+                "title": "WebhookEventAttemptResourceIdentifier"
+            },
+            "WebhookEventAttemptStatus": {
+                "type": "string",
+                "enum": [
+                    "succeeded",
+                    "failed"
+                ],
+                "title": "WebhookEventAttemptStatus"
+            },
+            "WebhookEventResource": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "webhook-events"
+                        ]
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "description": "The delivery status of the event.",
+                                "$ref": "#/components/schemas/WebhookEventStatus"
+                            },
+                            "type": {
+                                "description": "The event type.",
+                                "$ref": "#/components/schemas/WebhookEventType"
+                            },
+                            "webhook_url": {
+                                "type": "string",
+                                "description": "The webhook URL the event was sent to."
+                            },
+                            "payload": {
+                                "type": "array",
+                                "description": "The event payload.",
+                                "items": {}
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            }
+                        },
+                        "required": [
+                            "status",
+                            "type",
+                            "webhook_url",
+                            "payload",
+                            "created_at"
+                        ]
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "attempts": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/WebhookEventAttemptResourceIdentifier"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "type"
+                ],
+                "title": "WebhookEventResource"
+            },
+            "WebhookEventStatus": {
+                "type": "string",
+                "enum": [
+                    "processing",
+                    "succeeded",
+                    "failed"
+                ],
+                "title": "WebhookEventStatus"
+            },
+            "WebhookEventType": {
+                "type": "string",
+                "enum": [
+                    "verification.pending",
+                    "verification.verified",
+                    "verification.rejected",
+                    "verification.failed",
+                    "verification.cancelled",
+                    "verification.expired",
+                    "verification.error",
+                    "verification.confirmation_ready",
+                    "verification.confirmation_notification_sent"
+                ],
+                "title": "WebhookEventType"
+            },
+            "WebhookSubscriptionResource": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "webhook-subscriptions"
+                        ]
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string",
+                                "description": "The webhook endpoint URL."
+                            },
+                            "events": {
+                                "type": "array",
+                                "description": "The event types this subscription listens to.",
+                                "items": {
+                                    "type": "object"
+                                }
+                            },
+                            "secret": {
+                                "type": "string",
+                                "description": "The signing secret. Only returned when the subscription is first created."
+                            },
+                            "enabled": {
+                                "type": "boolean",
+                                "description": "Whether the subscription is enabled."
+                            },
+                            "consecutive_failures": {
+                                "type": "integer",
+                                "description": "The number of consecutive delivery failures."
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "updated_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "disabled_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time when the subscription was disabled, or null if enabled."
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "events",
+                            "enabled",
+                            "consecutive_failures",
+                            "created_at",
+                            "updated_at",
+                            "disabled_at"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "type"
+                ],
+                "title": "WebhookSubscriptionResource"
             }
         },
         "responses": {

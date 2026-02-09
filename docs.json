@@ -24,7 +24,7 @@
             "pages": [
               "objects/introduction",
               "objects/organization",
-              "objects/entity",
+              "objects/workspace",
               "objects/verification",
               "objects/check"
             ]
@@ -33,6 +33,12 @@
             "group": "Testing",
             "pages": [
               "testing/test-bank-accounts"
+            ]
+          },
+          {
+            "group": "Next steps",
+            "pages": [
+              "next-steps/webhooks"
             ]
           }
         ]
@@ -62,8 +68,7 @@
             "group": "Verification API",
             "openapi": "api-reference/verification.json",
             "pages": [
-              "api-reference/verification/overview",
-              "api-reference/verification/webhooks"
+              "api-reference/verification/overview"
             ]
           }
         ]

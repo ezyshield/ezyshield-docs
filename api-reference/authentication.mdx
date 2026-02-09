@@ -17,17 +17,17 @@ Authorization: Bearer <your_api_key>
 
 The API uses two types of API keys, each scoped to different resources:
 
-### Organization API keys
+### Admin keys
 
-Organization API keys are used to authenticate requests to the [Management API](/api-reference/management/overview). These keys are scoped to your organization and allow you to manage your organization, entities, and API keys.
+Admin keys are used to authenticate requests to the [Management API](/api-reference/management/overview). These keys are scoped to your organization and allow you to manage your organization, workspaces, and API keys.
 
-To create an organization API key:
-- Via the [Dashboard](https://app.ezyshield.com.au): Navigate to your organization settings and create an API key
-- Via the API: Once you have created your first API key, you may [create additional keys via the API](/api-reference/organization-api-keys/create-an-organization-api-key)
+To create an admin key:
+- Via the [Dashboard](https://app.ezyshield.com.au): Navigate to your organization settings and create an admin key
+- Via the API: Once you have created your first admin key, you may [create additional keys via the API](/api-reference/admin-keys/create-an-admin-key)
 
-### Entity API keys
+### API keys
 
-Entity API keys are used to authenticate requests to the [Verification API](/api-reference/verification/overview). These keys are scoped to a specific entity and allow you to verify business and banking details for that entity.
+API keys are used to authenticate requests to the [Verification API](/api-reference/verification/overview). These keys are scoped to a specific workspace and allow you to verify business and banking details for that workspace.
 
-To create an entity API key, use the [Management API](/api-reference/management/overview) to first [create an entity](/api-reference/entities/create-an-entity) and then [create an entity API key](/api-reference/entity-api-keys/create-an-entity-api-key).
+To create an API key, use the [Management API](/api-reference/management/overview) to first [create a workspace](/api-reference/workspaces/create-a-workspace) and then [create an API key](/api-reference/api-keys/create-an-api-key).
 
