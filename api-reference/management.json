@@ -65,6 +65,7 @@
         "/api-keys": {
             "get": {
                 "operationId": "management.v1.api-keys.index",
+                "description": "Requires the `organization_api_key:read` ability.",
                 "summary": "List all organization API keys",
                 "tags": [
                     "Organization API Keys"
@@ -232,7 +233,7 @@
             },
             "post": {
                 "operationId": "management.v1.api-keys.store",
-                "description": "The plain text token is only returned once and should be stored securely.",
+                "description": "The plain text token is only returned once and should be stored securely.\n\nRequires the `organization_api_key:write` ability.",
                 "summary": "Create an organization API key",
                 "tags": [
                     "Organization API Keys"
@@ -281,6 +282,7 @@
         "/api-keys/{apiKey}": {
             "get": {
                 "operationId": "management.v1.api-keys.show",
+                "description": "Requires the `organization_api_key:read` ability.",
                 "summary": "Get an organization API key",
                 "tags": [
                     "Organization API Keys"
@@ -326,6 +328,7 @@
             },
             "put": {
                 "operationId": "management.v1.api-keys.update",
+                "description": "Requires the `organization_api_key:write` ability.",
                 "summary": "Update an organization API key",
                 "tags": [
                     "Organization API Keys"
@@ -384,6 +387,7 @@
             },
             "delete": {
                 "operationId": "management.v1.api-keys.destroy",
+                "description": "Requires the `organization_api_key:write` ability.",
                 "summary": "Delete an organization API key",
                 "tags": [
                     "Organization API Keys"
@@ -429,6 +433,7 @@
         "/entities": {
             "get": {
                 "operationId": "management.v1.entities.index",
+                "description": "Requires the `entity:read` ability.",
                 "summary": "List all entities",
                 "tags": [
                     "Entities"
@@ -604,6 +609,7 @@
             },
             "post": {
                 "operationId": "management.v1.entities.store",
+                "description": "Requires the `entity:write` ability.",
                 "summary": "Create an entity",
                 "tags": [
                     "Entities"
@@ -652,6 +658,7 @@
         "/entities/{entity}": {
             "get": {
                 "operationId": "management.v1.entities.show",
+                "description": "Requires the `entity:read` ability.",
                 "summary": "Get an entity",
                 "tags": [
                     "Entities"
@@ -697,6 +704,7 @@
             },
             "put": {
                 "operationId": "management.v1.entities.update",
+                "description": "Requires the `entity:write` ability.",
                 "summary": "Update an entity",
                 "tags": [
                     "Entities"
@@ -755,6 +763,7 @@
             },
             "delete": {
                 "operationId": "management.v1.entities.destroy",
+                "description": "Requires the `entity:write` ability.",
                 "summary": "Delete an entity",
                 "tags": [
                     "Entities"
@@ -800,6 +809,7 @@
         "/entities/{entity}/api-keys": {
             "get": {
                 "operationId": "management.v1.entities.api-keys.index",
+                "description": "Requires the `entity_api_key:read` ability.",
                 "summary": "List all entity API keys",
                 "tags": [
                     "Entity API Keys"
@@ -977,7 +987,7 @@
             },
             "post": {
                 "operationId": "management.v1.entities.api-keys.store",
-                "description": "The plain text token is only returned once and should be stored securely.",
+                "description": "The plain text token is only returned once and should be stored securely.\n\nRequires the `entity_api_key:write` ability.",
                 "summary": "Create an entity API key",
                 "tags": [
                     "Entity API Keys"
@@ -1038,6 +1048,7 @@
         "/entities/{entity}/api-keys/{apiKey}": {
             "get": {
                 "operationId": "management.v1.entities.api-keys.show",
+                "description": "Requires the `entity_api_key:read` ability.",
                 "summary": "Get an entity API key",
                 "tags": [
                     "Entity API Keys"
@@ -1096,6 +1107,7 @@
             },
             "put": {
                 "operationId": "management.v1.entities.api-keys.update",
+                "description": "Requires the `entity_api_key:write` ability.",
                 "summary": "Update an entity API key",
                 "tags": [
                     "Entity API Keys"
@@ -1167,6 +1179,7 @@
             },
             "delete": {
                 "operationId": "management.v1.entities.api-keys.destroy",
+                "description": "Requires the `entity_api_key:write` ability.",
                 "summary": "Delete an entity API key",
                 "tags": [
                     "Entity API Keys"
