@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
+            "url": "https://api.staging-2tid4c.ezyshield.com.au/verification/v1"
         }
     ],
     "tags": [
@@ -203,11 +203,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ],
             "post": {
                 "operationId": "verification.v1.verifications.store",
                 "description": "Requires the `verification:write` ability.",
@@ -302,12 +297,7 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ]
+            }
         },
         "/verifications/{verification}/checks": {
             "get": {
@@ -476,11 +466,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ],
             "post": {
                 "operationId": "verification.v1.verifications.checks.store",
                 "description": "Requires the `check:write` ability.",
@@ -600,12 +585,7 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ]
+            }
         },
         "/webhook-subscriptions": {
             "get": {
@@ -764,11 +744,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ],
             "post": {
                 "operationId": "verification.v1.webhook-subscriptions.store",
                 "description": "Requires the `webhook_subscription:write` ability.",
@@ -864,11 +839,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ],
             "put": {
                 "operationId": "verification.v1.webhook-subscriptions.update",
                 "description": "Requires the `webhook_subscription:write` ability.",
@@ -1019,12 +989,7 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ]
+            }
         },
         "/webhook-subscriptions/{webhookSubscription}/webhook-events": {
             "get": {
@@ -1222,12 +1187,7 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ]
+            }
         },
         "/webhook-subscriptions/{webhookSubscription}/webhook-events/{webhookEvent}": {
             "get": {
@@ -1294,12 +1254,7 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/verification/v1"
-                }
-            ]
+            }
         }
     },
     "components": {

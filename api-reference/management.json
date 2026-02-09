@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://https://api.local-vj8qtz.ezyshield.com.au/management/v1"
+            "url": "https://api.staging-2tid4c.ezyshield.com.au/management/v1"
         }
     ],
     "tags": [
@@ -60,12 +60,7 @@
                         "$ref": "#/components/responses/AuthenticationException"
                     }
                 }
-            },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
-                }
-            ]
+            }
         },
         "/admin-keys": {
             "get": {
@@ -230,11 +225,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
-                }
-            ],
             "post": {
                 "operationId": "management.v1.admin-keys.store",
                 "description": "The plain text token is only returned once and should be stored securely.\n\nRequires the `admin_key:write` ability.",
@@ -354,11 +344,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
-                }
-            ],
             "put": {
                 "operationId": "management.v1.admin-keys.update",
                 "description": "Requires the `admin_key:write` ability.",
@@ -658,11 +643,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
-                }
-            ],
             "post": {
                 "operationId": "management.v1.workspaces.store",
                 "description": "Requires the `workspace:write` ability.",
@@ -758,11 +738,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
-                }
-            ],
             "put": {
                 "operationId": "management.v1.workspaces.update",
                 "description": "Requires the `workspace:write` ability.",
@@ -1040,11 +1015,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
-                }
-            ],
             "post": {
                 "operationId": "management.v1.workspaces.api-keys.store",
                 "description": "The plain text token is only returned once and should be stored securely.\n\nRequires the `api_key:write` ability.",
@@ -1177,11 +1147,6 @@
                     }
                 }
             },
-            "servers": [
-                {
-                    "url": "https://api.local-vj8qtz.ezyshield.com.au/management/v1"
-                }
-            ],
             "put": {
                 "operationId": "management.v1.workspaces.api-keys.update",
                 "description": "Requires the `api_key:write` ability.",
