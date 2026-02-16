@@ -5,10 +5,10 @@ description: "Learn how to filter and sort data in the API."
 
 ## Filtering
 
-Serveral endpoints support filtering to retrieve only the data you need. For example, you can filter verifications by status:
+Several endpoints support filtering to retrieve only the data you need. For example, you can filter verifications by status:
 
 ```http
-GET /verification/v1/verifications?filter[status]=verified
+GET /verifications?filter[status]=verified
 ```
 
 <Note>
@@ -20,13 +20,13 @@ Individual endpoints support filtering different fields. Check the documentation
 You can sort endpoint results by passing the `sort` parameter. Provide a comma-separated list of fields to sort by.
 
 ```http
-GET /management/v1/entities?sort=name
+GET /api-keys?sort=name
 ```
 
 To reverse the sort order, prefix the field with a hyphen (`-`):
 
 ```http
-GET /management/v1/entities?sort=-name
+GET /api-keys?sort=-name
 ```
 
 <Note>

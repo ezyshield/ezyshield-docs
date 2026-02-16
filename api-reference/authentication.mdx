@@ -1,33 +1,16 @@
 ---
 title: "Authentication"
-description: "Learn how to authenticate API requests using API keys."
+description: "Authenticate API requests using API keys."
 ---
 
-The ezyshield API uses token-based authentication. All requests must include an API key in the `Authorization` header using the Bearer token format.
-
-## Authorization header
-
-Include your API key token in every request:
+The API uses token-based authentication. All requests must include an API key in the `Authorization` header using the Bearer token format:
 
 ```http
 Authorization: Bearer <your_api_key>
 ```
 
-## API key types
+API keys are organization-scoped. All resources (organization, verifications, checks, webhooks) belong to your organization and are scoped automatically through the header.
 
-The API uses two types of API keys, each scoped to different resources:
-
-### Admin keys
-
-Admin keys are used to authenticate requests to the [Management API](/api-reference/management/overview). These keys are scoped to your organization and allow you to manage your organization, workspaces, and API keys.
-
-To create an admin key:
-- Via the [Dashboard](https://app.ezyshield.com.au): Navigate to your organization settings and create an admin key
-- Via the API: Once you have created your first admin key, you may [create additional keys via the API](/api-reference/admin-keys/create-an-admin-key)
-
-### API keys
-
-API keys are used to authenticate requests to the [Verification API](/api-reference/verification/overview). These keys are scoped to a specific workspace and allow you to verify business and banking details for that workspace.
-
-To create an API key, use the [Management API](/api-reference/management/overview) to first [create a workspace](/api-reference/workspaces/create-a-workspace) and then [create an API key](/api-reference/api-keys/create-an-api-key).
-
+To create an API key:
+- **Dashboard:** [app.ezyshield.com.au](https://app.ezyshield.com.au) → Organization settings
+- **API:** Once you have your first key, create additional keys via the [API Keys](/api-reference/api) endpoints
