@@ -1,4 +1,30 @@
 ---
 title: "Organization"
-description: "Your account as an ezyshield customer, representing the top-level billing and management unit that owns API keys, verifications, webhooks, and other resources."
+description: "Your account as an ezyshield customer—the tenant boundary that owns API keys, verifications, checks, webhooks, and ABA checks."
 ---
+
+Your **organization** is the top-level customer boundary in ezyshield. Every resource you access through the API belongs to exactly one organization.
+
+## Tenant boundary
+
+Under a single organization you have:
+
+- [API keys](/api-reference/api-keys/list-all-api-keys) used for [authentication](/api-reference/authentication)
+- [Verifications](/api-reference/verifications/list-all-verifications) and their [checks](/api-reference/checks/list-all-checks-for-a-verification)
+- Webhook subscriptions (see [Webhooks](/next-steps/webhooks))
+- [ABA checks](/guides/aba-checks)
+
+The `Authorization: Bearer` token identifies both the key and its organization. You cannot access another organization’s resources with that token; you receive `403` if you try.
+
+## Dashboard vs API
+
+Use [app.ezyshield.com.au](https://app.ezyshield.com.au) for onboarding, team access, and managing API keys interactively. Use the API for automation, integrations, and high-volume workflows. Both operate on the same organization.
+
+## Sanity check: GET /organization
+
+Call [Get the current organization](/api-reference/organizations/get-the-current-organization) after you create a key. A successful response confirms:
+
+- The API key is valid (`401` if not)
+- You are operating in the expected organization (`data` payload)
+
+This is the first step in the [API quickstart](/api-reference/quickstart).

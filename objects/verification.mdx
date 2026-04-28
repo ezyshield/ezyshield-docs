@@ -8,7 +8,7 @@ There are three core components to a verification:
 * The **contact person** authorised to act on behalf of the business
 * The **bank account** details
 
-To begin a verification, [create a verification](/api-reference/introduction) using the API.
+To begin a verification, use [Create a verification](/api-reference/verifications/create-a-verification).
 
 ezyshield's Verification Engine then performs a comprehensive series of checks in real-time to verify the integrity of the details provided.
 
@@ -31,7 +31,7 @@ A verification can be in one of the following statuses:
 
 <Steps>
   <Step title="Create a verification">
-    Call the [create verification](/api-reference/introduction) endpoint with the business details, contact person information, and bank account details.
+    Call [Create a verification](/api-reference/verifications/create-a-verification) with the business details, contact person information, and bank account details.
     
     The verification begins in `pending` status while ezyshield performs automated checks.
   </Step>
@@ -70,7 +70,7 @@ Use attribution to link multiple verifications to the same record in your system
 Provide an `attribution_id` when creating a verification to group related verifications together.
 
 <Tip>
-Retrieve all verifications for a specific record using the `attribution_id` parameter in the [list verifications](/api-reference/introduction) endpoint.
+Retrieve all verifications for a specific record using the `attribution_id` parameter on [List all verifications](/api-reference/verifications/list-all-verifications).
 </Tip>
 
 **Example use case:** When a customer updates their bank account details, create a new verification with the same `attribution_id`. This creates a complete audit trail of all verification attempts for that customer.
@@ -89,6 +89,6 @@ Verifications linked by the same `attribution_id` will reuse the same government
 
 When a verification is initiated, ezyshield stores the business identity and payment details and provides a verification ID. This ID is designed to be stored in your system against a record.
 
-The verification ID can later be supplied to [check a verification](/api-reference/introduction), which compares the current, supplied details against those stored by ezyshield.
+The verification ID can later be supplied to [Check a verification](/api-reference/checks/check-a-verification), which compares the current, supplied details against those stored by ezyshield.
 
 **Example use case:** Before processing a payment, check if saved details have been compromised in your system by comparing against the verification fingerprint.

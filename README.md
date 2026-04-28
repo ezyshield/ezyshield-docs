@@ -1,43 +1,29 @@
-# Mintlify Starter Kit
+# ezyshield docs
 
-Use the starter kit to get your docs deployed and ready to customize.
+Mintlify documentation for the ezyshield API and product guides. Site configuration lives in [`docs.json`](docs.json); page content is MDX in this repo.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Local preview
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+Install the [Mintlify CLI](https://www.npmjs.com/package/mint) (or use `npx mint@latest dev`), then from the repo root:
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
+```bash
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+Open the URL the CLI prints (for example `http://localhost:3000`).
 
-## Publishing changes
+## Syncing the OpenAPI spec
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+The **API reference** tab is generated from [`api-reference/api.json`](api-reference/api.json). Regenerate that file from the main ezyshield application when API routes or schemas change (for example your project’s `composer docs` or equivalent export command). Commit the updated `api.json` here so deployed docs stay aligned with production.
 
-## Need help?
+After each export, spot-check the **Endpoints** sidebar for new tags (such as **ABA checks**) and skim operation descriptions.
 
-### Troubleshooting
+## Contributing
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+- Follow the [Mintlify MDX reference](https://mintlify.com/docs) for components (`<Steps>`, `<Card>`, etc.).
+- Prefer linking to generated operation pages under `/api-reference/…` (discover paths via `mint dev` and the sidebar).
+- Avoid duplicating pagination, filtering, or full request/response schemas—link the API reference pages instead.
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+## Deployment
+
+Connect the repo to Mintlify (GitHub app) so pushes to the default branch deploy the site. See [Mintlify deployment](https://mintlify.com/docs/deploy/deployments).

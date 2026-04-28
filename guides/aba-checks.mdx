@@ -1,0 +1,50 @@
+---
+title: "ABA checks"
+description: "Upload Australian Banking Association (ABA) direct entry files, match credit lines to verifications, and download a regenerated file of matched entries."
+---
+
+An **ABA check** is a batch workflow: you upload one ABA file, ezyshield parses the entries, attempts to match them to existing [verifications](/objects/verification), and exposes an overall result for the batch. It is not a substitute for creating a single payee [verification](/objects/verification); use the verification API for individual onboarding.
+
+## API vs dashboard
+
+The dashboard (Filament) includes ABA check resources so operations teams can inspect uploads, entries, and results. Use the API when you need automation—scheduled uploads from treasury systems, CI-driven smoke tests, or partner integrations.
+
+## Prerequisites
+
+- An API key that includes **`aba_check:read`** and **`aba_check:write`** for full flows (list/show/regenerate require read; upload requires write). Abilities are defined when you [create an API key](/api-reference/api-keys/create-an-api-key); see the OpenAPI enum in [api.json](/api-reference/api.json).
+- Verifications in your [organization](/objects/organization) for the payees you expect to match; matching is described in the upload operation’s OpenAPI **description**.
+
+## Upload workflow
+
+Send a **multipart** request with a single `file` part (see **StoreAbaCheckRequest** in [api.json](/api-reference/api.json)). On success, the API returns **`201`** with an **Aba check** resource.
+
+The OpenAPI description for [Upload a single ABA file](/api-reference/aba-checks/upload-a-single-aba-file) states that the check is created and entries are matched to verifications. Exact JSON shape and any fields beyond the documented **`AbaCheckResource`** schema appear in the **API reference** and live responses—do not assume nested entry arrays unless your spec or runtime response includes them.
+
+## List and retrieve
+
+- [List all ABA checks](/api-reference/aba-checks/list-all-aba-checks) returns a paginated set of checks (see [pagination](/api-reference/pagination)).
+- [Get an ABA check](/api-reference/aba-checks/get-an-aba-check) returns one check by ID.
+
+Use list endpoints for dashboards and sync jobs; use show when you already have a check ID (for example after upload).
+
+## Results
+
+The documented **`AbaCheckResource.status`** enum is **`passed`** or **`failed`**, reflecting the batch outcome. Metadata fields such as `aba_date`, `original_file_name`, and organization linkage are included on the resource; see the generated schema for the full set.
+
+## Regenerated file download
+
+[Download a regenerated ABA file](/api-reference/aba-checks/download-a-regenerated-aba-file) returns a file containing **only entries matched to verifications**, with the total debit amount updated to the sum of those matched entries (per the operation description). Treat the download as an idempotent read suitable for banking operations once processing has finished.
+
+## Errors and authorization
+
+Typical failure modes align with the rest of the API:
+
+- **`401`** — invalid or missing API key.
+- **`403`** — key lacks `aba_check:read` / `aba_check:write`, or the resource belongs to another organization.
+- **`422`** — validation issues (for example invalid upload).
+
+Invalid ABA content may surface as validation or processing errors; rely on the endpoint’s documented responses in the **API reference**.
+
+## Testing
+
+In non-production, [test BSB codes](/testing/test-bank-accounts) affect simulated bank outcomes; use them when building end-to-end batch flows. See [Testing overview](/testing/overview) for environment and webhook guidance.

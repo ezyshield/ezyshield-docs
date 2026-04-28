@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "https://local-vj8qtz.ezyshield.com.au/api"
+            "url": "https://app.local-vj8qtz.ezyshield.com.au/api"
         }
     ],
     "tags": [
@@ -23,10 +23,18 @@
             "name": "Checks"
         },
         {
+            "name": "ABA checks"
+        },
+        {
             "name": "Webhook Subscriptions"
         },
         {
             "name": "Webhook Events"
+        }
+    ],
+    "security": [
+        {
+            "http": []
         }
     ],
     "paths": {
@@ -36,6 +44,25 @@
                 "summary": "Get the current organization",
                 "tags": [
                     "Organizations"
+                ],
+                "parameters": [
+                    {
+                        "name": "fields[organizations]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "slug",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -87,6 +114,56 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "creator"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[api-keys]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "token",
+                                    "abilities",
+                                    "created_at",
+                                    "last_used_at",
+                                    "expires_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[users]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "email",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -107,18 +184,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -232,6 +327,58 @@
                 "tags": [
                     "API Keys"
                 ],
+                "parameters": [
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "creator"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[api-keys]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "token",
+                                    "abilities",
+                                    "created_at",
+                                    "last_used_at",
+                                    "expires_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[users]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "email",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -306,6 +453,56 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "creator"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[api-keys]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "token",
+                                    "abilities",
+                                    "created_at",
+                                    "last_used_at",
+                                    "expires_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[users]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "email",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -370,6 +567,56 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "creator"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[api-keys]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "token",
+                                    "abilities",
+                                    "created_at",
+                                    "last_used_at",
+                                    "expires_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[users]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "name",
+                                    "email",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "requestBody": {
@@ -505,6 +752,38 @@
                         }
                     },
                     {
+                        "name": "fields[verifications]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "business_name",
+                                    "business_abn",
+                                    "account_name",
+                                    "account_bsb",
+                                    "account_number",
+                                    "individual_name",
+                                    "individual_mobile",
+                                    "individual_confirmation_mode",
+                                    "send_individual_confirmation_sms",
+                                    "accept_close_match",
+                                    "attribution_id",
+                                    "individual_confirmation_url",
+                                    "failure_reason",
+                                    "checks",
+                                    "resolved_individual_name",
+                                    "resolved_business_entity_name",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
                         "name": "filter[status]",
                         "in": "query",
                         "description": "The current status of the verification.",
@@ -515,7 +794,6 @@
                     {
                         "name": "filter[attribution_id]",
                         "in": "query",
-                        "description": "The attribution ID.",
                         "schema": {
                             "type": "string"
                         }
@@ -539,18 +817,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -658,6 +954,40 @@
                 "tags": [
                     "Verifications"
                 ],
+                "parameters": [
+                    {
+                        "name": "fields[verifications]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "business_name",
+                                    "business_abn",
+                                    "account_name",
+                                    "account_bsb",
+                                    "account_number",
+                                    "individual_name",
+                                    "individual_mobile",
+                                    "individual_confirmation_mode",
+                                    "send_individual_confirmation_sms",
+                                    "accept_close_match",
+                                    "attribution_id",
+                                    "individual_confirmation_url",
+                                    "failure_reason",
+                                    "checks",
+                                    "resolved_individual_name",
+                                    "resolved_business_entity_name",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -717,6 +1047,38 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "fields[verifications]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "business_name",
+                                    "business_abn",
+                                    "account_name",
+                                    "account_bsb",
+                                    "account_number",
+                                    "individual_name",
+                                    "individual_mobile",
+                                    "individual_confirmation_mode",
+                                    "send_individual_confirmation_sms",
+                                    "accept_close_match",
+                                    "attribution_id",
+                                    "individual_confirmation_url",
+                                    "failure_reason",
+                                    "checks",
+                                    "resolved_individual_name",
+                                    "resolved_business_entity_name",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -740,6 +1102,92 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/verifications/{verification}/cancel": {
+            "post": {
+                "operationId": "verifications.cancel",
+                "description": "Requires the `verification:write` ability.",
+                "summary": "Cancel a verification",
+                "tags": [
+                    "Verifications"
+                ],
+                "parameters": [
+                    {
+                        "name": "verification",
+                        "in": "path",
+                        "required": true,
+                        "description": "The verification ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "fields[verifications]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "business_name",
+                                    "business_abn",
+                                    "account_name",
+                                    "account_bsb",
+                                    "account_number",
+                                    "individual_name",
+                                    "individual_mobile",
+                                    "individual_confirmation_mode",
+                                    "send_individual_confirmation_sms",
+                                    "accept_close_match",
+                                    "attribution_id",
+                                    "individual_confirmation_url",
+                                    "failure_reason",
+                                    "checks",
+                                    "resolved_individual_name",
+                                    "resolved_business_entity_name",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "`VerificationResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/VerificationResource"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
                     },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
@@ -782,6 +1230,22 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "fields[checks]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "submitted_data",
+                                    "result",
+                                    "created_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -802,18 +1266,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -931,6 +1413,22 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "fields[checks]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "submitted_data",
+                                    "result",
+                                    "created_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "requestBody": {
@@ -1002,6 +1500,22 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "fields[checks]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "submitted_data",
+                                    "result",
+                                    "created_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -1035,6 +1549,408 @@
                 }
             }
         },
+        "/aba-checks": {
+            "get": {
+                "operationId": "aba-checks.index",
+                "description": "Requires the `aba_check:read` ability.",
+                "summary": "List all ABA checks",
+                "tags": [
+                    "ABA checks"
+                ],
+                "parameters": [
+                    {
+                        "name": "page[size]",
+                        "in": "query",
+                        "description": "The number of results that will be returned per page.",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "page[number]",
+                        "in": "query",
+                        "description": "The page number to start the pagination from.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "fields[aba-checks]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "description",
+                                    "aba_date",
+                                    "original_file_name",
+                                    "created_at",
+                                    "updated_at",
+                                    "entries"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paginated set of `AbaCheckResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AbaCheckResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object",
+                                            "properties": {
+                                                "first": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "last": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "prev": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "next": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
+                                        },
+                                        "meta": {
+                                            "type": "object",
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                },
+                                                "from": {
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ],
+                                                    "minimum": 1
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "description": "Generated paginator links.",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ]
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "url",
+                                                            "label",
+                                                            "active"
+                                                        ]
+                                                    }
+                                                },
+                                                "path": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base path for paginator generated URLs."
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "description": "Number of items shown per page.",
+                                                    "minimum": 0
+                                                },
+                                                "to": {
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ],
+                                                    "description": "Number of the last item in the slice.",
+                                                    "minimum": 1
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "description": "Total number of items being paginated.",
+                                                    "minimum": 0
+                                                }
+                                            },
+                                            "required": [
+                                                "current_page",
+                                                "from",
+                                                "last_page",
+                                                "links",
+                                                "path",
+                                                "per_page",
+                                                "to",
+                                                "total"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "links",
+                                        "meta"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "aba-checks.store",
+                "description": "The ABA check will be created and the entries will be matched to verifications.\n\nRequires the `aba_check:write` ability.",
+                "summary": "Upload a single ABA file",
+                "tags": [
+                    "ABA checks"
+                ],
+                "parameters": [
+                    {
+                        "name": "fields[aba-checks]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "description",
+                                    "aba_date",
+                                    "original_file_name",
+                                    "created_at",
+                                    "updated_at",
+                                    "entries"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreAbaCheckRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "`AbaCheckResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AbaCheckResource"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    }
+                }
+            }
+        },
+        "/aba-checks/{abaCheck}": {
+            "get": {
+                "operationId": "aba-checks.show",
+                "description": "Requires the `aba_check:read` ability.",
+                "summary": "Get an ABA check",
+                "tags": [
+                    "ABA checks"
+                ],
+                "parameters": [
+                    {
+                        "name": "abaCheck",
+                        "in": "path",
+                        "required": true,
+                        "description": "The ABA check ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "prefixed id"
+                        }
+                    },
+                    {
+                        "name": "fields[aba-checks]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "description",
+                                    "aba_date",
+                                    "original_file_name",
+                                    "created_at",
+                                    "updated_at",
+                                    "entries"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "`AbaCheckResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AbaCheckResource"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/aba-checks/{abaCheck}/regenerate": {
+            "get": {
+                "operationId": "aba-checks.regenerate",
+                "description": "The file will contain only entries matched to verifications. The total debit amount will be updated to the sum of the matched entries.\n\nRequires the `aba_check:read` ability.",
+                "summary": "Download a regenerated ABA file",
+                "tags": [
+                    "ABA checks"
+                ],
+                "parameters": [
+                    {
+                        "name": "abaCheck",
+                        "in": "path",
+                        "required": true,
+                        "description": "The ABA check ID",
+                        "schema": {
+                            "type": "string",
+                            "format": "prefixed id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ]
+                                }
+                            }
+                        },
+                        "headers": {
+                            "Content-Disposition": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "422": {
+                        "description": "An error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Error overview."
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
         "/webhook-subscriptions": {
             "get": {
                 "operationId": "webhook-subscriptions.index",
@@ -1060,6 +1976,27 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "fields[webhook-subscriptions]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "url",
+                                    "events",
+                                    "secret",
+                                    "enabled",
+                                    "consecutive_failures",
+                                    "created_at",
+                                    "updated_at",
+                                    "disabled_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -1080,18 +2017,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -1199,6 +2154,29 @@
                 "tags": [
                     "Webhook Subscriptions"
                 ],
+                "parameters": [
+                    {
+                        "name": "fields[webhook-subscriptions]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "url",
+                                    "events",
+                                    "secret",
+                                    "enabled",
+                                    "consecutive_failures",
+                                    "created_at",
+                                    "updated_at",
+                                    "disabled_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1258,6 +2236,27 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "fields[webhook-subscriptions]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "url",
+                                    "events",
+                                    "secret",
+                                    "enabled",
+                                    "consecutive_failures",
+                                    "created_at",
+                                    "updated_at",
+                                    "disabled_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -1304,6 +2303,27 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "fields[webhook-subscriptions]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "url",
+                                    "events",
+                                    "secret",
+                                    "enabled",
+                                    "consecutive_failures",
+                                    "created_at",
+                                    "updated_at",
+                                    "disabled_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "requestBody": {
@@ -1409,6 +2429,27 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "fields[webhook-subscriptions]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "url",
+                                    "events",
+                                    "secret",
+                                    "enabled",
+                                    "consecutive_failures",
+                                    "created_at",
+                                    "updated_at",
+                                    "disabled_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -1476,6 +2517,54 @@
                         }
                     },
                     {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "attempts"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[webhook-events]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "type",
+                                    "webhook_url",
+                                    "payload",
+                                    "created_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[webhook-event-attempts]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "attempt",
+                                    "created_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
                         "name": "filter[type]",
                         "in": "query",
                         "description": "Filter by event type.",
@@ -1518,18 +2607,36 @@
                                             "type": "object",
                                             "properties": {
                                                 "first": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "last": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "prev": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "next": {
-                                                    "type": "string"
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "first",
+                                                "last",
+                                                "prev",
+                                                "next"
+                                            ]
                                         },
                                         "meta": {
                                             "type": "object",
@@ -1665,6 +2772,54 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "attempts"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[webhook-events]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "type",
+                                    "webhook_url",
+                                    "payload",
+                                    "created_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[webhook-event-attempts]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "attempt",
+                                    "created_at"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -1706,18 +2861,97 @@
         }
     },
     "components": {
+        "securitySchemes": {
+            "http": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
         "schemas": {
+            "AbaCheckResource": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "aba-checks"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "description": "The status of the ABA check.",
+                                "$ref": "#/components/schemas/AbaCheckStatus"
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "The description of the ABA file."
+                            },
+                            "aba_date": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "The processing date of the ABA file."
+                            },
+                            "original_file_name": {
+                                "type": "string",
+                                "description": "The original file name of the ABA file."
+                            },
+                            "created_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "updated_at": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date-time."
+                            },
+                            "entries": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "type"
+                ],
+                "title": "AbaCheckResource"
+            },
+            "AbaCheckStatus": {
+                "type": "string",
+                "enum": [
+                    "passed",
+                    "failed"
+                ],
+                "title": "AbaCheckStatus"
+            },
             "ApiKeyResource": {
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "type": {
                         "type": "string",
-                        "enum": [
-                            "api-keys"
-                        ]
+                        "const": "api-keys"
                     },
                     "attributes": {
                         "type": "object",
@@ -1727,11 +2961,18 @@
                                 "description": "The name of the API key."
                             },
                             "token": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "description": "The plain text token, only shown once when created."
+                                "description": "The plain text token, only shown once when created.",
+                                "anyOf": [
+                                    {
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ]
+                                    },
+                                    {
+                                        "type": "object"
+                                    }
+                                ]
                             },
                             "abilities": {
                                 "type": "array",
@@ -1764,14 +3005,7 @@
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time."
                             }
-                        },
-                        "required": [
-                            "name",
-                            "abilities",
-                            "created_at",
-                            "last_used_at",
-                            "expires_at"
-                        ]
+                        }
                     },
                     "relationships": {
                         "type": "object",
@@ -1780,13 +3014,20 @@
                                 "type": "object",
                                 "properties": {
                                     "data": {
-                                        "anyOf": [
-                                            {
-                                                "$ref": "#/components/schemas/UserResourceIdentifier"
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid"
                                             },
-                                            {
-                                                "type": "null"
+                                            "type": {
+                                                "type": "string",
+                                                "const": "users"
                                             }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "type"
                                         ]
                                     }
                                 },
@@ -1807,17 +3048,20 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "type": {
                         "type": "string",
-                        "enum": [
-                            "checks"
-                        ]
+                        "const": "checks"
                     },
                     "attributes": {
                         "type": "object",
                         "properties": {
+                            "submitted_data": {
+                                "type": "string",
+                                "description": "The submitted data for the check."
+                            },
                             "result": {
                                 "description": "The result of the check.",
                                 "$ref": "#/components/schemas/CheckResult"
@@ -1830,11 +3074,7 @@
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time."
                             }
-                        },
-                        "required": [
-                            "result",
-                            "created_at"
-                        ]
+                        }
                     }
                 },
                 "required": [
@@ -1851,26 +3091,25 @@
                 ],
                 "title": "CheckResult"
             },
-            "IndividualVerificationMode": {
+            "IndividualConfirmationMode": {
                 "type": "string",
                 "enum": [
                     "kyc",
                     "biometric",
                     "skip"
                 ],
-                "title": "IndividualVerificationMode"
+                "title": "IndividualConfirmationMode"
             },
             "OrganizationResource": {
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "type": {
                         "type": "string",
-                        "enum": [
-                            "organizations"
-                        ]
+                        "const": "organizations"
                     },
                     "attributes": {
                         "type": "object",
@@ -1899,13 +3138,7 @@
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time."
                             }
-                        },
-                        "required": [
-                            "name",
-                            "slug",
-                            "created_at",
-                            "updated_at"
-                        ]
+                        }
                     }
                 },
                 "required": [
@@ -1913,6 +3146,21 @@
                     "type"
                 ],
                 "title": "OrganizationResource"
+            },
+            "StoreAbaCheckRequest": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "contentMediaType": "application/octet-stream",
+                        "maxLength": 10240
+                    }
+                },
+                "required": [
+                    "file"
+                ],
+                "title": "StoreAbaCheckRequest"
             },
             "StoreApiKeyRequest": {
                 "type": "object",
@@ -1936,9 +3184,11 @@
                                 "check:write",
                                 "webhook_subscription:read",
                                 "webhook_subscription:write",
-                                "webhook_event:read"
+                                "aba_check:read",
+                                "aba_check:write"
                             ]
-                        }
+                        },
+                        "minItems": 1
                     }
                 },
                 "required": [
@@ -1950,74 +3200,118 @@
             "StoreCheckRequest": {
                 "type": "object",
                 "properties": {
-                    "business": {
-                        "type": "object",
-                        "description": "Business owning the bank account.",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "Business name.",
-                                "maxLength": 255
-                            },
-                            "abn": {
-                                "type": "string",
-                                "description": "Australian Business Number (ABN). Must be 11 digits."
-                            }
-                        }
+                    "business_name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Business name. Required when individual_name is omitted. One of individual or business must be present.",
+                        "maxLength": 255
                     },
-                    "account": {
-                        "type": "object",
-                        "description": "Bank account details.",
-                        "properties": {
-                            "bsb": {
-                                "type": "string",
-                                "description": "Bank State Branch (BSB) code. Must be 6 digits."
-                            },
-                            "number": {
-                                "type": "string",
-                                "description": "Bank account number. Must be 6-10 digits."
-                            },
-                            "name": {
-                                "type": "string",
-                                "description": "Bank account name.",
-                                "maxLength": 255
-                            }
-                        },
-                        "required": [
-                            "bsb",
-                            "number",
-                            "name"
-                        ]
+                    "business_abn": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Australian Business Number (ABN). Must be 11 digits."
                     },
-                    "individual": {
-                        "type": "object",
-                        "description": "Individual details.",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "Individual's full legal name. Must include a space between first name(s) and last name (e.g., \"John Michael Doe\").",
-                                "pattern": "^[^\\s]+\\s+[^\\s]+",
-                                "maxLength": 255
-                            },
-                            "mobile": {
-                                "type": "string",
-                                "description": "Individual's Australian mobile number."
-                            }
-                        },
-                        "required": [
-                            "name"
-                        ]
+                    "account_name": {
+                        "type": "string",
+                        "description": "Bank account name.",
+                        "maxLength": 255
+                    },
+                    "account_bsb": {
+                        "type": "string",
+                        "description": "Bank State Branch (BSB) code. Must be 6 digits."
+                    },
+                    "account_number": {
+                        "type": "string",
+                        "description": "Bank account number. Must be 6-10 digits."
+                    },
+                    "individual_name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Individual's full legal name. Required when business_name is omitted. One of individual or business must be present.\nMust include a space between first name(s) and last name (e.g., \"John Michael Doe\").",
+                        "pattern": "^[^\\s]+\\s+[^\\s]+",
+                        "maxLength": 255
+                    },
+                    "individual_mobile": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Individual's Australian mobile number."
                     }
                 },
                 "required": [
-                    "account",
-                    "individual"
+                    "account_name",
+                    "account_bsb",
+                    "account_number"
                 ],
                 "title": "StoreCheckRequest"
             },
             "StoreVerificationRequest": {
                 "type": "object",
                 "properties": {
+                    "business_name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Business name. Required when individual_name is omitted. One of individual or business must be present.",
+                        "maxLength": 255
+                    },
+                    "business_abn": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Australian Business Number (ABN). Must be 11 digits. Required when business_name is present."
+                    },
+                    "account_name": {
+                        "type": "string",
+                        "description": "Bank account name.",
+                        "maxLength": 255
+                    },
+                    "account_bsb": {
+                        "type": "string",
+                        "description": "Bank State Branch (BSB) code. Must be 6 digits."
+                    },
+                    "account_number": {
+                        "type": "string",
+                        "description": "Bank account number. Must be 6-10 digits."
+                    },
+                    "individual_name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Individual's full legal name. Required when business_name is omitted. One of individual or business must be present.\nMust include a space between first name(s) and last name (e.g., \"John Michael Doe\").",
+                        "pattern": "^[^\\s]+\\s+[^\\s]+",
+                        "maxLength": 255
+                    },
+                    "individual_mobile": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Individual's Australian mobile number. Required when `send_individual_confirmation_sms` is true.\n\nThe mobile number is also used for the individual's identity fingerprint. When successive verifications are requested via a common `attribution_id` and the `individual_confirmation_mode` is `kyc`, the mobile number is used to identify the individual. When the details have not changed, we fallback to biometric authentication for less friction, using the identification the individual provided in the last successful verification."
+                    },
+                    "individual_confirmation_mode": {
+                        "description": "Verification mode for the individual.\n- `kyc`: Run full KYC to establish identity (biometric authentication on subsequent verifications).\n- `biometric`: Biometric authentication with client-provided portrait image.\n- `skip`: Skip individual verification entirely. Required when individual_name is present. Must be omitted when individual_name is omitted.",
+                        "$ref": "#/components/schemas/IndividualConfirmationMode"
+                    },
+                    "send_individual_confirmation_sms": {
+                        "type": "boolean",
+                        "description": "Whether to send the confirmation link to the individual via SMS. When false, the confirmation URL is returned in the API response for the caller to deliver.\nMust be omitted when `individual_confirmation_mode` is `skip` or when individual_name is omitted."
+                    },
+                    "individual_portrait_image": {
+                        "type": "string",
+                        "description": "Individual's government-issued ID portrait image. Required for biometric authentication when `individual_confirmation_mode` is `biometric`. The image must be a valid base64-encoded JPEG or PNG image up to 5MB when decoded. The data URI prefix `data:[MIME type];base64,` is optional.\n\nRequired when `individual_confirmation_mode` is `biometric`, otherwise it must be omitted.",
+                        "example": "data:image/jpeg;base64,/9j/..."
+                    },
                     "attribution_id": {
                         "type": [
                             "string",
@@ -2026,88 +3320,15 @@
                         "description": "Attribution identifier for grouping related verifications.",
                         "maxLength": 255
                     },
-                    "business": {
-                        "type": "object",
-                        "description": "Business owning the bank account.",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "Business name.",
-                                "maxLength": 255
-                            },
-                            "abn": {
-                                "type": "string",
-                                "description": "Australian Business Number (ABN). Must be 11 digits."
-                            }
-                        }
-                    },
-                    "account": {
-                        "type": "object",
-                        "description": "Bank account details.",
-                        "properties": {
-                            "bsb": {
-                                "type": "string",
-                                "description": "Bank State Branch (BSB) code. Must be 6 digits."
-                            },
-                            "number": {
-                                "type": "string",
-                                "description": "Bank account number. Must be 6-10 digits."
-                            },
-                            "name": {
-                                "type": "string",
-                                "description": "Bank account name.",
-                                "maxLength": 255
-                            }
-                        },
-                        "required": [
-                            "bsb",
-                            "number",
-                            "name"
-                        ]
-                    },
-                    "individual": {
-                        "type": "object",
-                        "description": "Individual details.",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "Individual's full legal name. Must include a space between first name(s) and last name (e.g., \"John Michael Doe\").",
-                                "pattern": "^[^\\s]+\\s+[^\\s]+",
-                                "maxLength": 255
-                            },
-                            "mobile": {
-                                "type": "string",
-                                "description": "Individual's Australian mobile number. Required when `individual.confirmation_notification_method` is provided."
-                            },
-                            "verification_mode": {
-                                "description": "Verification mode for the individual.\n- `kyc`: Run full KYC to establish identity (biometric authentication on subsequent verifications).\n- `biometric`: Biometric authentication with client-provided portrait image.\n- `skip`: Skip individual verification entirely.",
-                                "$ref": "#/components/schemas/IndividualVerificationMode"
-                            },
-                            "confirmation_notification_method": {
-                                "type": "array",
-                                "description": "Notification channels to use for sending the confirmation link to the individual. When null, the URL is returned in API response. Must be omitted when `individual.verification_mode` is `skip`.",
-                                "items": {
-                                    "type": "string",
-                                    "enum": [
-                                        "sms"
-                                    ]
-                                }
-                            },
-                            "portrait_image": {
-                                "type": "string",
-                                "description": "Individual's government-issued ID portrait image. Required for biometric authentication when `individual.verification_mode` is `biometric`. The image must be a valid base64-encoded JPEG or PNG image up to 5MB when decoded. The data URI prefix `data:[MIME type];base64,` is optional.\n\nRequired when `individual.verification_mode` is `biometric`, otherwise it must be omitted.",
-                                "example": "data:image/jpeg;base64,/9j/..."
-                            }
-                        },
-                        "required": [
-                            "name",
-                            "verification_mode"
-                        ]
+                    "accept_close_match": {
+                        "type": "boolean",
+                        "description": "Whether to accept close match results for verifications. When true, the bank account name check will pass on both exact match and close match results.\nDefaults to false."
                     }
                 },
                 "required": [
-                    "account",
-                    "individual"
+                    "account_name",
+                    "account_bsb",
+                    "account_number"
                 ],
                 "title": "StoreVerificationRequest"
             },
@@ -2179,13 +3400,12 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "type": {
                         "type": "string",
-                        "enum": [
-                            "users"
-                        ]
+                        "const": "users"
                     },
                     "attributes": {
                         "type": "object",
@@ -2214,13 +3434,7 @@
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time."
                             }
-                        },
-                        "required": [
-                            "name",
-                            "email",
-                            "created_at",
-                            "updated_at"
-                        ]
+                        }
                     }
                 },
                 "required": [
@@ -2229,43 +3443,94 @@
                 ],
                 "title": "UserResource"
             },
-            "UserResourceIdentifier": {
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "users"
-                        ]
-                    },
-                    "id": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "type",
-                    "id"
-                ],
-                "title": "UserResourceIdentifier"
-            },
             "VerificationResource": {
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "type": {
                         "type": "string",
-                        "enum": [
-                            "verifications"
-                        ]
+                        "const": "verifications"
                     },
                     "attributes": {
                         "type": "object",
                         "properties": {
                             "status": {
-                                "description": "The current status of the verification.",
+                                "description": "Current status of the verification.",
                                 "$ref": "#/components/schemas/VerificationStatus"
+                            },
+                            "business_name": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Business name."
+                            },
+                            "business_abn": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Australian Business Number (ABN)."
+                            },
+                            "account_name": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Bank account name."
+                            },
+                            "account_bsb": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Bank State Branch (BSB) code."
+                            },
+                            "account_number": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Bank account number."
+                            },
+                            "individual_name": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Individual's full legal name."
+                            },
+                            "individual_mobile": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Individual's Australian mobile number."
+                            },
+                            "individual_confirmation_mode": {
+                                "anyOf": [
+                                    {
+                                        "description": "Verification mode for the individual.",
+                                        "$ref": "#/components/schemas/IndividualConfirmationMode"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ]
+                            },
+                            "send_individual_confirmation_sms": {
+                                "type": [
+                                    "boolean",
+                                    "null"
+                                ],
+                                "description": "Whether confirmation SMS is sent to the individual."
+                            },
+                            "accept_close_match": {
+                                "type": "boolean",
+                                "description": "Whether to accept close match for individual verifications."
                             },
                             "attribution_id": {
                                 "type": [
@@ -2274,9 +3539,34 @@
                                 ],
                                 "description": "The attribution ID optionally provided upon creation."
                             },
-                            "confirmation_url": {
+                            "individual_confirmation_url": {
                                 "type": "string",
-                                "description": "Confirmation URL returned when notification is manual (confirmation_notification_method is null)"
+                                "description": "Confirmation URL for the individual to complete verification."
+                            },
+                            "failure_reason": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Human-readable reason why the verification failed."
+                            },
+                            "checks": {
+                                "type": "object",
+                                "description": "Array of verification check results."
+                            },
+                            "resolved_individual_name": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "The resolved account name returned by the bank.\n'resolved_account_name' => $this->resolved_account_name,\nThe resolved individual name returned by the bank."
+                            },
+                            "resolved_business_entity_name": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "The resolved business entity name returned by the ABN lookup."
                             },
                             "created_at": {
                                 "type": [
@@ -2294,14 +3584,7 @@
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time."
                             }
-                        },
-                        "required": [
-                            "status",
-                            "attribution_id",
-                            "confirmation_url",
-                            "created_at",
-                            "updated_at"
-                        ]
+                        }
                     }
                 },
                 "required": [
@@ -2328,13 +3611,12 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "type": {
                         "type": "string",
-                        "enum": [
-                            "webhook-event-attempts"
-                        ]
+                        "const": "webhook-event-attempts"
                     },
                     "attributes": {
                         "type": "object",
@@ -2355,12 +3637,7 @@
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time."
                             }
-                        },
-                        "required": [
-                            "status",
-                            "attempt",
-                            "created_at"
-                        ]
+                        }
                     }
                 },
                 "required": [
@@ -2368,25 +3645,6 @@
                     "type"
                 ],
                 "title": "WebhookEventAttemptResource"
-            },
-            "WebhookEventAttemptResourceIdentifier": {
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "webhook-event-attempts"
-                        ]
-                    },
-                    "id": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "type",
-                    "id"
-                ],
-                "title": "WebhookEventAttemptResourceIdentifier"
             },
             "WebhookEventAttemptStatus": {
                 "type": "string",
@@ -2400,13 +3658,12 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "type": {
                         "type": "string",
-                        "enum": [
-                            "webhook-events"
-                        ]
+                        "const": "webhook-events"
                     },
                     "attributes": {
                         "type": "object",
@@ -2436,14 +3693,7 @@
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time."
                             }
-                        },
-                        "required": [
-                            "status",
-                            "type",
-                            "webhook_url",
-                            "payload",
-                            "created_at"
-                        ]
+                        }
                     },
                     "relationships": {
                         "type": "object",
@@ -2454,7 +3704,21 @@
                                     "data": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/WebhookEventAttemptResourceIdentifier"
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "const": "webhook-event-attempts"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "type"
+                                            ]
                                         }
                                     }
                                 },
@@ -2499,13 +3763,12 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "type": {
                         "type": "string",
-                        "enum": [
-                            "webhook-subscriptions"
-                        ]
+                        "const": "webhook-subscriptions"
                     },
                     "attributes": {
                         "type": "object",
@@ -2522,8 +3785,15 @@
                                 }
                             },
                             "secret": {
-                                "type": "string",
-                                "description": "The signing secret. Only returned when the subscription is first created."
+                                "description": "The signing secret. Only returned when the subscription is first created.",
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "object"
+                                    }
+                                ]
                             },
                             "enabled": {
                                 "type": "boolean",
@@ -2557,16 +3827,7 @@
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time when the subscription was disabled, or null if enabled."
                             }
-                        },
-                        "required": [
-                            "url",
-                            "events",
-                            "enabled",
-                            "consecutive_failures",
-                            "created_at",
-                            "updated_at",
-                            "disabled_at"
-                        ]
+                        }
                     }
                 },
                 "required": [

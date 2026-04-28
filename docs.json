@@ -29,8 +29,15 @@
             ]
           },
           {
+            "group": "Batch payments",
+            "pages": [
+              "guides/aba-checks"
+            ]
+          },
+          {
             "group": "Testing",
             "pages": [
+              "testing/overview",
               "testing/test-bank-accounts"
             ]
           },

@@ -1,4 +1,32 @@
 ---
-title: "Introduction"
-description: "Welcome to the ezyshield documentation."
+title: "Documentation"
+description: "ezyshield helps you verify payees, run ongoing bank account checks, receive webhooks, and process bulk ABA payment files via API."
 ---
+
+## Overview
+
+ezyshield verifies **business identity and bank account details** for a contact person, stores an immutable [**verification**](/objects/verification) fingerprint, and lets you run [**checks**](/objects/check) later to detect whether those details have changed. You can subscribe to [**webhooks**](/next-steps/webhooks) for completion events, use [**test BSB codes**](/testing/test-bank-accounts) in non-production, and run [**ABA file checks**](/guides/aba-checks) to validate batches of credits against your verifications.
+
+The [**API reference**](/api-reference/introduction) (including every endpoint) is generated from our [**OpenAPI document**](/api-reference/api.json).
+
+<CardGroup cols={2}>
+  <Card title="API quickstart" icon="bolt" href="/api-reference/quickstart">
+    Create an API key, confirm your organization, and make your first calls in order.
+  </Card>
+  <Card title="Core objects" icon="cube" href="/objects/introduction">
+    Organization, verification, check — how they relate.
+  </Card>
+  <Card title="Webhooks" icon="webhook" href="/next-steps/webhooks">
+    Subscribe to verification events instead of polling.
+  </Card>
+  <Card title="Testing" icon="flask" href="/testing/overview">
+    Non-production behavior, test BSBs, and rate limits.
+  </Card>
+  <Card title="ABA checks" icon="file-lines" href="/guides/aba-checks">
+    Upload Australian ABA files and match entries to verifications.
+  </Card>
+</CardGroup>
+
+### Same flow, two entry points
+
+For a single onboarding path, follow the [API quickstart](/api-reference/quickstart). This page is the hub for guides; the quickstart is the numbered checklist.

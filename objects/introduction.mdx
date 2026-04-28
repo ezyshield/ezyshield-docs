@@ -1,7 +1,9 @@
 ---
 title: "Overview"
-description: "Core data objects used throughout ezyshield, including organizations, verifications, and checks."
+description: "Core data objects used throughout ezyshield: organizations, verifications, checks, and batch ABA file checks."
 ---
+
+## Core objects
 
 <Columns cols={2}>
 <Card title="Organization" icon="building" href="/objects/organization">
@@ -14,5 +16,9 @@ An immutable record created when verifying data.
 
 <Card title="Check" icon="magnifying-glass" href="/objects/check">
 Validates data against a verification to detect compromises.
+</Card>
+
+<Card title="ABA check" icon="file-lines" href="/guides/aba-checks">
+Batch upload of Australian ABA files; match credit entries to verifications.
 </Card>
 </Columns>
