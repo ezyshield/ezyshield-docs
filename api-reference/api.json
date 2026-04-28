@@ -426,7 +426,7 @@
                 }
             }
         },
-        "/api-keys/{apiKey}": {
+        "/api-keys/{api_key}": {
             "get": {
                 "operationId": "api-keys.show",
                 "description": "Requires the `api_key:read` ability.",
@@ -436,22 +436,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "apiKey",
-                        "in": "path",
-                        "required": true,
-                        "description": "The api key prefixed id",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "api_key",
                         "in": "path",
                         "required": true,
-                        "description": "The API key ID",
+                        "description": "The API key ID. Example: `key_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -533,9 +523,6 @@
                     "403": {
                         "$ref": "#/components/responses/AuthorizationException"
                     },
-                    "404": {
-                        "$ref": "#/components/responses/ModelNotFoundException"
-                    },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
                     }
@@ -550,22 +537,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "apiKey",
-                        "in": "path",
-                        "required": true,
-                        "description": "The api key prefixed id",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "api_key",
                         "in": "path",
                         "required": true,
-                        "description": "The API key ID",
+                        "description": "The API key ID. Example: `key_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -657,9 +634,6 @@
                     "403": {
                         "$ref": "#/components/responses/AuthorizationException"
                     },
-                    "404": {
-                        "$ref": "#/components/responses/ModelNotFoundException"
-                    },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
                     },
@@ -677,22 +651,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "apiKey",
-                        "in": "path",
-                        "required": true,
-                        "description": "The api key prefixed id",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "api_key",
                         "in": "path",
                         "required": true,
-                        "description": "The API key ID",
+                        "description": "The API key ID. Example: `key_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     }
                 ],
@@ -715,9 +679,6 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/AuthorizationException"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/ModelNotFoundException"
                     },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
@@ -788,14 +749,21 @@
                         "in": "query",
                         "description": "The current status of the verification.",
                         "schema": {
+                            "examples": [
+                                "successful"
+                            ],
                             "$ref": "#/components/schemas/VerificationStatus"
                         }
                     },
                     {
                         "name": "filter[attribution_id]",
                         "in": "query",
+                        "description": "The attribution ID.",
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "examples": [
+                                "invoice-123"
+                            ]
                         }
                     }
                 ],
@@ -1042,10 +1010,9 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -1125,10 +1092,9 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -1225,10 +1191,9 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -1408,10 +1373,9 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -1485,20 +1449,18 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
                         "name": "check",
                         "in": "path",
                         "required": true,
-                        "description": "The check ID",
+                        "description": "The check ID. Example: `chk_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -1814,7 +1776,7 @@
                 }
             }
         },
-        "/aba-checks/{abaCheck}": {
+        "/aba-checks/{aba_check}": {
             "get": {
                 "operationId": "aba-checks.show",
                 "description": "Requires the `aba_check:read` ability.",
@@ -1824,13 +1786,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "abaCheck",
+                        "name": "aba_check",
                         "in": "path",
                         "required": true,
-                        "description": "The ABA check ID",
+                        "description": "The ABA check ID. Example: `aba_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "prefixed id"
+                            "type": "string"
                         }
                     },
                     {
@@ -1882,7 +1843,7 @@
                 }
             }
         },
-        "/aba-checks/{abaCheck}/regenerate": {
+        "/aba-checks/{aba_check}/regenerate": {
             "get": {
                 "operationId": "aba-checks.regenerate",
                 "description": "The file will contain only entries matched to verifications. The total debit amount will be updated to the sum of the matched entries.\n\nRequires the `aba_check:read` ability.",
@@ -1892,31 +1853,28 @@
                 ],
                 "parameters": [
                     {
-                        "name": "abaCheck",
+                        "name": "aba_check",
                         "in": "path",
                         "required": true,
-                        "description": "The ABA check ID",
+                        "description": "The ABA check ID. Example: `aba_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "prefixed id"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "Regenerated ABA file contents.",
                         "content": {
                             "text/plain": {
                                 "schema": {
-                                    "type": [
-                                        "object",
-                                        "null"
-                                    ]
+                                    "type": "string"
                                 }
                             }
                         },
                         "headers": {
                             "Content-Disposition": {
+                                "description": "Attachment filename for the regenerated ABA file.",
                                 "schema": {
                                     "type": "string"
                                 }
@@ -2218,7 +2176,7 @@
                 }
             }
         },
-        "/webhook-subscriptions/{webhookSubscription}": {
+        "/webhook-subscriptions/{webhook_subscription}": {
             "get": {
                 "operationId": "webhook-subscriptions.show",
                 "description": "Requires the `webhook_subscription:read` ability.",
@@ -2228,13 +2186,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "webhookSubscription",
+                        "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -2295,13 +2252,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "webhookSubscription",
+                        "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -2375,13 +2331,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "webhookSubscription",
+                        "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     }
                 ],
@@ -2411,7 +2366,7 @@
                 }
             }
         },
-        "/webhook-subscriptions/{webhookSubscription}/enable": {
+        "/webhook-subscriptions/{webhook_subscription}/enable": {
             "post": {
                 "operationId": "webhook-subscriptions.enable",
                 "description": "Resets the consecutive failure count and re-enables the subscription.\n\nRequires the `webhook_subscription:write` ability.",
@@ -2421,13 +2376,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "webhookSubscription",
+                        "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -2480,7 +2434,7 @@
                 }
             }
         },
-        "/webhook-subscriptions/{webhookSubscription}/webhook-events": {
+        "/webhook-subscriptions/{webhook_subscription}/webhook-events": {
             "get": {
                 "operationId": "webhook-subscriptions.webhook-events.index",
                 "description": "Requires the `webhook_event:read` ability.",
@@ -2507,13 +2461,12 @@
                         }
                     },
                     {
-                        "name": "webhookSubscription",
+                        "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -2569,6 +2522,9 @@
                         "in": "query",
                         "description": "Filter by event type.",
                         "schema": {
+                            "examples": [
+                                "verification.successful"
+                            ],
                             "$ref": "#/components/schemas/WebhookEventType"
                         }
                     },
@@ -2577,7 +2533,11 @@
                         "in": "query",
                         "description": "Filter events created on or after this datetime.",
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-04-01T00:00:00Z"
+                            ]
                         }
                     },
                     {
@@ -2585,7 +2545,11 @@
                         "in": "query",
                         "description": "Filter events created on or before this datetime.",
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-04-30T23:59:59Z"
+                            ]
                         }
                     }
                 ],
@@ -2744,7 +2708,7 @@
                 }
             }
         },
-        "/webhook-subscriptions/{webhookSubscription}/webhook-events/{webhookEvent}": {
+        "/webhook-subscriptions/{webhook_subscription}/webhook-events/{webhook_event}": {
             "get": {
                 "operationId": "webhook-subscriptions.webhook-events.show",
                 "description": "Requires the `webhook_event:read` ability.",
@@ -2754,23 +2718,21 @@
                 ],
                 "parameters": [
                     {
-                        "name": "webhookSubscription",
+                        "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
-                        "name": "webhookEvent",
+                        "name": "webhook_event",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook event ID",
+                        "description": "The webhook event ID. Example: `wh_evt_01jz8v2q4x...`.",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
+                            "type": "string"
                         }
                     },
                     {
@@ -2942,6 +2904,22 @@
                 ],
                 "title": "AbaCheckStatus"
             },
+            "ApiKeyAbility": {
+                "type": "string",
+                "enum": [
+                    "api_key:read",
+                    "api_key:write",
+                    "verification:read",
+                    "verification:write",
+                    "check:read",
+                    "check:write",
+                    "webhook_subscription:read",
+                    "webhook_subscription:write",
+                    "aba_check:read",
+                    "aba_check:write"
+                ],
+                "title": "ApiKeyAbility"
+            },
             "ApiKeyResource": {
                 "type": "object",
                 "properties": {
@@ -2961,18 +2939,11 @@
                                 "description": "The name of the API key."
                             },
                             "token": {
-                                "description": "The plain text token, only shown once when created.",
-                                "anyOf": [
-                                    {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ]
-                                    },
-                                    {
-                                        "type": "object"
-                                    }
-                                ]
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "The plain text token, only shown once when created."
                             },
                             "abilities": {
                                 "type": "array",
@@ -3154,6 +3125,7 @@
                         "type": "string",
                         "format": "binary",
                         "contentMediaType": "application/octet-stream",
+                        "description": "ABA file to upload and match against verifications. Must be a valid ABA file up to 10MB.",
                         "maxLength": 10240
                     }
                 },
@@ -3172,23 +3144,11 @@
                     },
                     "abilities": {
                         "type": "array",
-                        "description": "The abilities/permissions for the API key.",
+                        "description": "The abilities/permissions granted to the API key.",
                         "items": {
-                            "type": "string",
-                            "enum": [
-                                "api_key:read",
-                                "api_key:write",
-                                "verification:read",
-                                "verification:write",
-                                "check:read",
-                                "check:write",
-                                "webhook_subscription:read",
-                                "webhook_subscription:write",
-                                "aba_check:read",
-                                "aba_check:write"
-                            ]
-                        },
-                        "minItems": 1
+                            "description": "A single API key ability.",
+                            "$ref": "#/components/schemas/ApiKeyAbility"
+                        }
                     }
                 },
                 "required": [
@@ -3559,7 +3519,7 @@
                                     "string",
                                     "null"
                                 ],
-                                "description": "The resolved account name returned by the bank.\n'resolved_account_name' => $this->resolved_account_name,\nThe resolved individual name returned by the bank."
+                                "description": "The resolved individual name returned by the bank."
                             },
                             "resolved_business_entity_name": {
                                 "type": [
