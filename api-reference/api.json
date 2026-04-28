@@ -99,6 +99,15 @@
                 ],
                 "parameters": [
                     {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Available sorts are `created_at`, `last_used_at`, `expires_at`, `name`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
+                        "schema": {
+                            "type": "string",
+                            "default": "-created_at"
+                        }
+                    },
+                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -164,6 +173,17 @@
                             }
                         },
                         "explode": false
+                    },
+                    {
+                        "name": "filter[name]",
+                        "in": "query",
+                        "description": "Filter by API key name.",
+                        "schema": {
+                            "type": "string",
+                            "examples": [
+                                "Production key"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -439,7 +459,7 @@
                         "name": "api_key",
                         "in": "path",
                         "required": true,
-                        "description": "The API key ID. Example: `key_01jz8v2q4x...`.",
+                        "description": "The API key ID. Example: `key_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -540,7 +560,7 @@
                         "name": "api_key",
                         "in": "path",
                         "required": true,
-                        "description": "The API key ID. Example: `key_01jz8v2q4x...`.",
+                        "description": "The API key ID. Example: `key_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -654,7 +674,7 @@
                         "name": "api_key",
                         "in": "path",
                         "required": true,
-                        "description": "The API key ID. Example: `key_01jz8v2q4x...`.",
+                        "description": "The API key ID. Example: `key_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -695,6 +715,15 @@
                     "Verifications"
                 ],
                 "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Available sorts are `created_at`, `updated_at`, `status`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
+                        "schema": {
+                            "type": "string",
+                            "default": "-created_at"
+                        }
+                    },
                     {
                         "name": "page[size]",
                         "in": "query",
@@ -763,6 +792,30 @@
                             "type": "string",
                             "examples": [
                                 "invoice-123"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter[created_at_start]",
+                        "in": "query",
+                        "description": "Filter verifications created on or after this datetime.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-04-01T00:00:00Z"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter[created_at_end]",
+                        "in": "query",
+                        "description": "Filter verifications created on or before this datetime.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-04-30T23:59:59Z"
                             ]
                         }
                     }
@@ -1010,7 +1063,7 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -1092,7 +1145,7 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -1171,6 +1224,15 @@
                 ],
                 "parameters": [
                     {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Available sorts are `created_at`, `result`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
+                        "schema": {
+                            "type": "string",
+                            "default": "-created_at"
+                        }
+                    },
+                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -1191,7 +1253,7 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -1211,6 +1273,17 @@
                             }
                         },
                         "explode": false
+                    },
+                    {
+                        "name": "filter[result]",
+                        "in": "query",
+                        "description": "Filter by check result.",
+                        "schema": {
+                            "examples": [
+                                "uncompromised"
+                            ],
+                            "$ref": "#/components/schemas/CheckResult"
+                        }
                     }
                 ],
                 "responses": {
@@ -1373,7 +1446,7 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -1449,7 +1522,7 @@
                         "name": "verification",
                         "in": "path",
                         "required": true,
-                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`.",
+                        "description": "The verification ID. Example: `ver_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -1458,7 +1531,7 @@
                         "name": "check",
                         "in": "path",
                         "required": true,
-                        "description": "The check ID. Example: `chk_01jz8v2q4x...`.",
+                        "description": "The check ID. Example: `chk_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -1521,6 +1594,15 @@
                 ],
                 "parameters": [
                     {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Available sorts are `created_at`, `updated_at`, `aba_date`, `status`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
+                        "schema": {
+                            "type": "string",
+                            "default": "-created_at"
+                        }
+                    },
+                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -1538,6 +1620,21 @@
                         }
                     },
                     {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "entries",
+                                    "entries.verification"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
                         "name": "fields[aba-checks]",
                         "in": "query",
                         "schema": {
@@ -1550,12 +1647,110 @@
                                     "aba_date",
                                     "original_file_name",
                                     "created_at",
-                                    "updated_at",
-                                    "entries"
+                                    "updated_at"
                                 ]
                             }
                         },
                         "explode": false
+                    },
+                    {
+                        "name": "fields[aba-check-entries]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "account_name",
+                                    "bsb",
+                                    "account_number",
+                                    "amount",
+                                    "lodgement_reference",
+                                    "result",
+                                    "passed"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[verifications]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "business_name",
+                                    "business_abn",
+                                    "account_name",
+                                    "account_bsb",
+                                    "account_number",
+                                    "individual_name",
+                                    "individual_mobile",
+                                    "individual_confirmation_mode",
+                                    "send_individual_confirmation_sms",
+                                    "accept_close_match",
+                                    "attribution_id",
+                                    "individual_confirmation_url",
+                                    "failure_reason",
+                                    "checks",
+                                    "resolved_individual_name",
+                                    "resolved_business_entity_name",
+                                    "created_at",
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "filter[status]",
+                        "in": "query",
+                        "description": "Filter by ABA check status.",
+                        "schema": {
+                            "examples": [
+                                "passed"
+                            ],
+                            "$ref": "#/components/schemas/AbaCheckStatus"
+                        }
+                    },
+                    {
+                        "name": "filter[aba_date]",
+                        "in": "query",
+                        "description": "Filter by ABA processing date.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "examples": [
+                                "2026-04-28"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter[created_at_start]",
+                        "in": "query",
+                        "description": "Filter ABA checks created on or after this datetime.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-04-01T00:00:00Z"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter[created_at_end]",
+                        "in": "query",
+                        "description": "Filter ABA checks created on or before this datetime.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time",
+                            "examples": [
+                                "2026-04-30T23:59:59Z"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -1687,6 +1882,19 @@
                                                 "to",
                                                 "total"
                                             ]
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "anyOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/AbaCheckEntryResource"
+                                                    },
+                                                    {
+                                                        "$ref": "#/components/schemas/VerificationResource"
+                                                    }
+                                                ]
+                                            }
                                         }
                                     },
                                     "required": [
@@ -1715,6 +1923,21 @@
                 ],
                 "parameters": [
                     {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "entries",
+                                    "entries.verification"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
                         "name": "fields[aba-checks]",
                         "in": "query",
                         "schema": {
@@ -1727,8 +1950,59 @@
                                     "aba_date",
                                     "original_file_name",
                                     "created_at",
-                                    "updated_at",
-                                    "entries"
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[aba-check-entries]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "account_name",
+                                    "bsb",
+                                    "account_number",
+                                    "amount",
+                                    "lodgement_reference",
+                                    "result",
+                                    "passed"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[verifications]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "business_name",
+                                    "business_abn",
+                                    "account_name",
+                                    "account_bsb",
+                                    "account_number",
+                                    "individual_name",
+                                    "individual_mobile",
+                                    "individual_confirmation_mode",
+                                    "send_individual_confirmation_sms",
+                                    "accept_close_match",
+                                    "attribution_id",
+                                    "individual_confirmation_url",
+                                    "failure_reason",
+                                    "checks",
+                                    "resolved_individual_name",
+                                    "resolved_business_entity_name",
+                                    "created_at",
+                                    "updated_at"
                                 ]
                             }
                         },
@@ -1755,6 +2029,19 @@
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/AbaCheckResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "anyOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/AbaCheckEntryResource"
+                                                    },
+                                                    {
+                                                        "$ref": "#/components/schemas/VerificationResource"
+                                                    }
+                                                ]
+                                            }
                                         }
                                     },
                                     "required": [
@@ -1789,10 +2076,25 @@
                         "name": "aba_check",
                         "in": "path",
                         "required": true,
-                        "description": "The ABA check ID. Example: `aba_01jz8v2q4x...`.",
+                        "description": "The ABA check ID. Example: `aba_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "entries",
+                                    "entries.verification"
+                                ]
+                            }
+                        },
+                        "explode": false
                     },
                     {
                         "name": "fields[aba-checks]",
@@ -1807,8 +2109,59 @@
                                     "aba_date",
                                     "original_file_name",
                                     "created_at",
-                                    "updated_at",
-                                    "entries"
+                                    "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[aba-check-entries]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "account_name",
+                                    "bsb",
+                                    "account_number",
+                                    "amount",
+                                    "lodgement_reference",
+                                    "result",
+                                    "passed"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[verifications]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "business_name",
+                                    "business_abn",
+                                    "account_name",
+                                    "account_bsb",
+                                    "account_number",
+                                    "individual_name",
+                                    "individual_mobile",
+                                    "individual_confirmation_mode",
+                                    "send_individual_confirmation_sms",
+                                    "accept_close_match",
+                                    "attribution_id",
+                                    "individual_confirmation_url",
+                                    "failure_reason",
+                                    "checks",
+                                    "resolved_individual_name",
+                                    "resolved_business_entity_name",
+                                    "created_at",
+                                    "updated_at"
                                 ]
                             }
                         },
@@ -1825,6 +2178,19 @@
                                     "properties": {
                                         "data": {
                                             "$ref": "#/components/schemas/AbaCheckResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "anyOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/AbaCheckEntryResource"
+                                                    },
+                                                    {
+                                                        "$ref": "#/components/schemas/VerificationResource"
+                                                    }
+                                                ]
+                                            }
                                         }
                                     },
                                     "required": [
@@ -1856,7 +2222,7 @@
                         "name": "aba_check",
                         "in": "path",
                         "required": true,
-                        "description": "The ABA check ID. Example: `aba_01jz8v2q4x...`.",
+                        "description": "The ABA check ID. Example: `aba_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -1919,6 +2285,15 @@
                 ],
                 "parameters": [
                     {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Available sorts are `created_at`, `updated_at`, `consecutive_failures`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
+                        "schema": {
+                            "type": "string",
+                            "default": "-created_at"
+                        }
+                    },
+                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -1955,6 +2330,17 @@
                             }
                         },
                         "explode": false
+                    },
+                    {
+                        "name": "filter[enabled]",
+                        "in": "query",
+                        "description": "Filter by whether the subscription is enabled.",
+                        "schema": {
+                            "type": "boolean",
+                            "examples": [
+                                true
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -2189,7 +2575,7 @@
                         "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -2255,7 +2641,7 @@
                         "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -2334,7 +2720,7 @@
                         "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -2379,7 +2765,7 @@
                         "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -2444,6 +2830,15 @@
                 ],
                 "parameters": [
                     {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Available sorts are `created_at`, `status`, `type`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
+                        "schema": {
+                            "type": "string",
+                            "default": "-created_at"
+                        }
+                    },
+                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -2464,7 +2859,7 @@
                         "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -2526,6 +2921,17 @@
                                 "verification.successful"
                             ],
                             "$ref": "#/components/schemas/WebhookEventType"
+                        }
+                    },
+                    {
+                        "name": "filter[status]",
+                        "in": "query",
+                        "description": "Filter by delivery status.",
+                        "schema": {
+                            "examples": [
+                                "succeeded"
+                            ],
+                            "$ref": "#/components/schemas/WebhookEventStatus"
                         }
                     },
                     {
@@ -2721,7 +3127,7 @@
                         "name": "webhook_subscription",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`.",
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -2730,7 +3136,7 @@
                         "name": "webhook_event",
                         "in": "path",
                         "required": true,
-                        "description": "The webhook event ID. Example: `wh_evt_01jz8v2q4x...`.",
+                        "description": "The webhook event ID. Example: `wh_evt_01jz8v2q4x...`",
                         "schema": {
                             "type": "string"
                         }
@@ -2830,6 +3236,87 @@
             }
         },
         "schemas": {
+            "AbaCheckEntryResource": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "type": {
+                        "type": "string",
+                        "const": "aba-check-entries"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "account_name": {
+                                "type": "string",
+                                "description": "The account name from the ABA file entry."
+                            },
+                            "bsb": {
+                                "type": "string",
+                                "description": "The BSB from the ABA file entry."
+                            },
+                            "account_number": {
+                                "type": "string",
+                                "description": "The account number from the ABA file entry."
+                            },
+                            "amount": {
+                                "type": "integer",
+                                "description": "The payment amount in cents."
+                            },
+                            "lodgement_reference": {
+                                "type": "string",
+                                "description": "The lodgement reference from the ABA file entry."
+                            },
+                            "result": {
+                                "type": "string",
+                                "description": "The verification result for the ABA file entry."
+                            },
+                            "passed": {
+                                "type": "boolean",
+                                "description": "Whether the entry matched a known verified contact."
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
+                            "verification": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "uuid"
+                                            },
+                                            "type": {
+                                                "type": "string",
+                                                "const": "verifications"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "type"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "type"
+                ],
+                "title": "AbaCheckEntryResource"
+            },
             "AbaCheckResource": {
                 "type": "object",
                 "properties": {
@@ -2876,15 +3363,38 @@
                                 ],
                                 "format": "date-time",
                                 "description": "ISO 8601 formatted date-time."
-                            },
+                            }
+                        }
+                    },
+                    "relationships": {
+                        "type": "object",
+                        "properties": {
                             "entries": {
-                                "anyOf": [
-                                    {
-                                        "type": "string"
-                                    },
-                                    {
-                                        "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "const": "aba-check-entries"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "type"
+                                            ]
+                                        }
                                     }
+                                },
+                                "required": [
+                                    "data"
                                 ]
                             }
                         }
