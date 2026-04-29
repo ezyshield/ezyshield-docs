@@ -1,0 +1,47 @@
+---
+title: "Biometric verification"
+description: "Use biometric verification when your system already has a suitable identity portrait for the contact."
+---
+
+`biometric` keeps the ezyshield contact flow shorter by asking the contact to complete a face scan against an identity portrait supplied by your system.
+
+Use it only when your system already has the right identity evidence and permission to use it for this verification.
+
+## When to use it
+
+Use `biometric` when:
+
+- your own onboarding flow already captures a government-issued identity portrait
+- you want the contact to avoid uploading identity documents again
+- your system can send the image as `individual_portrait_image`
+- your team is comfortable owning the upstream identity-capture experience
+
+If you do not already have the image, use [`kyc`](/guides/confirmation-modes/kyc) instead.
+
+## What happens
+
+<Steps>
+  <Step title="Create the verification with `individual_confirmation_mode: biometric`">
+    Include the contact's legal name and `individual_portrait_image`. The image must be a base64-encoded JPEG or PNG within the API limits.
+  </Step>
+
+  <Step title="Deliver the confirmation link">
+    Let ezyshield send the SMS, or deliver the returned `individual_confirmation_url` through your own product flow.
+  </Step>
+
+  <Step title="The contact completes a face scan">
+    The contact does not need to upload the supplied identity portrait again. They complete the live biometric step against the image your system provided.
+  </Step>
+
+  <Step title="Your app receives the result">
+    Process webhook events and update the verification state stored against your record.
+  </Step>
+</Steps>
+
+## Implementation notes
+
+`individual_portrait_image` is required for `biometric` and must be omitted for `kyc` and `skip`.
+
+Store the verification ID returned by ezyshield. If this verification belongs to an existing payee, send its stable record ID as `attribution_id` so future verifications can be retrieved as a linked history.
+
+For exact field names, validation rules, and response shape, see [Create a verification](/api-reference/verifications/create-a-verification).

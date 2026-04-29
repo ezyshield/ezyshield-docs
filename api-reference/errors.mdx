@@ -1,0 +1,30 @@
+---
+title: "Errors"
+description: "Common API error responses and how to handle them."
+---
+
+ezyshield uses HTTP status codes to distinguish authentication, authorization, validation, rate-limit, and server errors.
+
+| Code | Meaning | Typical handling |
+| ---: | --- | --- |
+| `200` | Success | Process the response body. |
+| `201` | Created | Store the returned resource ID. |
+| `204` | No content | Treat the operation as complete. |
+| `400` | Bad request | Check request structure and endpoint requirements. |
+| `401` | Unauthorized | Check that the API key is present and valid. |
+| `403` | Forbidden | Check the key's abilities and organization access. |
+| `404` | Not found | Check the resource ID and organization context. |
+| `422` | Validation error | Show or log field-level validation messages. |
+| `429` | Too many requests | Back off and retry after the rate-limit window resets. |
+| `500` | Server error | Retry only if safe, then contact support if it persists. |
+| `503` | Service unavailable | Retry later. |
+
+## Validation errors
+
+Validation errors return `422`. Use them to correct request fields before retrying. For exact field rules, read the generated endpoint reference.
+
+## Authorization errors
+
+API keys are organization-scoped and ability-scoped. A valid key can still receive `403` if it does not include the ability required by the endpoint.
+
+See [Authentication](/api-reference/authentication) for abilities and key handling.

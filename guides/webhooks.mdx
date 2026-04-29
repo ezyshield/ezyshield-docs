@@ -1,0 +1,136 @@
+---
+title: "Receive completion events"
+description: "Update your system when a verification changes state."
+---
+
+Your app creates a verification. ezyshield sends events as it progresses. Your app updates local state when the verification reaches a terminal status.
+
+Polling is useful while debugging. In production, prefer webhooks.
+
+## Events to subscribe to
+
+At minimum, subscribe to the terminal verification events:
+
+| Event | Meaning |
+| --- | --- |
+| `verification.successful` | The verification completed successfully. |
+| `verification.rejected` | The contact rejected the verification. |
+| `verification.failed` | ezyshield could not verify the supplied details. |
+| `verification.cancelled` | The verification was cancelled or superseded. |
+| `verification.expired` | The contact did not complete the flow in time. |
+| `verification.error` | An unexpected error occurred. |
+
+You may also subscribe to progress events:
+
+| Event | Meaning |
+| --- | --- |
+| `verification.pending` | The verification is in progress. |
+| `verification.confirmation_ready` | The contact confirmation step is ready. |
+| `verification.confirmation_notification_sent` | ezyshield sent the contact notification. |
+
+## Recommended handler behavior
+
+<Steps>
+  <Step title="Verify the signature">
+    Verify the webhook signature before processing the body. ezyshield signs outbound webhooks with the subscription secret returned when the subscription is created.
+  </Step>
+
+  <Step title="Record the event ID">
+    Store processed event IDs. If ezyshield retries a delivery, your app can safely ignore the duplicate side effects.
+  </Step>
+
+  <Step title="Update local verification state">
+    Use the verification ID in the event data to update the record in your system. Store the latest status and event timestamp.
+  </Step>
+
+  <Step title="Respond quickly">
+    Return a `2xx` response once the event is accepted. Do slower work asynchronously.
+  </Step>
+</Steps>
+
+## Signature verification
+
+By default, ezyshield sends the HMAC-SHA256 signature in the `Signature` header. Verify the signature against the raw request body before parsing or mutating the payload.
+
+<CodeGroup>
+```php PHP
+$payload = file_get_contents('php://input');
+$signature = $_SERVER['HTTP_SIGNATURE'] ?? '';
+
+$expected = hash_hmac('sha256', $payload, $webhookSecret);
+
+if (! hash_equals($expected, $signature)) {
+    http_response_code(401);
+    exit('Invalid signature');
+}
+```
+
+```javascript Node.js
+import crypto from 'crypto';
+
+const payload = req.rawBody;
+const signature = req.headers['signature'] ?? '';
+
+const expected = crypto
+  .createHmac('sha256', webhookSecret)
+  .update(payload)
+  .digest('hex');
+
+const expectedBuffer = Buffer.from(expected);
+const signatureBuffer = Buffer.from(signature);
+
+if (
+  expectedBuffer.length !== signatureBuffer.length ||
+  !crypto.timingSafeEqual(expectedBuffer, signatureBuffer)
+) {
+  return res.status(401).send('Invalid signature');
+}
+```
+
+```python Python
+import hashlib
+import hmac
+
+payload = request.get_data(as_text=True)
+signature = request.headers.get('Signature', '')
+
+expected = hmac.new(
+    webhook_secret.encode(),
+    payload.encode(),
+    hashlib.sha256,
+).hexdigest()
+
+if not hmac.compare_digest(expected, signature):
+    return 'Invalid signature', 401
+```
+</CodeGroup>
+
+<Warning>
+Use the raw request body for signature verification and compare signatures in constant time. Re-serializing parsed JSON can change the bytes being signed.
+</Warning>
+
+<Note>
+Store the webhook subscription secret when the subscription is created. The secret is only returned in the create response.
+</Note>
+
+## Idempotency pattern
+
+Webhook delivery can be retried. Your handler should be safe to run more than once for the same event.
+
+```text
+receive event
+  -> verify signature
+  -> check whether event ID was already processed
+  -> store event ID
+  -> update verification state
+  -> return 2xx
+```
+
+## Managing subscriptions
+
+Create and manage webhook subscriptions from the Dashboard or through the API. API management requires `webhook_subscription:read` and `webhook_subscription:write`; receiving webhook deliveries does not require those abilities on the key that created the verification.
+
+- [Create a webhook subscription](/api-reference/webhook-subscriptions/create-a-webhook-subscription)
+- [List all webhook subscriptions](/api-reference/webhook-subscriptions/list-all-webhook-subscriptions)
+
+For subscription fields and event types, see [Webhooks](/objects/webhooks).

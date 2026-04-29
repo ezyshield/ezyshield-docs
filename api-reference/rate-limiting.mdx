@@ -1,14 +1,16 @@
 ---
-title: "Rate Limiting"
+title: "Rate limits"
 description: "API rate limits and response headers."
 ---
 
-<Note>Rate limiting is currently in development and will be available soon.</Note>
+ezyshield rate limits API requests per organization.
 
-**60 requests per minute per organization.** API responses include `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers.
+The current limit is **60 requests per minute per organization**. API responses include rate-limit headers when available.
 
 | Header | Description |
 |--------|-------------|
 | `X-RateLimit-Limit` | Maximum requests allowed per minute |
 | `X-RateLimit-Remaining` | Requests remaining in the current window |
 | `X-RateLimit-Reset` | Unix timestamp when the window resets |
+
+If you receive `429`, back off and retry after the current window resets. Avoid tight polling loops; use [webhooks](/guides/webhooks) for verification completion.

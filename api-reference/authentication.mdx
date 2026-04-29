@@ -1,16 +1,44 @@
 ---
 title: "Authentication"
-description: "Authenticate API requests using API keys."
+description: "Authenticate API requests with organization-scoped API keys."
 ---
 
-The API uses token-based authentication. All requests must include an API key in the `Authorization` header using the Bearer token format:
+ezyshield uses bearer API keys. Every API request must include an API key in the `Authorization` header:
 
 ```http
 Authorization: Bearer <your_api_key>
 ```
 
-API keys are organization-scoped. All resources (organization, verifications, checks, webhooks) belong to your organization and are scoped automatically through the header.
+API keys are organization-scoped. The key identifies the organization and the abilities available to the request.
 
-To create an API key:
-- **Dashboard:** [app.ezyshield.com.au](https://app.ezyshield.com.au) → Organization settings
-- **API:** Once you have your first key, create additional keys with [List all API keys](/api-reference/api-keys/list-all-api-keys) and [Create an API key](/api-reference/api-keys/create-an-api-key)
+## Create a key
+
+Create your first key in the Dashboard: [app.ezyshield.com.au](https://app.ezyshield.com.au).
+
+After you have a key, you can manage additional keys through the API:
+
+- [List all API keys](/api-reference/api-keys/list-all-api-keys)
+- [Create an API key](/api-reference/api-keys/create-an-api-key)
+
+## Abilities
+
+Keys should have only the abilities your integration needs. Abilities are granted when the key is created; updating an API key only changes its name. If an integration needs a different ability set, create a new key and rotate to it.
+
+Available abilities include:
+
+| Ability | Use |
+| --- | --- |
+| `api_key:read` | Retrieve API keys. |
+| `api_key:write` | Create, rename, or delete API keys. |
+| `verification:read` | Retrieve verifications. |
+| `verification:write` | Create or cancel verifications. |
+| `check:read` | Retrieve checks. |
+| `check:write` | Run checks against verifications. |
+| `webhook_subscription:read` | Retrieve webhook subscriptions. |
+| `webhook_subscription:write` | Create, update, enable, or delete webhook subscriptions through the API. |
+| `aba_check:read` | Retrieve ABA checks or download regenerated files. |
+| `aba_check:write` | Upload ABA files. |
+
+## First authentication test
+
+Call [Get the current organization](/api-reference/organizations/get-the-current-organization) after creating a key. It confirms the token is valid and attached to the organization you expect.

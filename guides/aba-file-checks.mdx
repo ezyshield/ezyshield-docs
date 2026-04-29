@@ -1,0 +1,55 @@
+---
+title: "ABA file checks"
+description: "Upload ABA files to compare payment entries against existing verifications before processing the file elsewhere."
+---
+
+An ABA file check reviews an Australian Banking Association direct entry file before you process it in your banking software or payment workflow.
+
+ezyshield does not initiate the payment. It parses the file, compares entries against existing verifications, and lets you download a regenerated file containing matched entries.
+
+## When to use ABA file checks
+
+Use this workflow when:
+
+- your payment process produces ABA direct entry files
+- you already have ezyshield verifications for the payees in the file
+- you want to review or remove unmatched entries before processing the file elsewhere
+
+Use [checks before payment](/guides/checks-before-payment) for individual payment decisions outside an ABA file.
+
+## Workflow
+
+<Steps>
+  <Step title="Verify payees first">
+    Create successful verifications for the payees you expect to appear in the file. ABA file checks match credit entries to the latest successful contact-backed verification for the same BSB and account number.
+  </Step>
+
+  <Step title="Upload the ABA file">
+    Use [Upload a single ABA file](/api-reference/aba-checks/upload-a-single-aba-file). The endpoint accepts a multipart file upload.
+  </Step>
+
+  <Step title="Review the check result">
+    Retrieve the ABA check to inspect status and metadata. Use the Dashboard if your operations team needs to review the file interactively.
+  </Step>
+
+  <Step title="Download the regenerated file">
+    Download the regenerated ABA file. It contains entries matched to verifications, with the total debit amount updated to the sum of those matched entries.
+  </Step>
+
+  <Step title="Process the file elsewhere">
+    Process the regenerated file in your banking software or payment workflow. ezyshield does not submit the payment.
+  </Step>
+</Steps>
+
+## API surface
+
+- [Upload a single ABA file](/api-reference/aba-checks/upload-a-single-aba-file)
+- [List all ABA checks](/api-reference/aba-checks/list-all-aba-checks)
+- [Get an ABA check](/api-reference/aba-checks/get-an-aba-check)
+- [Download a regenerated ABA file](/api-reference/aba-checks/download-a-regenerated-aba-file)
+
+## Testing
+
+In non-production, [test BSB codes](/testing/test-bank-accounts) drive predictable outcomes for entries in uploaded files. Use them to test exact matches, close matches, mismatches, missing accounts, and closed accounts.
+
+For status and relationships, see [ABA check](/objects/aba-check).

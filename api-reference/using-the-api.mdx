@@ -1,0 +1,46 @@
+---
+title: "Using the API"
+description: "Base URL, headers, authentication, pagination, filtering, and errors."
+---
+
+## Base URL
+
+```text
+https://api.ezyshield.com.au
+```
+
+## Required headers
+
+Send JSON requests with these headers:
+
+```http
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+```
+
+File upload endpoints, such as ABA file checks, use multipart requests where documented.
+
+## OpenAPI specification
+
+The OpenAPI document is available at [api.json](/api-reference/api.json).
+
+## Common behavior
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Send API keys and understand organization-scoped abilities.
+  </Card>
+
+  <Card title="Errors" icon="triangle-exclamation" href="/api-reference/errors">
+    Handle common HTTP statuses and validation failures.
+  </Card>
+
+  <Card title="Pagination" icon="list" href="/api-reference/pagination">
+    Navigate list endpoints.
+  </Card>
+
+  <Card title="Filtering and sorting" icon="filter" href="/api-reference/filtering-and-sorting">
+    Shape list results where endpoint filters and sorts are available.
+  </Card>
+</CardGroup>

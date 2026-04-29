@@ -1,0 +1,43 @@
+---
+title: "Skip contact confirmation"
+description: "Use skip mode only when contact identity assurance is handled outside ezyshield."
+---
+
+`skip` creates a verification without asking the contact to complete an ezyshield identity flow.
+
+This is the lowest-friction mode, but it moves contact identity assurance outside ezyshield. Use it intentionally.
+
+## When to use it
+
+Use `skip` when:
+
+- your system already has a separate identity assurance process
+- the verification does not require an ezyshield contact step
+- your risk model accepts that the individual will not complete ezyshield KYC or biometric confirmation
+
+Do not use `skip` just to make the first integration faster. Start with [`kyc`](/guides/confirmation-modes/kyc) unless you have a clear reason not to.
+
+## What happens
+
+<Steps>
+  <Step title="Create the verification with `individual_confirmation_mode: skip`">
+    Include the business, contact, and bank account details required for the verification. Do not send SMS or portrait-image fields.
+  </Step>
+
+  <Step title="ezyshield processes the supplied details">
+    There is no contact confirmation link, SMS, document upload, or face scan.
+  </Step>
+
+  <Step title="Your app receives the result">
+    Process webhook events or retrieve the verification to learn the terminal status.
+  </Step>
+</Steps>
+
+## What not to send
+
+When using `skip`, omit:
+
+- `send_individual_confirmation_sms`
+- `individual_portrait_image`
+
+For exact request fields and validation behavior, see [Create a verification](/api-reference/verifications/create-a-verification).

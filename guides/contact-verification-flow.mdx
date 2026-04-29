@@ -1,0 +1,71 @@
+---
+title: "Contact verification flow"
+description: "What happens when a contact is asked to complete identity verification."
+---
+
+The contact verification flow is the human part of a verification. It starts after your app creates a verification and ends when the contact completes, rejects, abandons, or times out of the flow.
+
+<Steps>
+  <Step title="Your app creates a verification">
+    Your app creates a verification with business, contact, and bank account details. The verification starts in `created` or `pending`, depending on where it is in processing.
+
+    If you set `send_individual_confirmation_sms` to `true`, ezyshield sends the contact an SMS when the confirmation step is ready. If you set it to `false`, the API response includes `individual_confirmation_url` so you can deliver the link yourself.
+  </Step>
+
+  <Step title="ezyshield prepares the contact step">
+    ezyshield checks the supplied details and prepares the confirmation flow. Your webhook endpoint may receive `verification.confirmation_ready`.
+
+    At this point, your app should treat the verification as in progress. Do not mark the payee as verified yet.
+  </Step>
+
+  <Step title="The contact receives or opens the verification link">
+    The contact opens a secure ezyshield flow. If ezyshield sends the SMS, your app does not need to send the link separately.
+
+    Suggested wording before handoff:
+
+    <Info>
+      We use ezyshield to verify identity and bank account details before payments are made. You may receive a secure verification link by SMS.
+    </Info>
+  </Step>
+
+  <Step title="The contact confirms their details">
+    The contact reviews the verification request and continues into the identity step. The exact step depends on the [confirmation mode](/guides/confirmation-modes).
+  </Step>
+
+  <Step title="The contact completes identity verification">
+    With `kyc`, the contact provides identity details and completes a face scan. With `biometric`, the contact completes a face scan against the portrait image supplied by your system. With `skip`, there is no contact identity step.
+  </Step>
+
+  <Step title="ezyshield sends the result">
+    ezyshield sends a webhook event when the verification reaches a terminal status. Your app should process the event idempotently and update the verification state stored against your record.
+  </Step>
+</Steps>
+
+## Outcomes your app should handle
+
+| Outcome | Meaning | What your app should do |
+| --- | --- | --- |
+| `successful` | ezyshield completed the verification successfully. | Store the verification ID as the current successful verification for the record. |
+| `rejected` | The contact rejected the verification. | Ask the contact or your operations team to review before retrying. |
+| `failed` | ezyshield could not verify the supplied details. | Treat the payee as unverified and inspect the failure reason. |
+| `expired` | The contact did not complete the flow in time. | Create a new verification if the payee still needs to be verified. |
+| `cancelled` | A newer verification superseded this one, or it was cancelled. | Keep the history, but do not use this verification as the current one. |
+| `error` | An unexpected error occurred. | Retry only after checking the returned context or contacting support. |
+
+## Recommended customer-facing copy
+
+Keep the copy short. The contact should understand why they are being asked to verify, what they need, and who to contact if something looks wrong.
+
+<AccordionGroup>
+  <Accordion title="Before the verification starts">
+    We need to verify your identity and bank account details before we can process payments to you. This helps protect you and us from account changes or payment redirection.
+  </Accordion>
+
+  <Accordion title="When an SMS is expected">
+    You may receive an SMS from ezyshield with a secure verification link. Open the link on your phone and follow the prompts.
+  </Accordion>
+
+  <Accordion title="When you deliver the link yourself">
+    Use the secure verification link below to complete identity verification. The link opens an ezyshield flow where you may be asked to confirm details and complete a face scan.
+  </Accordion>
+</AccordionGroup>

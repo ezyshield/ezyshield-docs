@@ -1,0 +1,40 @@
+---
+title: "Filtering and sorting"
+description: "Use endpoint-supported filters and sorts on list responses."
+---
+
+List endpoints may support filtering and sorting. The generated endpoint page lists the exact filters and sort fields available for that resource.
+
+## Filtering
+
+Filters use the `filter[...]` query parameter shape.
+
+```http
+GET /verifications?filter[status]=successful
+```
+
+Some useful filters include:
+
+- `filter[status]` on verification lists
+- `filter[attribution_id]` to retrieve linked verifications for your own record
+- date-range filters where documented by the endpoint
+
+<Note>
+Do not assume every list endpoint supports the same filters. Check the generated endpoint reference before relying on a filter in production.
+</Note>
+
+## Sorting
+
+Sort with the `sort` query parameter.
+
+```http
+GET /verifications?sort=-created_at
+```
+
+Prefix a field with `-` for descending order. Where supported, multiple fields can be comma-separated.
+
+```http
+GET /verifications?sort=status,-created_at
+```
+
+The generated endpoint page lists supported sort fields.

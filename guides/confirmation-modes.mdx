@@ -1,0 +1,52 @@
+---
+title: "Choose a confirmation mode"
+description: "Decide whether a verification should use KYC, biometric confirmation, or skip contact confirmation."
+---
+
+The confirmation mode controls the contact identity step inside a verification. It does not change the organization boundary or the bank account details you send; it changes how the individual is confirmed.
+
+For most first integrations, start with `kyc`.
+
+## Decision table
+
+| Mode | Use when | Contact step | Main trade-off |
+| --- | --- | --- | --- |
+| [`kyc`](/guides/confirmation-modes/kyc) | You want ezyshield to establish the contact's identity. | The contact provides identity details and completes a face scan. | Strong default, but more work for the contact on the first verification. |
+| [`biometric`](/guides/confirmation-modes/biometric) | Your system already has a suitable government-issued portrait image. | The contact completes a face scan against the supplied image. | Faster for the contact, but your system must already handle the identity image correctly. |
+| [`skip`](/guides/confirmation-modes/skip) | You intentionally own contact identity assurance outside ezyshield. | No ezyshield contact identity step. | Lowest friction, but identity assurance is your responsibility. |
+
+<Tip>
+If you are unsure, use `kyc`. You can still use `attribution_id` to link later verifications for the same payee, and ezyshield can reduce friction on later flows when previous identity evidence can be reused.
+</Tip>
+
+## How the choice affects implementation
+
+<AccordionGroup>
+  <Accordion title="SMS and confirmation URL">
+    For `kyc` and `biometric`, you can either let ezyshield send the SMS or deliver the returned `individual_confirmation_url` yourself. For `skip`, no contact confirmation link is needed.
+  </Accordion>
+
+  <Accordion title="Identity image">
+    `biometric` requires `individual_portrait_image`. `kyc` and `skip` must not send that field.
+  </Accordion>
+
+  <Accordion title="Linked verifications">
+    Send a stable `attribution_id` when the payee exists in your system. It lets you retrieve related verifications and helps keep repeat verification history connected to the same record.
+  </Accordion>
+</AccordionGroup>
+
+## Mode guides
+
+<CardGroup cols={3}>
+  <Card title="KYC verification" icon="identification-card" href="/guides/confirmation-modes/kyc">
+    Best default when ezyshield should establish identity.
+  </Card>
+
+  <Card title="Biometric verification" icon="face-smile" href="/guides/confirmation-modes/biometric">
+    Use when you already have a suitable identity portrait.
+  </Card>
+
+  <Card title="Skip contact confirmation" icon="circle-xmark" href="/guides/confirmation-modes/skip">
+    Use only when identity assurance is handled outside ezyshield.
+  </Card>
+</CardGroup>

@@ -1,27 +1,35 @@
 ---
 title: "Check"
-description: "A comparison of newly submitted business and bank details against a verification fingerprint to detect whether stored payee data may be compromised."
+description: "A later comparison of current payment details against a verification fingerprint."
 ---
 
-A **check** runs against an existing [verification](/objects/verification). You supply current business and bank account fields; ezyshield compares them to the verification’s stored fingerprint and returns whether the data appears **uncompromised** or **compromised** relative to that snapshot.
+A check runs against an existing [verification](/objects/verification). You supply the details you hold now, and ezyshield compares them to the verification fingerprint.
+
+Checks answer one narrow question: do today's details still align with the details that were successfully verified?
 
 ## Relationship to verifications
 
-1. You [create a verification](/api-reference/verifications/create-a-verification) and drive it through the verification flow (including contact steps described on the [verification](/objects/verification) page).
-2. Later—before a payout, on a schedule, or after a data change in your system—you [check a verification](/api-reference/checks/check-a-verification) by posting the details you hold **now**.
-3. Each check is a separate record you can [list](/api-reference/checks/list-all-checks-for-a-verification) or [retrieve](/api-reference/checks/get-a-check-for-a-verification).
+```mermaid
+flowchart TD
+    verification["Successful verification"] --> check["Check"]
+    currentDetails["Current details from your system"] --> check
+    check --> result["Result"]
+```
 
-Checks do not replace a full verification when onboarding a payee; they answer “do today’s details still align with the verified fingerprint?”
+Checks do not replace a full verification when onboarding a payee. They are a later safety layer for payment decisions and detail changes.
 
 ## When to use checks
 
-- **Before payments:** confirm bank and identity details have not drifted or been tampered with since verification.
-- **Periodic reviews:** re-check high-value or long-lived payees on a cadence.
-- **After internal updates:** your CRM or banking file changes should be checked against the last good verification.
+Use checks:
 
-## Testing bank details
+- before payment
+- after bank details change in your system
+- during scheduled reviews for high-value or long-lived payees
+- when processing file-based payment workflows that depend on verified records
 
-In non-production environments, certain BSB codes simulate name-match and account outcomes. Use the table on [Test bank accounts](/testing/test-bank-accounts) so your integration exercises success and failure paths without affecting real banking data.
+## What to store
+
+Each check is its own record. Store the check ID, result, timestamp, verification ID, and the internal record you checked. This gives your team an audit trail for the payment decision.
 
 ## API surface
 
@@ -32,3 +40,5 @@ All check endpoints are nested under a verification:
 - [Get a check for a verification](/api-reference/checks/get-a-check-for-a-verification)
 
 See [Authentication](/api-reference/authentication) for required abilities (`check:read`, `check:write` per your API key).
+
+For implementation guidance, read [Run checks before payment](/guides/checks-before-payment).

@@ -1,0 +1,49 @@
+---
+title: "Test your integration"
+description: "Use non-production environments, test BSBs, and webhook tooling before going live."
+---
+
+Test the full verification path before using production data. Your test should cover API authentication, verification creation, webhook delivery, terminal status handling, and checks before payment.
+
+## Test in this order
+
+<Steps>
+  <Step title="Confirm the API key">
+    Call [Get the current organization](/api-reference/organizations/get-the-current-organization) with the key for the environment you are testing.
+  </Step>
+
+  <Step title="Create a verification">
+    Create a verification with test bank details. Use the generated [Create a verification](/api-reference/verifications/create-a-verification) reference for exact fields.
+  </Step>
+
+  <Step title="Receive webhook events">
+    Point webhook subscriptions at a tunnel or shared staging endpoint. Verify signature checking, idempotency, and terminal status updates.
+  </Step>
+
+  <Step title="Run a check">
+    Run a check against a successful verification so your payment-control path is tested before production.
+  </Step>
+
+  <Step title="Test the unhappy paths">
+    Use test BSBs to simulate missing accounts, closed accounts, mismatches, close matches, and exact matches.
+  </Step>
+</Steps>
+
+## Test BSBs
+
+Use [Test bank accounts](/testing/test-bank-accounts) for deterministic bank-account outcomes in non-production.
+
+The same test BSB behavior applies when ABA files are parsed in non-production, so you can test [ABA file checks](/guides/aba-file-checks) without using real banking data.
+
+## Webhooks locally
+
+Use a tunnel such as ngrok, Cloudflare Tunnel, or a staging endpoint that can receive HTTPS traffic. Your handler should:
+
+- verify the signature
+- store processed event IDs
+- return quickly
+- update local verification state from terminal events
+
+## Keep environments separate
+
+Treat API keys, webhook subscriptions, and webhook secrets as environment-specific. Do not point production webhooks at local tooling, and do not use production keys in sandbox scripts.

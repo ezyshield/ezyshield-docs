@@ -1,94 +1,78 @@
 ---
 title: "Verification"
-description: "An immutable record representing a point-in-time verification of business identity and payment details."
+description: "A point-in-time record of business identity, contact identity, and bank account details."
 ---
 
-There are three core components to a verification:
-* The **business** details
-* The **contact person** authorised to act on behalf of the business
-* The **bank account** details
+A verification is the central ezyshield object. It records the details you asked ezyshield to verify, the contact identity flow selected for the individual, and the outcome of that verification.
 
-To begin a verification, use [Create a verification](/api-reference/verifications/create-a-verification).
+Create a verification when you need to establish whether a payee's details can be trusted. Keep the returned verification ID in your system.
 
-ezyshield's Verification Engine then performs a comprehensive series of checks in real-time to verify the integrity of the details provided.
+## What a verification contains
 
-## Statuses
+Every verification is built from three sets of details:
 
-A verification can be in one of the following statuses:
+- business identity, such as name and ABN
+- contact identity, such as the individual's legal name and mobile number
+- bank account details, such as account name, BSB, and account number
 
-| Status      | Description                                                                  |
-|-------------|------------------------------------------------------------------------------|
-|  🟡 `pending`  | The verification is in progress. **All verifications begin in this status.**     |
-|  🟢 `verified`  | ezyshield was able to verify the integrity of the details provided.          |
-|  🔴 `failed`   | ezyshield was unable to verify the integrity of the details provided.        |
-|  🔴 `rejected`  | The verification has been rejected by the contact person.                    |
-|  🔴 `error`     | The verification has encountered an unexpected error.                        |
-|  ⚪ `cancelled` | The verification has been cancelled by a newer verification.                 |
-|  ⚪ `expired`    | The verification has expired.                                                |
+The exact request fields live in [Create a verification](/api-reference/verifications/create-a-verification).
 
+## Lifecycle
 
-## Flow
+```mermaid
+flowchart TD
+    created["created"] --> pending["pending"]
+    pending --> contactFlow["Contact verification flow"]
+    contactFlow --> successful["successful"]
+    contactFlow --> rejected["rejected"]
+    contactFlow --> failed["failed"]
+    pending --> successful
+    created --> cancelled["cancelled"]
+    pending --> cancelled["cancelled"]
+    created --> expired["expired"]
+    pending --> expired["expired"]
+    created --> error["error"]
+    pending --> error
+    contactFlow --> error
+```
 
-<Steps>
-  <Step title="Create a verification">
-    Call [Create a verification](/api-reference/verifications/create-a-verification) with the business details, contact person information, and bank account details.
-    
-    The verification begins in `pending` status while ezyshield performs automated checks.
-  </Step>
+A verification starts in an in-progress state and eventually reaches a terminal outcome.
 
-  <Step title="Automated verification checks">
-    ezyshield's Verification Engine performs a comprehensive series of checks in real-time to verify the integrity of the details provided.
-    
-    This includes validating business registration, bank account ownership, and contact person details.
-  </Step>
+| Status | Meaning |
+| --- | --- |
+| `created` | The verification record has been created. |
+| `pending` | ezyshield is processing the verification or waiting on the contact flow. |
+| `successful` | The verification completed successfully. |
+| `rejected` | The contact rejected the verification. |
+| `failed` | ezyshield could not verify the supplied details. |
+| `cancelled` | The verification was cancelled or superseded. |
+| `expired` | The contact did not complete the flow in time. |
+| `error` | An unexpected error occurred. |
 
-  <Step title="Contact person verification">
-    Once automated checks complete, the contact person receives an SMS to their mobile number with instructions to complete identity verification.
-    
-    <Info>
-    The SMS is sent automatically by ezyshield. No action is required from your application.
-    </Info>
-  </Step>
+For the human step, see [Contact verification flow](/guides/contact-verification-flow). For webhook events, see [Receive completion events](/guides/webhooks).
 
-  <Step title="Biometric authentication">
-    The contact person completes biometric authentication to confirm their identity:
-  </Step>
+## Confirmation modes
 
-  <Step title="Listen for webhook">
-    ezyshield sends a [webhook](/next-steps/webhooks) when the verification completes.
-    
-    If the verification is successful, the verification will transition to the `verified` status. Otherwise, it will transition one of the remaining statuses.
+The `individual_confirmation_mode` controls how the contact identity step works:
 
-    See [Statuses](#statuses) for details on each status.
-  </Step>
-</Steps>
+- `kyc` asks the contact to complete the full ezyshield identity flow
+- `biometric` asks the contact to complete a face scan against an image you provide
+- `skip` omits the contact identity step
 
-## Attribution
+Most integrations should start with `kyc`. Compare the modes in [Choose a confirmation mode](/guides/confirmation-modes).
 
-Use attribution to link multiple verifications to the same record in your system (e.g., a payer or payee). This allows you to track verification history when details are updated.
+## Attribution and history
 
-Provide an `attribution_id` when creating a verification to group related verifications together.
+Use `attribution_id` to link verifications back to the same record in your system. For example, if your payee has ID `payee_123`, send that same value whenever you create a verification for that payee.
 
 <Tip>
-Retrieve all verifications for a specific record using the `attribution_id` parameter on [List all verifications](/api-reference/verifications/list-all-verifications).
+Verifications are point-in-time records. If details change, create another verification and reuse the same `attribution_id`.
 </Tip>
 
-**Example use case:** When a customer updates their bank account details, create a new verification with the same `attribution_id`. This creates a complete audit trail of all verification attempts for that customer.
+Read [Linked verifications with attribution_id](/guides/linked-verifications) for the recommended storage pattern.
 
-## Biometric authentication
+## Relationship to checks
 
-During the verification process, ezyshield will send a SMS message to the contact person's mobile number to verify their identity.
+A [check](/objects/check) compares current details against a verification fingerprint. Use checks later, before payment or after a detail change. Do not use a check as a substitute for onboarding verification.
 
-To verify the identity of the contact person, they must provide a government-issued ID image and then complete a face scan.
-
-For customers that have an existing KYC process, ezyshield allows an existing government-issued ID image to be provided with the `contact_identity_portrait` parameter. This prevents the need for the customer to upload a government-issued ID image, resulting in a faster verification process.
-
-Verifications linked by the same `attribution_id` will reuse the same government-issued ID image, when provided.
-
-## Fingerprint
-
-When a verification is initiated, ezyshield stores the business identity and payment details and provides a verification ID. This ID is designed to be stored in your system against a record.
-
-The verification ID can later be supplied to [Check a verification](/api-reference/checks/check-a-verification), which compares the current, supplied details against those stored by ezyshield.
-
-**Example use case:** Before processing a payment, check if saved details have been compromised in your system by comparing against the verification fingerprint.
+For the first integration path, start with [Create your first verification](/guides/first-verification).

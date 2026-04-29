@@ -1,28 +1,10 @@
 ---
 title: "Testing overview"
-description: "How non-production behavior differs from production, how to use test BSB codes and webhooks locally, and where to read rate limits."
+description: "This page has moved to Test your integration."
 ---
 
-## Non-production vs production
+Testing guidance now lives at [Test your integration](/guides/test-your-integration).
 
-Use staging or other non-production environments to integrate without touching real payees or live verification traffic. In non-production, [test BSB codes](/testing/test-bank-accounts) drive predictable bank-name and account outcomes so you can automate checks and verifications safely.
-
-Production uses live data sources and real contact flows. Treat API keys and webhooks as environment-specific: never share production keys with sandbox tools.
-
-## Test bank account data
-
-The [Test bank accounts](/testing/test-bank-accounts) page lists BSBs that simulate “no account,” “closed,” name mismatch, close match, and exact match. Use these whenever you need deterministic responses while building check and verification flows.
-
-Where ABA uploads parse per-line BSB and account numbers, the same test BSB semantics apply in non-production so batch flows stay testable.
-
-## Webhooks in development
-
-Point webhook subscriptions at a tunnel or dev gateway (for example ngrok, Cloudflare Tunnel, or a shared staging URL) so [webhook deliveries](/next-steps/webhooks) reach your machine. Verify your handler returns quickly and treats idempotency and retries like production.
-
-## Rate limits and list behavior
-
-Bulk or polling-heavy tests should respect [rate limiting](/api-reference/rate-limiting). For large result sets, use [pagination](/api-reference/pagination) and [filtering](/api-reference/filtering) as documented for each list endpoint.
-
-## Full integration path
-
-Follow the [API quickstart](/api-reference/quickstart) end-to-end in a non-production environment before going live.
+<Card title="Test your integration" icon="flask" href="/guides/test-your-integration">
+  Read the current integration testing guide.
+</Card>

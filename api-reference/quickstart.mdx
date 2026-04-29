@@ -1,58 +1,10 @@
 ---
 title: "Quickstart"
-description: "Create an organization account, issue an API key, and walk through your first verification, checks, and optional ABA upload."
+description: "This guide has moved to Create your first verification."
 ---
 
-## Overview
+The guided quickstart now lives in [Create your first verification](/guides/first-verification).
 
-Use this checklist in order. For background on each object, see the [core objects overview](/objects/introduction).
-
-<Steps titleSize="p">
-  <Step title="Create your account and organization">
-    Sign up and complete your organization in the ezyshield dashboard: [app.ezyshield.com.au](https://app.ezyshield.com.au).
-
-    All API keys, verifications, checks, webhooks, and [ABA checks](/guides/aba-checks) are scoped to that single [organization](/objects/organization).
-  </Step>
-
-  <Step title="Create an API key with the right abilities">
-    In the dashboard, create an API key with the abilities you need. Typical combinations:
-
-    - **Verify payee flow:** at least `verification:read`, `verification:write`, plus `check:read` / `check:write` if you will run [checks](/objects/check).
-    - **Webhooks:** `webhook_subscription:read`, `webhook_subscription:write` when managing subscriptions via API.
-    - **ABA batches:** `aba_check:read`, `aba_check:write` for [ABA check](/guides/aba-checks) endpoints.
-
-    To create additional keys programmatically after you have one, use [List all API keys](/api-reference/api-keys/list-all-api-keys) and [Create an API key](/api-reference/api-keys/create-an-api-key).
-
-    See [Authentication](/api-reference/authentication) for how to send the key.
-  </Step>
-
-  <Step title="Confirm the token with GET /organization">
-    Call [Get the current organization](/api-reference/organizations/get-the-current-organization) with a `Bearer` API key. A `200` response confirms the key is valid and shows your organization context.
-
-    ```bash
-    curl -sS 'https://api.ezyshield.com.au/organization' \
-      -H 'Accept: application/json' \
-      -H 'Authorization: Bearer YOUR_API_KEY'
-    ```
-
-    Use production base URL `https://api.ezyshield.com.au` (see [Introduction](/api-reference/introduction)).
-  </Step>
-
-  <Step title="Create a verification">
-    Read [Verification](/objects/verification), then call [Create a verification](/api-reference/verifications/create-a-verification) with business, contact, and bank account details. Verifications start in `pending` and may transition when checks and contact steps complete.
-  </Step>
-
-  <Step title="Run checks and listen for completion">
-    Use [Check a verification](/api-reference/checks/check-a-verification) to submit current details and compare them to the stored fingerprint. List history with [List all checks for a verification](/api-reference/checks/list-all-checks-for-a-verification) or fetch one via [Get a check for a verification](/api-reference/checks/get-a-check-for-a-verification).
-
-    Prefer asynchronous completion? Configure [Webhooks](/next-steps/webhooks) instead of polling.
-  </Step>
-
-  <Step title="Optional: upload an ABA file">
-    For bulk Australian ABA (direct entry) files, follow [ABA checks](/guides/aba-checks) and [Upload a single ABA file](/api-reference/aba-checks/upload-a-single-aba-file).
-  </Step>
-</Steps>
-
-### Reference-only topics
-
-- [Pagination](/api-reference/pagination), [filtering](/api-reference/filtering), and [rate limiting](/api-reference/rate-limiting) apply across list endpoints.
+<Card title="Create your first verification" icon="shield-check" href="/guides/first-verification">
+  Follow the current first-run integration guide.
+</Card>

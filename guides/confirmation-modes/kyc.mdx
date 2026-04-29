@@ -1,0 +1,49 @@
+---
+title: "KYC verification"
+description: "Use KYC when ezyshield should establish the contact's identity during verification."
+---
+
+`kyc` is the recommended default confirmation mode. It asks the contact to complete the identity step inside the ezyshield flow instead of assuming your system has already collected suitable identity evidence.
+
+## When to use it
+
+Use `kyc` when:
+
+- you are onboarding a payee for the first time
+- you do not already hold a suitable identity portrait for the contact
+- you want ezyshield to own the contact identity step
+- you want a straightforward first integration path
+
+## What happens
+
+<Steps>
+  <Step title="Create the verification with `individual_confirmation_mode: kyc`">
+    Include the contact's full legal name. If ezyshield should send the SMS, include the contact's Australian mobile number and set `send_individual_confirmation_sms` to `true`.
+  </Step>
+
+  <Step title="ezyshield sends or exposes the confirmation link">
+    If SMS sending is enabled, ezyshield sends the contact the link. Otherwise, your app receives `individual_confirmation_url` and is responsible for delivering it.
+  </Step>
+
+  <Step title="The contact completes the identity step">
+    The contact follows the ezyshield flow, provides identity details, and completes a face scan.
+  </Step>
+
+  <Step title="Your app receives the result">
+    Process webhook events and store the terminal verification status against your payee record.
+  </Step>
+</Steps>
+
+## Linked verifications
+
+Send `attribution_id` when the contact maps to a record in your system. On later verifications for the same `attribution_id`, ezyshield can use previous successful identity evidence to reduce friction when the details support it.
+
+<Note>
+The mobile number is part of the identity fingerprint used for successive `kyc` verifications linked by `attribution_id`. If the contact's mobile number changes, treat the next verification as a fresh identity step.
+</Note>
+
+## What not to send
+
+Do not send `individual_portrait_image` with `kyc`. That field belongs to the [`biometric`](/guides/confirmation-modes/biometric) path.
+
+For exact request fields, see [Create a verification](/api-reference/verifications/create-a-verification).

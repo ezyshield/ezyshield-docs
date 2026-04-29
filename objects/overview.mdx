@@ -1,0 +1,34 @@
+---
+title: "How ezyshield works"
+description: "Organizations, verifications, checks, webhooks, and ABA checks."
+---
+
+Most integrations start with a verification. Checks, webhooks, and ABA checks build around that record.
+
+<CardGroup cols={2}>
+  <Card title="Organization" icon="building" href="/objects/organization">
+    The tenant boundary for API keys, verifications, checks, webhooks, and ABA checks.
+  </Card>
+
+  <Card title="Verification" icon="shield-check" href="/objects/verification">
+    A point-in-time record of business identity, contact identity, and bank account details.
+  </Card>
+
+  <Card title="Check" icon="magnifying-glass" href="/objects/check">
+    A later comparison against a verification fingerprint.
+  </Card>
+
+  <Card title="Webhooks" icon="webhook" href="/objects/webhooks">
+    Subscriptions and events that tell your app when verification outcomes change.
+  </Card>
+
+  <Card title="ABA check" icon="file-lines" href="/objects/aba-check">
+    A payment file review that compares ABA entries against existing verifications.
+  </Card>
+</CardGroup>
+
+## The usual sequence
+
+First, create a verification for the payee you want to trust. Then receive the completion result through a webhook. Store the verification ID against your own record. Later, run checks before payment or when saved details change.
+
+ABA file checks build on the same idea at file level: upload an ABA file, match its entries to existing successful verifications, and download a regenerated file containing matched entries.

@@ -1,30 +1,38 @@
 ---
 title: "Organization"
-description: "Your account as an ezyshield customer—the tenant boundary that owns API keys, verifications, checks, webhooks, and ABA checks."
+description: "The tenant boundary for API keys, verifications, checks, webhooks, and ABA file checks."
 ---
 
-Your **organization** is the top-level customer boundary in ezyshield. Every resource you access through the API belongs to exactly one organization.
+An organization is your ezyshield account boundary. API keys, verifications, checks, webhook subscriptions, webhook events, and ABA checks all belong to one organization.
 
-## Tenant boundary
+The API key in the `Authorization` header identifies both the key and its organization. You cannot use that key to access another organization's resources.
 
-Under a single organization you have:
+## What belongs to an organization
 
-- [API keys](/api-reference/api-keys/list-all-api-keys) used for [authentication](/api-reference/authentication)
-- [Verifications](/api-reference/verifications/list-all-verifications) and their [checks](/api-reference/checks/list-all-checks-for-a-verification)
-- Webhook subscriptions (see [Webhooks](/next-steps/webhooks))
-- [ABA checks](/guides/aba-checks)
+<CardGroup cols={2}>
+  <Card title="API keys" icon="key" href="/api-reference/authentication">
+    Keys authenticate requests and define which abilities the caller has.
+  </Card>
 
-The `Authorization: Bearer` token identifies both the key and its organization. You cannot access another organization’s resources with that token; you receive `403` if you try.
+  <Card title="Verifications" icon="shield-check" href="/objects/verification">
+    Point-in-time records created when ezyshield verifies details for a payee.
+  </Card>
 
-## Dashboard vs API
+  <Card title="Checks" icon="magnifying-glass" href="/objects/check">
+    Later comparisons against successful verification fingerprints.
+  </Card>
 
-Use [app.ezyshield.com.au](https://app.ezyshield.com.au) for onboarding, team access, and managing API keys interactively. Use the API for automation, integrations, and high-volume workflows. Both operate on the same organization.
+  <Card title="Webhooks" icon="webhook" href="/objects/webhooks">
+    Subscriptions and delivery events for verification updates.
+  </Card>
+</CardGroup>
 
-## Sanity check: GET /organization
+## Dashboard and API
 
-Call [Get the current organization](/api-reference/organizations/get-the-current-organization) after you create a key. A successful response confirms:
+Use the Dashboard for account setup, team access, and interactive API-key management. Use the API for integrations and automated workflows. Both operate on the same organization.
 
-- The API key is valid (`401` if not)
-- You are operating in the expected organization (`data` payload)
+## First API test
 
-This is the first step in the [API quickstart](/api-reference/quickstart).
+After creating an API key, call [Get the current organization](/api-reference/organizations/get-the-current-organization). A successful response confirms the key is valid and attached to the organization you expect.
+
+This is the first API call in [Create your first verification](/guides/first-verification) because it tests authentication without creating a verification or starting a contact flow.

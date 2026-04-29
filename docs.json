@@ -11,40 +11,41 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
-        "groups": [
+        "tab": "Guides",
+        "pages": [
+          "index",
           {
-            "group": "Getting started",
+            "group": "Guides",
             "pages": [
-              "index"
+              "objects/overview",
+              "guides/first-verification",
+              "guides/contact-verification-flow",
+              "guides/confirmation-modes",
+              "guides/confirmation-modes/kyc",
+              "guides/confirmation-modes/biometric",
+              "guides/confirmation-modes/skip",
+              "guides/webhooks",
+              "guides/checks-before-payment",
+              "guides/linked-verifications",
+              "guides/test-your-integration",
+              "guides/go-live"
             ]
           },
           {
             "group": "Objects",
             "pages": [
-              "objects/introduction",
               "objects/organization",
               "objects/verification",
-              "objects/check"
+              "objects/check",
+              "objects/webhooks",
+              "objects/aba-check"
             ]
           },
           {
-            "group": "Batch payments",
+            "group": "Advanced guides",
             "pages": [
-              "guides/aba-checks"
-            ]
-          },
-          {
-            "group": "Testing",
-            "pages": [
-              "testing/overview",
-              "testing/test-bank-accounts"
-            ]
-          },
-          {
-            "group": "Next steps",
-            "pages": [
-              "next-steps/webhooks"
+              "testing/test-bank-accounts",
+              "guides/aba-file-checks"
             ]
           }
         ]
@@ -55,12 +56,12 @@
           {
             "group": "Overview",
             "pages": [
-              "api-reference/introduction",
-              "api-reference/quickstart",
+              "api-reference/using-the-api",
               "api-reference/authentication",
-              "api-reference/rate-limiting",
+              "api-reference/errors",
               "api-reference/pagination",
-              "api-reference/filtering"
+              "api-reference/filtering-and-sorting",
+              "api-reference/rate-limiting"
             ]
           },
           {
