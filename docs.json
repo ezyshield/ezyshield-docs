@@ -58,6 +58,7 @@
             "pages": [
               "api-reference/using-the-api",
               "api-reference/authentication",
+              "api-reference/sandbox",
               "api-reference/errors",
               "api-reference/pagination",
               "api-reference/filtering-and-sorting",
