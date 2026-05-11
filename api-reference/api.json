@@ -6,7 +6,12 @@
     },
     "servers": [
         {
-            "url": "https://app.local-vj8qtz.ezyshield.com.au/api"
+            "url": "https://app.ezyshield.com.au/api",
+            "description": "Production"
+        },
+        {
+            "url": "https://sandbox.ezyshield.com.au/api",
+            "description": "Sandbox"
         }
     ],
     "tags": [
@@ -82,6 +87,40 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/organization/reset": {
+            "post": {
+                "operationId": "organization.reset",
+                "description": "Deletes sandbox account data and revokes every API key for the organization,\nincluding the key used for this request. Clears WorkOS invitations and\nmemberships, disconnects accounting providers where supported, and preserves\nlocal users and billing usage.\nRequires the `verification:write` ability.",
+                "summary": "Reset the current sandbox organization",
+                "tags": [
+                    "Organizations"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "minItems": 0,
+                                    "maxItems": 0,
+                                    "additionalItems": false
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
                     },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
