@@ -90,8 +90,8 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.ezyshield.com.au"
+      "label": "Sandbox",
+      "href": "https://sandbox.ezyshield.com.au"
     }
   },
   "contextual": {
