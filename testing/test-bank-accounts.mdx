@@ -23,8 +23,14 @@ During a verification, the match name returned by the bank is used to correlate 
 | Any other valid 6-digit BSB | Match | `account_name` |
 
 <Note>
-**Testing close matches (`111111`)** — Use BSB `111111` when you want the simulated bank to return the full registered name (`business_name` or `individual_name`) while the account name you supply is shorter or abbreviated, so you can verify that your matching rules accept that outcome. 
+**Testing close matches** — Use BSB `111111` to test close match scenarios. This will simulate the bank returning the supplied `business_name` (or `individual_name` for individual verifications) as the verified name on the account.
 
-- **Business (example):** Registered business name **ACME PTY LTD**, account name **ACME**, simulated match name **ACME PTY LTD**.
-- **Individual (example):** Registered individual name **John Doe**, account name **J Doe**, simulated match name **John Doe**.
+- **Business (example):**
+    - Registered business name: **ACME PTY LTD**
+    - Provided account name: **ACME**
+    - Simulated close match name: **ACME PTY LTD**
+- **Individual (example):**
+    - Registered individual name: **John Doe**
+    - Provided account name: **J Doe**
+    - Simulated close match name: **John Doe**
 </Note>
