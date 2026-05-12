@@ -25,15 +25,13 @@ Test the full verification path before using production data. Your test should c
   </Step>
 
   <Step title="Test the unhappy paths">
-    Use test BSBs to simulate missing accounts, closed accounts, mismatches, close matches, and exact matches.
+    Use test BSBs to simulate missing accounts, closed accounts, mismatches, close matches, confirmation errors, and exact matches.
   </Step>
 </Steps>
 
 ## Test BSBs
 
-Use [Test bank accounts](/testing/test-bank-accounts) for deterministic bank-account outcomes in the sandbox environment.
-
-The same test BSB behavior applies when ABA files are parsed in the sandbox environment, so you can test [ABA file checks](/guides/aba-file-checks) without using real banking data.
+Use [Test bank accounts](/testing/test-bank-accounts) for deterministic outcomes in **sandbox**.
 
 ## Webhooks locally
 
