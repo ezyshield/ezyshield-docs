@@ -1,0 +1,27 @@
+---
+title: "Changelog"
+description: "See the latest ezyshield updates, improvements, and platform changes."
+rss: true
+---
+
+<Update label="May 20, 2026" tags={["Breaking Change"]}>
+  ## Renamed Verification `checks` to `check_results` <Badge color="red">Breaking Change</Badge>
+
+  The `checks` attribute on the [Verification](/api-reference/verifications) object has been renamed to `check_results` to reduce naming ambiguity between automated check logs and user-initiated [Check](/api-reference/checks) objects.
+
+  ### Concept Clarification
+  - `verification.check_results` is a historical record of the automated background checks run by the system during the initial verification process.
+  - The [Check](/api-reference/checks) object represents a separate, ongoing monitoring check that you trigger after completion to ensure details haven't maliciously diverged.
+
+  <Note>
+    Make sure to update references from `checks` to `check_results`.
+  </Note>
+</Update>
+
+<Update label="May 14, 2026" tags={["Feature"]}>
+  ## Customize confirmation flow branding
+
+  Upload your organization's logo in settings to align confirmation screens and portal pages with your company's branding. 
+
+  Featuring your brand identity during verification checks increases payee completion rates and establishes immediate trust, while maintaining a clean "Powered by ezyshield" footer.
+</Update>
