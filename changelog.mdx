@@ -4,6 +4,14 @@ description: "See the latest ezyshield updates, improvements, and platform chang
 rss: true
 ---
 
+<Update label="May 26, 2026" tags={["Feature"]}>
+  ## Account-only verifications (Confirmation of Payee)
+
+  Create [verifications](/api-reference/verifications) with only bank account details when business or individual identity verification and correlation is not required.
+
+  This gives API integrations a lighter Confirmation of Payee path for checking an account name, BSB, and account number, while keeping business and individual verification flows available when stronger payee correlation is needed.
+</Update>
+
 <Update label="May 20, 2026" tags={["Breaking Change"]}>
   ## Renamed Verification `checks` to `check_results` <Badge color="red">Breaking Change</Badge>
 
