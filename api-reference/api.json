@@ -3745,7 +3745,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Business name. Required when individual_name is omitted. One of individual or business must be present.",
+                        "description": "Business name. When present, business_abn is required and business checks are run.",
                         "maxLength": 255
                     },
                     "business_abn": {
@@ -3773,7 +3773,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Individual's full legal name. Required when business_name is omitted. One of individual or business must be present.\nMust include a space between first name(s) and last name (e.g., \"John Michael Doe\").",
+                        "description": "Individual's full legal name. When present, individual confirmation mode is required and individual checks are run.\nMust include a space between first name(s) and last name (e.g., \"John Michael Doe\").",
                         "pattern": "^[^\\s]+\\s+[^\\s]+",
                         "maxLength": 255
                     },
