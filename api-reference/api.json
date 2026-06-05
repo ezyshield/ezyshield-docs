@@ -2251,7 +2251,7 @@
         "/aba-checks/{aba_check}/regenerate": {
             "get": {
                 "operationId": "aba-checks.regenerate",
-                "description": "The file will contain only entries matched to verifications. The total debit amount will be updated to the sum of the matched entries.\n\nRequires the `aba_check:read` ability.",
+                "description": "The file will contain only entries matched to verifications. When the original file has a balancing debit record, its amount will be updated to the sum of the matched entries.\n\nRequires the `aba_check:read` ability.",
                 "summary": "Download a regenerated ABA file",
                 "tags": [
                     "ABA checks"
