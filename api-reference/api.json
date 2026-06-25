@@ -789,13 +789,6 @@
                                 "type": "string",
                                 "enum": [
                                     "status",
-                                    "business_name",
-                                    "business_abn",
-                                    "account_name",
-                                    "account_bsb",
-                                    "account_number",
-                                    "individual_name",
-                                    "individual_mobile",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
                                     "accept_close_match",
@@ -803,8 +796,6 @@
                                     "individual_confirmation_url",
                                     "failure_reason",
                                     "check_results",
-                                    "resolved_individual_name",
-                                    "resolved_business_entity_name",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -1024,13 +1015,6 @@
                                 "type": "string",
                                 "enum": [
                                     "status",
-                                    "business_name",
-                                    "business_abn",
-                                    "account_name",
-                                    "account_bsb",
-                                    "account_number",
-                                    "individual_name",
-                                    "individual_mobile",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
                                     "accept_close_match",
@@ -1038,8 +1022,6 @@
                                     "individual_confirmation_url",
                                     "failure_reason",
                                     "check_results",
-                                    "resolved_individual_name",
-                                    "resolved_business_entity_name",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -1116,13 +1098,6 @@
                                 "type": "string",
                                 "enum": [
                                     "status",
-                                    "business_name",
-                                    "business_abn",
-                                    "account_name",
-                                    "account_bsb",
-                                    "account_number",
-                                    "individual_name",
-                                    "individual_mobile",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
                                     "accept_close_match",
@@ -1130,8 +1105,6 @@
                                     "individual_confirmation_url",
                                     "failure_reason",
                                     "check_results",
-                                    "resolved_individual_name",
-                                    "resolved_business_entity_name",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -1198,13 +1171,6 @@
                                 "type": "string",
                                 "enum": [
                                     "status",
-                                    "business_name",
-                                    "business_abn",
-                                    "account_name",
-                                    "account_bsb",
-                                    "account_number",
-                                    "individual_name",
-                                    "individual_mobile",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
                                     "accept_close_match",
@@ -1212,8 +1178,6 @@
                                     "individual_confirmation_url",
                                     "failure_reason",
                                     "check_results",
-                                    "resolved_individual_name",
-                                    "resolved_business_entity_name",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -1721,13 +1685,6 @@
                                 "type": "string",
                                 "enum": [
                                     "status",
-                                    "business_name",
-                                    "business_abn",
-                                    "account_name",
-                                    "account_bsb",
-                                    "account_number",
-                                    "individual_name",
-                                    "individual_mobile",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
                                     "accept_close_match",
@@ -1735,8 +1692,6 @@
                                     "individual_confirmation_url",
                                     "failure_reason",
                                     "check_results",
-                                    "resolved_individual_name",
-                                    "resolved_business_entity_name",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -2024,13 +1979,6 @@
                                 "type": "string",
                                 "enum": [
                                     "status",
-                                    "business_name",
-                                    "business_abn",
-                                    "account_name",
-                                    "account_bsb",
-                                    "account_number",
-                                    "individual_name",
-                                    "individual_mobile",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
                                     "accept_close_match",
@@ -2038,8 +1986,6 @@
                                     "individual_confirmation_url",
                                     "failure_reason",
                                     "check_results",
-                                    "resolved_individual_name",
-                                    "resolved_business_entity_name",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -2183,13 +2129,6 @@
                                 "type": "string",
                                 "enum": [
                                     "status",
-                                    "business_name",
-                                    "business_abn",
-                                    "account_name",
-                                    "account_bsb",
-                                    "account_number",
-                                    "individual_name",
-                                    "individual_mobile",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
                                     "accept_close_match",
@@ -2197,8 +2136,6 @@
                                     "individual_confirmation_url",
                                     "failure_reason",
                                     "check_results",
-                                    "resolved_individual_name",
-                                    "resolved_business_entity_name",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -3938,34 +3875,6 @@
                                 "type": "string",
                                 "description": "Current status of the verification."
                             },
-                            "business_name": {
-                                "type": "string",
-                                "description": "Business name."
-                            },
-                            "business_abn": {
-                                "type": "string",
-                                "description": "Australian Business Number (ABN)."
-                            },
-                            "account_name": {
-                                "type": "string",
-                                "description": "Bank account name."
-                            },
-                            "account_bsb": {
-                                "type": "string",
-                                "description": "Bank State Branch (BSB) code."
-                            },
-                            "account_number": {
-                                "type": "string",
-                                "description": "Bank account number."
-                            },
-                            "individual_name": {
-                                "type": "string",
-                                "description": "Individual's full legal name."
-                            },
-                            "individual_mobile": {
-                                "type": "string",
-                                "description": "Individual's Australian mobile number."
-                            },
                             "individual_confirmation_mode": {
                                 "type": "string",
                                 "description": "Verification mode for the individual."
@@ -4002,14 +3911,6 @@
                                         "type": "string"
                                     }
                                 }
-                            },
-                            "resolved_individual_name": {
-                                "type": "string",
-                                "description": "The resolved individual name returned by the bank."
-                            },
-                            "resolved_business_entity_name": {
-                                "type": "string",
-                                "description": "The resolved business entity name returned by the ABN lookup."
                             },
                             "created_at": {
                                 "type": "string",

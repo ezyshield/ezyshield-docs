@@ -4,6 +4,26 @@ description: "See the latest ezyshield updates, improvements, and platform chang
 rss: true
 ---
 
+<Update label="June 25, 2026" tags={["Breaking Change"]}>
+  ## Payee details removed from Verification responses and webhooks <Badge color="red">Breaking Change</Badge>
+
+  The list and get [Verification](/api-reference/verifications) endpoints, and verification webhooks, no longer return the submitted and resolved payee details: `business_name`, `business_abn`, `account_name`, `account_bsb`, `account_number`, `individual_name`, `individual_mobile`, `resolved_individual_name`, and `resolved_business_entity_name`. Verification responses now carry only the verification `status`, `check_results`, and related metadata.
+
+  Following data-minimisation best practice, sensitive payee details are no longer included in routine verification reads or persisted in webhook history, reducing where this information is stored and the surface area exposed if an API key or webhook endpoint is ever compromised.
+
+  <Note>
+    Update any integration that reads these fields from verification responses or webhook payloads.
+  </Note>
+
+  ## Verification webhooks now mirror the API object <Badge color="red">Breaking Change</Badge>
+
+  The `data` field on verification webhooks now contains the same object the API returns — with `id`, `type`, and an `attributes` map — instead of a flat list of attributes. Webhook payloads and API responses now share one consistent shape.
+
+  <Note>
+    Update webhook handlers to read verification fields from `data.attributes` rather than directly from `data`.
+  </Note>
+</Update>
+
 <Update label="June 24, 2026" tags={["Feature"]}>
   ## Import your contacts in bulk
 
