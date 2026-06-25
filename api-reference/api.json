@@ -791,6 +791,7 @@
                                     "status",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
+                                    "send_individual_confirmation_email",
                                     "accept_close_match",
                                     "attribution_id",
                                     "individual_confirmation_url",
@@ -1017,6 +1018,7 @@
                                     "status",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
+                                    "send_individual_confirmation_email",
                                     "accept_close_match",
                                     "attribution_id",
                                     "individual_confirmation_url",
@@ -1100,6 +1102,7 @@
                                     "status",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
+                                    "send_individual_confirmation_email",
                                     "accept_close_match",
                                     "attribution_id",
                                     "individual_confirmation_url",
@@ -1173,6 +1176,7 @@
                                     "status",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
+                                    "send_individual_confirmation_email",
                                     "accept_close_match",
                                     "attribution_id",
                                     "individual_confirmation_url",
@@ -1687,6 +1691,7 @@
                                     "status",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
+                                    "send_individual_confirmation_email",
                                     "accept_close_match",
                                     "attribution_id",
                                     "individual_confirmation_url",
@@ -1981,6 +1986,7 @@
                                     "status",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
+                                    "send_individual_confirmation_email",
                                     "accept_close_match",
                                     "attribution_id",
                                     "individual_confirmation_url",
@@ -2131,6 +2137,7 @@
                                     "status",
                                     "individual_confirmation_mode",
                                     "send_individual_confirmation_sms",
+                                    "send_individual_confirmation_email",
                                     "accept_close_match",
                                     "attribution_id",
                                     "individual_confirmation_url",
@@ -3665,6 +3672,14 @@
                             "null"
                         ],
                         "description": "Individual's Australian mobile number."
+                    },
+                    "individual_email": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "email",
+                        "description": "Individual's email address."
                     }
                 },
                 "required": [
@@ -3721,13 +3736,25 @@
                         ],
                         "description": "Individual's Australian mobile number. Required when `send_individual_confirmation_sms` is true.\n\nThe mobile number is also used for the individual's identity fingerprint. When successive verifications are requested via a common `attribution_id` and the `individual_confirmation_mode` is `kyc`, the mobile number is used to identify the individual. When the details have not changed, we fallback to biometric authentication for less friction, using the identification the individual provided in the last successful verification."
                     },
+                    "individual_email": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "email",
+                        "description": "Individual's email address."
+                    },
                     "individual_confirmation_mode": {
                         "description": "Verification mode for the individual.\n- `kyc`: Run full KYC to establish identity (biometric authentication on subsequent verifications).\n- `biometric`: Biometric authentication with client-provided portrait image.\n- `skip`: Skip individual verification entirely. Required when individual_name is present. Must be omitted when individual_name is omitted.",
                         "$ref": "#/components/schemas/IndividualConfirmationMode"
                     },
                     "send_individual_confirmation_sms": {
                         "type": "boolean",
-                        "description": "Whether to send the confirmation link to the individual via SMS. When false, the confirmation URL is returned in the API response for the caller to deliver.\nMust be omitted when `individual_confirmation_mode` is `skip` or when individual_name is omitted."
+                        "description": "Whether to send the confirmation link to the individual via SMS. KYC and biometric verifications require at least one confirmation delivery channel.\nMust be omitted when `individual_confirmation_mode` is `skip` or when individual_name is omitted."
+                    },
+                    "send_individual_confirmation_email": {
+                        "type": "boolean",
+                        "description": "Whether to send the confirmation link to the individual via email. KYC and biometric verifications require at least one confirmation delivery channel.\nMust be omitted when `individual_confirmation_mode` is `skip` or when individual_name is omitted."
                     },
                     "individual_portrait_image": {
                         "type": "string",
@@ -3882,6 +3909,10 @@
                             "send_individual_confirmation_sms": {
                                 "type": "string",
                                 "description": "Whether confirmation SMS is sent to the individual."
+                            },
+                            "send_individual_confirmation_email": {
+                                "type": "string",
+                                "description": "Whether confirmation email is sent to the individual."
                             },
                             "accept_close_match": {
                                 "type": "string",
