@@ -4,6 +4,64 @@ description: "See the latest ezyshield updates, improvements, and platform chang
 rss: true
 ---
 
+<Update label="July 6, 2026" tags={["Breaking Change"]}>
+  ## Verification delivery parameters renamed to `send_individual_authentication_*` <Badge color="red">Breaking Change</Badge>
+
+  The `send_individual_confirmation_sms` and `send_individual_confirmation_email` parameters on the [Verification](/api-reference/verifications) API have been renamed to `send_individual_authentication_sms` and `send_individual_authentication_email`, matching the identity authentication step the contact person completes. Verification responses use the new names too, and the `individual_confirmation_url` response attribute is now `individual_authentication_url`.
+
+  <Note>
+    Update integrations to send and read the `send_individual_authentication_sms`, `send_individual_authentication_email`, and `individual_authentication_url` attributes.
+  </Note>
+
+  ## Webhook event `verification.confirmation_notification_sent` renamed <Badge color="red">Breaking Change</Badge>
+
+  The `verification.confirmation_notification_sent` webhook event has been renamed to `verification.authentication_link_sent`, matching the identity authentication link it reports on. The event payload is unchanged.
+
+  <Note>
+    Update any webhook handlers filtering on `verification.confirmation_notification_sent` to listen for `verification.authentication_link_sent`.
+  </Note>
+
+  ## Rejected verification status removed <Badge color="red">Breaking Change</Badge>
+
+  The `rejected` verification status and the `verification.rejected` webhook event have been removed. The status belonged to a retired flow in which the contact person could decline the payment details; no verification could reach it any longer. Verifications that cannot be verified always finish as `failed`.
+
+  <Note>
+    Remove any handling of the `rejected` status or the `verification.rejected` webhook event; failed outcomes are delivered via `verification.failed`.
+  </Note>
+</Update>
+
+<Update label="July 3, 2026" tags={["Breaking Change", "Feature"]}>
+  ## Verification requests use a `verify_identity` boolean <Badge color="red">Breaking Change</Badge>
+
+  The `individual_confirmation_mode` parameter on the [Verification](/api-reference/verifications) API has been replaced by a single `verify_identity` boolean. Set it to `true` to have the contact person verify their identity with a government-issued ID, or `false` to run sanctions screening only. The `individual_portrait_image` parameter and the biometric authentication mode have been removed, and verification responses no longer include `individual_confirmation_mode`.
+
+  <Note>
+    Update integrations to send `verify_identity` alongside `individual_name`. Requests that still send `individual_confirmation_mode` or `individual_portrait_image` are rejected with a validation error.
+  </Note>
+
+  ## Verified identities are reused automatically
+
+  When a contact person has already verified their identity for the same contact (or `attribution_id` chain) and their details are unchanged, requesting a new verification no longer messages them again. The earlier identity verification is reused and the verification completes immediately — sanctions screening and payee correlation still run in full every time. Payees are no longer asked to re-verify details that haven't changed, and repeat verifications finish without waiting on the payee.
+</Update>
+
+<Update label="June 30, 2026" tags={["Breaking Change"]}>
+  ## Identity verification page moved to `/authenticate` <Badge color="red">Breaking Change</Badge>
+
+  The page payees use to verify their identity has moved from `/confirm/{code}` to `/authenticate/{code}`. Verification links sent by SMS and email now point to the new address, and any existing `/confirm/{code}` link is permanently redirected (301) to the new path — so links already delivered to payees keep working without interruption.
+
+  <Note>
+    Update any hardcoded references to the `/confirm/{code}` path to use `/authenticate/{code}`.
+  </Note>
+
+  ## Webhook event `verification.confirmation_ready` renamed <Badge color="red">Breaking Change</Badge>
+
+  The `verification.confirmation_ready` webhook event has been renamed to `verification.authentication_ready`, reflecting that the payee completes an identity authentication step. The event payload is unchanged.
+
+  <Note>
+    Update any webhook handlers filtering on `verification.confirmation_ready` to listen for `verification.authentication_ready`.
+  </Note>
+</Update>
+
 <Update label="June 24, 2026" tags={["Feature"]}>
   ## Import your contacts in bulk
 
