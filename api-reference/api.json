@@ -2795,6 +2795,111 @@
                 }
             }
         },
+        "/webhook-subscriptions/{webhook_subscription}/test": {
+            "post": {
+                "operationId": "webhook-subscriptions.test",
+                "description": "Requires the `webhook_subscription:write` ability.",
+                "summary": "Send a test event to a webhook subscription",
+                "tags": [
+                    "Webhook Subscriptions"
+                ],
+                "parameters": [
+                    {
+                        "name": "webhook_subscription",
+                        "in": "path",
+                        "required": true,
+                        "description": "The webhook subscription ID. Example: `wh_sub_01jz8v2q4x...`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "attempts"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[webhook-events]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "type",
+                                    "webhook_url",
+                                    "payload",
+                                    "created_at",
+                                    "attempts_count",
+                                    "last_attempted_at",
+                                    "last_response_status_code"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "fields[webhook-event-attempts]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "status",
+                                    "attempt",
+                                    "created_at",
+                                    "response_status_code"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "`WebhookEventResource`",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/WebhookEventResource"
+                                        },
+                                        "included": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/WebhookEventAttemptResource"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/AuthorizationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
         "/webhook-subscriptions/{webhook_subscription}/webhook-events": {
             "get": {
                 "operationId": "webhook-subscriptions.webhook-events.index",
@@ -4109,7 +4214,8 @@
                     "verification.expired",
                     "verification.error",
                     "verification.authentication_ready",
-                    "verification.authentication_link_sent"
+                    "verification.authentication_link_sent",
+                    "webhook.test"
                 ],
                 "title": "WebhookEventType"
             },
