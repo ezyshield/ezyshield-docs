@@ -4,12 +4,22 @@ description: "See the latest ezyshield updates, improvements, and platform chang
 rss: true
 ---
 
-<Update label="July 14, 2026" tags={["Feature"]}>
+<Update label="July 16, 2026" tags={["Bug"]}>
+  ## Verification status displays correctly after reverting contacts to verified
+
+Verification status now displays the correct check marks in the portal when contacts are reverted to verified status, instead of incorrectly showing cancelled verification attempt indicators.
+</Update>
+
+<Update label="July 14, 2026" tags={["Feature", "Improvement"]}>
   ## Manage webhook subscriptions in the portal
 
   API administrators can now create and manage webhook endpoints, choose which verification events each endpoint receives, copy signing secrets when subscriptions are created, and send test events directly from the portal.
 
   Webhook event pages show payloads, HTTP response statuses, delivery attempts, queued retries, and terminal failures, making it easier to validate and troubleshoot integrations without leaving the portal.
+
+  ## Authorise individual email addresses
+
+  Organization settings now accept individual email addresses alongside authorised email domains. Emails from an authorised address are processed automatically even when the rest of its domain is not trusted — useful for accepting invoices from a specific contact at a shared provider such as Gmail without opening the door to the entire domain.
 </Update>
 
 <Update label="July 6, 2026" tags={["Breaking Change"]}>
