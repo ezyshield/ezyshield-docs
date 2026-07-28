@@ -4,6 +4,16 @@ description: "See the latest ezyshield updates, improvements, and platform chang
 rss: true
 ---
 
+<Update label="July 23, 2026" tags={["Feature"]}>
+  ## Upload invoices through the API
+
+  Supplier invoices can now be uploaded through the new [Invoice](/api-reference/invoices) endpoints. ezyshield reads each uploaded file and extracts the supplier's business identity, bank account details, and invoice number — removing manual data entry from the path between receiving an invoice and verifying who gets paid.
+
+  Progress is delivered over the new `invoice.reading`, `invoice.processed`, `invoice.failed`, and `invoice.invalid` webhook events, and the new `invoice:read` and `invoice:write` API key abilities scope access. Invoices uploaded through the API never create or update contacts, so the extracted details stay under your integration's control.
+
+  See the [Invoice extraction](/guides/invoice-extraction) guide for the recommended upload-extract-verify workflow.
+</Update>
+
 <Update label="July 16, 2026" tags={["Bug"]}>
   ## Verification status displays correctly after reverting contacts to verified
 
