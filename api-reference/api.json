@@ -794,7 +794,6 @@
                                     "status",
                                     "send_individual_authentication_sms",
                                     "send_individual_authentication_email",
-                                    "accept_close_match",
                                     "attribution_id",
                                     "individual_authentication_url",
                                     "failure_reason",
@@ -1020,7 +1019,6 @@
                                     "status",
                                     "send_individual_authentication_sms",
                                     "send_individual_authentication_email",
-                                    "accept_close_match",
                                     "attribution_id",
                                     "individual_authentication_url",
                                     "failure_reason",
@@ -1102,7 +1100,6 @@
                                     "status",
                                     "send_individual_authentication_sms",
                                     "send_individual_authentication_email",
-                                    "accept_close_match",
                                     "attribution_id",
                                     "individual_authentication_url",
                                     "failure_reason",
@@ -1175,7 +1172,6 @@
                                     "status",
                                     "send_individual_authentication_sms",
                                     "send_individual_authentication_email",
-                                    "accept_close_match",
                                     "attribution_id",
                                     "individual_authentication_url",
                                     "failure_reason",
@@ -1689,7 +1685,6 @@
                                     "status",
                                     "send_individual_authentication_sms",
                                     "send_individual_authentication_email",
-                                    "accept_close_match",
                                     "attribution_id",
                                     "individual_authentication_url",
                                     "failure_reason",
@@ -1983,7 +1978,6 @@
                                     "status",
                                     "send_individual_authentication_sms",
                                     "send_individual_authentication_email",
-                                    "accept_close_match",
                                     "attribution_id",
                                     "individual_authentication_url",
                                     "failure_reason",
@@ -2133,7 +2127,6 @@
                                     "status",
                                     "send_individual_authentication_sms",
                                     "send_individual_authentication_email",
-                                    "accept_close_match",
                                     "attribution_id",
                                     "individual_authentication_url",
                                     "failure_reason",
@@ -4494,10 +4487,6 @@
                             "send_individual_authentication_email": {
                                 "type": "string",
                                 "description": "Whether the identity authentication email is sent to the individual."
-                            },
-                            "accept_close_match": {
-                                "type": "string",
-                                "description": "Whether a close match on a resolved name (not just an exact match) can still pass."
                             },
                             "attribution_id": {
                                 "type": "string",
