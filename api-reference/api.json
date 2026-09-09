@@ -116,8 +116,7 @@
                                         "type": "string"
                                     },
                                     "minItems": 0,
-                                    "maxItems": 0,
-                                    "additionalItems": false
+                                    "maxItems": 0
                                 }
                             }
                         }
@@ -141,15 +140,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Available sorts are `created_at`, `last_used_at`, `expires_at`, `name`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
-                        "schema": {
-                            "type": "string",
-                            "default": "-created_at"
-                        }
-                    },
-                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -165,20 +155,6 @@
                         "schema": {
                             "type": "integer"
                         }
-                    },
-                    {
-                        "name": "include",
-                        "in": "query",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "enum": [
-                                    "creator"
-                                ]
-                            }
-                        },
-                        "explode": false
                     },
                     {
                         "name": "fields[api-keys]",
@@ -226,6 +202,46 @@
                                 "Production key"
                             ]
                         }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "default": [
+                                "-created_at"
+                            ],
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "created_at",
+                                    "-created_at",
+                                    "last_used_at",
+                                    "-last_used_at",
+                                    "expires_at",
+                                    "-expires_at",
+                                    "name",
+                                    "-name"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "creator",
+                                    "creatorCount",
+                                    "creatorExists"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -507,20 +523,6 @@
                         }
                     },
                     {
-                        "name": "include",
-                        "in": "query",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "enum": [
-                                    "creator"
-                                ]
-                            }
-                        },
-                        "explode": false
-                    },
-                    {
                         "name": "fields[api-keys]",
                         "in": "query",
                         "schema": {
@@ -551,6 +553,22 @@
                                     "email",
                                     "created_at",
                                     "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "creator",
+                                    "creatorCount",
+                                    "creatorExists"
                                 ]
                             }
                         },
@@ -733,8 +751,7 @@
                                         "type": "string"
                                     },
                                     "minItems": 0,
-                                    "maxItems": 0,
-                                    "additionalItems": false
+                                    "maxItems": 0
                                 }
                             }
                         }
@@ -757,15 +774,6 @@
                     "Verifications"
                 ],
                 "parameters": [
-                    {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Available sorts are `created_at`, `updated_at`, `status`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
-                        "schema": {
-                            "type": "string",
-                            "default": "-created_at"
-                        }
-                    },
                     {
                         "name": "page[size]",
                         "in": "query",
@@ -850,6 +858,28 @@
                                 "2026-04-30T23:59:59Z"
                             ]
                         }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "default": [
+                                "-created_at"
+                            ],
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "created_at",
+                                    "-created_at",
+                                    "updated_at",
+                                    "-updated_at",
+                                    "status",
+                                    "-status"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -1225,15 +1255,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Available sorts are `created_at`, `result`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
-                        "schema": {
-                            "type": "string",
-                            "default": "-created_at"
-                        }
-                    },
-                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -1285,6 +1306,26 @@
                             ],
                             "$ref": "#/components/schemas/CheckResult"
                         }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "default": [
+                                "-created_at"
+                            ],
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "created_at",
+                                    "-created_at",
+                                    "result",
+                                    "-result"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -1595,15 +1636,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Available sorts are `created_at`, `updated_at`, `aba_date`, `status`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
-                        "schema": {
-                            "type": "string",
-                            "default": "-created_at"
-                        }
-                    },
-                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -1619,21 +1651,6 @@
                         "schema": {
                             "type": "integer"
                         }
-                    },
-                    {
-                        "name": "include",
-                        "in": "query",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "enum": [
-                                    "entries",
-                                    "entries.verification"
-                                ]
-                            }
-                        },
-                        "explode": false
                     },
                     {
                         "name": "fields[aba-checks]",
@@ -1742,6 +1759,47 @@
                                 "2026-04-30T23:59:59Z"
                             ]
                         }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "default": [
+                                "-created_at"
+                            ],
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "created_at",
+                                    "-created_at",
+                                    "updated_at",
+                                    "-updated_at",
+                                    "aba_date",
+                                    "-aba_date",
+                                    "status",
+                                    "-status"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "entries",
+                                    "entriesCount",
+                                    "entriesExists",
+                                    "entries.verification"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -1914,21 +1972,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "include",
-                        "in": "query",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "enum": [
-                                    "entries",
-                                    "entries.verification"
-                                ]
-                            }
-                        },
-                        "explode": false
-                    },
-                    {
                         "name": "fields[aba-checks]",
                         "in": "query",
                         "schema": {
@@ -1984,6 +2027,23 @@
                                     "check_results",
                                     "created_at",
                                     "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "entries",
+                                    "entriesCount",
+                                    "entriesExists",
+                                    "entries.verification"
                                 ]
                             }
                         },
@@ -2063,21 +2123,6 @@
                         }
                     },
                     {
-                        "name": "include",
-                        "in": "query",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "enum": [
-                                    "entries",
-                                    "entries.verification"
-                                ]
-                            }
-                        },
-                        "explode": false
-                    },
-                    {
                         "name": "fields[aba-checks]",
                         "in": "query",
                         "schema": {
@@ -2133,6 +2178,23 @@
                                     "check_results",
                                     "created_at",
                                     "updated_at"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "entries",
+                                    "entriesCount",
+                                    "entriesExists",
+                                    "entries.verification"
                                 ]
                             }
                         },
@@ -2259,15 +2321,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Available sorts are `created_at`, `updated_at`, `status`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
-                        "schema": {
-                            "type": "string",
-                            "default": "-created_at"
-                        }
-                    },
-                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -2342,6 +2395,28 @@
                                 "2026-04-30T23:59:59Z"
                             ]
                         }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "default": [
+                                "-created_at"
+                            ],
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "created_at",
+                                    "-created_at",
+                                    "updated_at",
+                                    "-updated_at",
+                                    "status",
+                                    "-status"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -2647,15 +2722,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Available sorts are `created_at`, `updated_at`, `consecutive_failures`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
-                        "schema": {
-                            "type": "string",
-                            "default": "-created_at"
-                        }
-                    },
-                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -2703,6 +2769,28 @@
                                 true
                             ]
                         }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "default": [
+                                "-created_at"
+                            ],
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "created_at",
+                                    "-created_at",
+                                    "updated_at",
+                                    "-updated_at",
+                                    "consecutive_failures",
+                                    "-consecutive_failures"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -3099,8 +3187,7 @@
                                         "type": "string"
                                     },
                                     "minItems": 0,
-                                    "maxItems": 0,
-                                    "additionalItems": false
+                                    "maxItems": 0
                                 }
                             }
                         }
@@ -3297,15 +3384,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Available sorts are `created_at`, `status`, `type`. You can sort by multiple options by separating them with a comma. To sort in descending order, use `-` sign in front of the sort, for example: `-created_at`.",
-                        "schema": {
-                            "type": "string",
-                            "default": "-created_at"
-                        }
-                    },
-                    {
                         "name": "page[size]",
                         "in": "query",
                         "description": "The number of results that will be returned per page.",
@@ -3330,20 +3408,6 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
-                        "name": "include",
-                        "in": "query",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "enum": [
-                                    "attempts"
-                                ]
-                            }
-                        },
-                        "explode": false
                     },
                     {
                         "name": "fields[webhook-events]",
@@ -3428,6 +3492,44 @@
                                 "2026-04-30T23:59:59Z"
                             ]
                         }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "default": [
+                                "-created_at"
+                            ],
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "created_at",
+                                    "-created_at",
+                                    "status",
+                                    "-status",
+                                    "type",
+                                    "-type"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "attempts",
+                                    "attemptsCount",
+                                    "attemptsExists"
+                                ]
+                            }
+                        },
+                        "explode": false
                     }
                 ],
                 "responses": {
@@ -3613,20 +3715,6 @@
                         }
                     },
                     {
-                        "name": "include",
-                        "in": "query",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "enum": [
-                                    "attempts"
-                                ]
-                            }
-                        },
-                        "explode": false
-                    },
-                    {
                         "name": "fields[webhook-events]",
                         "in": "query",
                         "schema": {
@@ -3659,6 +3747,22 @@
                                     "attempt",
                                     "created_at",
                                     "response_status_code"
+                                ]
+                            }
+                        },
+                        "explode": false
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "attempts",
+                                    "attemptsCount",
+                                    "attemptsExists"
                                 ]
                             }
                         },
@@ -4735,13 +4839,9 @@
                             },
                             "secret": {
                                 "description": "The signing secret. Only returned when the subscription is first created.",
-                                "anyOf": [
-                                    {
-                                        "type": "string"
-                                    },
-                                    {
-                                        "type": "object"
-                                    }
+                                "type": [
+                                    "string",
+                                    "object"
                                 ]
                             },
                             "enabled": {
