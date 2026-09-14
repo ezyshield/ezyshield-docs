@@ -4458,8 +4458,7 @@
                     },
                     "accept_close_match": {
                         "type": "boolean",
-                        "description": "No longer read by the verification engine. A resolved name that isn't\nan exact match is now always judged by our AI arbiter, regardless of this value.\nAccepted and ignored during a short sunset window; will be removed.",
-                        "deprecated": true
+                        "description": "Whether a bank \"close match\" verdict is accepted as proof of the account name.\nWhen true, a close match verifies the supplied account name exactly as a full match does.\nWhen false, a close match is judged by our own comparison of the supplied name against the\nname the bank returned, which forgives formatting differences only. Defaults to the\norganisation's setting."
                     }
                 },
                 "title": "StoreVerificationRequest"
