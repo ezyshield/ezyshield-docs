@@ -2294,7 +2294,7 @@
                                             "type": "string",
                                             "description": "Error overview.",
                                             "examples": [
-                                                "This ABA check has no verified payment lines to include in a regenerated file."
+                                                "This ABA file has no verified lines to include in a regenerated file."
                                             ]
                                         }
                                     },
@@ -4455,10 +4455,6 @@
                         ],
                         "description": "Attribution identifier for grouping related verifications.",
                         "maxLength": 255
-                    },
-                    "accept_close_match": {
-                        "type": "boolean",
-                        "description": "Whether a bank \"close match\" verdict is accepted as proof of the account name.\nWhen true, a close match verifies the supplied account name exactly as a full match does.\nWhen false, a close match is judged by our own comparison of the supplied name against the\nname the bank returned, which forgives formatting differences only. Defaults to the\norganisation's setting."
                     }
                 },
                 "title": "StoreVerificationRequest"
