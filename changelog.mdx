@@ -4,59 +4,34 @@ description: "See the latest ezyshield updates, improvements, and platform chang
 rss: true
 ---
 
-<Update label="September 28, 2026" tags={["Feature", "Bug", "Improvement"]}>
+<Update label="September 28, 2026" tags={["Feature"]}>
   ## Clearer Xero and MYOB connections
 
   Connecting Xero now explains exactly what the signed-in login can and can’t do before anything is saved. If the login can’t access payroll, you can invite a colleague who can, or continue with suppliers only and add employees later. If the login can’t change supplier bank details, you’re guided to invite someone who can, so supplier payments stay protected from the first sync.
 
-  Businesses that can’t be connected are listed with the reason, reconnecting always keeps the same business, and cancelling a new Xero connection removes ezyshield’s access in Xero. Accounting software settings show whether employees are syncing and offer a reconnect when they aren’t.
+  Accounting software settings show whether employees are syncing and offer a reconnect when they aren’t.
 
   ## Download verification records as PDFs
 
   Download any finished verification as a PDF from its verification page, or from the contact page menu for the contact's current verification. The record shows who the details belong to, the bank, business, and identity details that were checked, each check's result, any manual approval with its reason, and who generated the document and when, so it can be filed as supporting evidence in your accounting software or audit records instead of a screenshot or phone-call note.
 </Update>
 
-<Update label="September 17, 2026" tags={["Improvement"]}>
+<Update label="September 17, 2026" tags={["Feature", "Bug"]}>
   ## Fewer notifications during contact imports
 
   CSV imports and the initial Xero or MYOB sync no longer send individual verification-result notifications to your team, even when checks finish after the import.
 
   ## Review invoice emails in bulk and remember unwanted senders
 
-  Accept or decline selected emails together from the Emails page. Administrators can also remember exact sender addresses for automatic acceptance or decline, keeping recurring unwanted emails out of invoice processing without blocking an entire domain.
-
-  Email Sender Rules in organisation settings brings authorised addresses, authorised domains, and declined addresses together in readable, expandable lists. Declined addresses take priority over authorised senders.
+  Accept or decline selected emails together from the Emails page. Administrators can also remember exact sender addresses for automatic acceptance or decline, keeping recurring unwanted emails out of invoice processing without blocking an entire domain. Declined addresses take priority over authorised senders.
 </Update>
 
-<Update label="August 12, 2026" tags={["Improvement"]}>
-  ## Choose which ABN business name to verify against
-
-  When an ABN has more than one active registered business name, auto-verify now shows the available names and lets you pick the one to use, instead of selecting one automatically. ABNs with a single active name still verify in one click.
-</Update>
-
-<Update label="August 10, 2026" tags={["Feature", "Improvement"]}>
+<Update label="August 10, 2026" tags={["Feature"]}>
   ## Review identity checks instead of an outright fail
 
-  Identity (KYC) checks that need a closer look no longer simply fail. When the automated checks cannot reach a confident decision, the verification moves to a distinct in-review state, and the contact and verification pages prompt your team to review it in the portal.
+  Identity (KYC) checks that need a closer look no longer simply fail. When the automated checks cannot reach a confident decision, the verification moves to a distinct in-review state, and the contact and verification pages and the unverified contacts overview prompt your team to review it in the portal.
 
   Reviewers see the evidence submitted by the person — identity documents, liveness video, and face-match results — and record an approve or reject decision with a reason. The decision is applied to the verification immediately and logged in the contact's activity timeline, so a borderline identity check becomes a minute of review instead of a failed verification and a restarted process.
-
-  <Expandable title="Improvements (2)">
-    * The activity log now sits alongside the main content on wide screens, keeping recent events visible while working with a contact or verification.
-    * The unverified contacts overview flags contacts awaiting identity review with a direct link to the review screen.
-  </Expandable>
-</Update>
-
-<Update label="August 3, 2026" tags={["Improvement"]}>
-  ## Find records faster with portal search
-
-  Portal searches now reliably find contacts and verifications by names and payment details, with search added across invoices, ABA checks, API keys, webhooks, users, and invites.
-</Update>
-
-<Update label="July 29, 2026" tags={["Feature"]}>
-  ## 7-day card-free trial for the Founder plan
-
-  The Founder plan now includes a 7-day free trial that requires no card details to start. Customers can explore the full portal experience and run live verifications without payment, making it easier to evaluate ezyshield before committing to a paid subscription.
 </Update>
 
 <Update label="July 23, 2026" tags={["Feature"]}>
@@ -69,13 +44,7 @@ rss: true
   See the [Invoice extraction](/guides/invoice-extraction) guide for the recommended upload-extract-verify workflow.
 </Update>
 
-<Update label="July 16, 2026" tags={["Bug"]}>
-  ## Verification status displays correctly after reverting contacts to verified
-
-Verification status now displays the correct check marks in the portal when contacts are reverted to verified status, instead of incorrectly showing cancelled verification attempt indicators.
-</Update>
-
-<Update label="July 14, 2026" tags={["Feature", "Improvement"]}>
+<Update label="July 14, 2026" tags={["Feature"]}>
   ## Manage webhook subscriptions in the portal
 
   API administrators can now create and manage webhook endpoints, choose which verification events each endpoint receives, copy signing secrets when subscriptions are created, and send test events directly from the portal.
@@ -113,7 +82,7 @@ Verification status now displays the correct check marks in the portal when cont
   </Note>
 </Update>
 
-<Update label="July 3, 2026" tags={["Breaking Change", "Feature"]}>
+<Update label="July 3, 2026" tags={["Breaking Change", "Improvement"]}>
   ## Verification requests use a `verify_identity` boolean <Badge color="red">Breaking Change</Badge>
 
   The `individual_confirmation_mode` parameter on the [Verification](/api-reference/verifications) API has been replaced by a single `verify_identity` boolean. Set it to `true` to have the contact person verify their identity with a government-issued ID, or `false` to run sanctions screening only. The `individual_portrait_image` parameter and the biometric authentication mode have been removed, and verification responses no longer include `individual_confirmation_mode`.
@@ -128,14 +97,6 @@ Verification status now displays the correct check marks in the portal when cont
 </Update>
 
 <Update label="June 30, 2026" tags={["Breaking Change"]}>
-  ## Identity verification page moved to `/authenticate` <Badge color="red">Breaking Change</Badge>
-
-  The page payees use to verify their identity has moved from `/confirm/{code}` to `/authenticate/{code}`. Verification links sent by SMS and email now point to the new address, and any existing `/confirm/{code}` link is permanently redirected (301) to the new path — so links already delivered to payees keep working without interruption.
-
-  <Note>
-    Update any hardcoded references to the `/confirm/{code}` path to use `/authenticate/{code}`.
-  </Note>
-
   ## Webhook event `verification.confirmation_ready` renamed <Badge color="red">Breaking Change</Badge>
 
   The `verification.confirmation_ready` webhook event has been renamed to `verification.authentication_ready`, reflecting that the payee completes an identity authentication step. The event payload is unchanged.
@@ -145,7 +106,7 @@ Verification status now displays the correct check marks in the portal when cont
   </Note>
 </Update>
 
-<Update label="June 24, 2026" tags={["Feature"]}>
+<Update label="June 24, 2026" tags={["Feature", "Improvement"]}>
   ## Import your contacts in bulk
 
   Bring your existing payees into ezyshield in one step. Upload a CSV of contacts during onboarding or at any time from the contacts list, and ezyshield creates and queues them for verification automatically — no manual entry, no row-by-row setup. New customers can be fully operational minutes after signing up.
