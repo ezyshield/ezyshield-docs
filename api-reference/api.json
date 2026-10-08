@@ -1027,6 +1027,9 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             },
@@ -1960,6 +1963,9 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             },
@@ -2272,6 +2278,15 @@
                             }
                         },
                         "headers": {
+                            "Transfer-Encoding": {
+                                "required": true,
+                                "schema": {
+                                    "type": "string",
+                                    "enum": [
+                                        "chunked"
+                                    ]
+                                }
+                            },
                             "Content-Disposition": {
                                 "description": "Attachment filename for the regenerated ABA file.",
                                 "schema": {
@@ -2294,7 +2309,7 @@
                                             "type": "string",
                                             "description": "Error overview.",
                                             "examples": [
-                                                "This ABA file has no verified lines to include in a regenerated file."
+                                                "Only a failed ABA file with at least one verified line can be regenerated."
                                             ]
                                         }
                                     },
@@ -2354,6 +2369,7 @@
                                     "extracted_account_number",
                                     "extracted_account_bsb",
                                     "extracted_invoice_number",
+                                    "check_results",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -2564,6 +2580,9 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             },
@@ -2592,6 +2611,7 @@
                                     "extracted_account_number",
                                     "extracted_account_bsb",
                                     "extracted_invoice_number",
+                                    "check_results",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -2676,6 +2696,7 @@
                                     "extracted_account_number",
                                     "extracted_account_bsb",
                                     "extracted_invoice_number",
+                                    "check_results",
                                     "created_at",
                                     "updated_at"
                                 ]
@@ -3683,6 +3704,9 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
                     }
                 }
             }
@@ -3920,6 +3944,7 @@
                             },
                             "aba_date": {
                                 "type": "string",
+                                "format": "date",
                                 "description": "The processing date of the ABA file."
                             },
                             "original_file_name": {
@@ -4129,6 +4154,18 @@
                 ],
                 "title": "CheckResult"
             },
+            "InvoiceCheckType": {
+                "type": "string",
+                "enum": [
+                    "document_is_invoice",
+                    "supplier_name_and_abn_found",
+                    "abn_passes_checksum",
+                    "abn_registered_for_gst",
+                    "document_is_tax_invoice",
+                    "bank_details_unchanged"
+                ],
+                "title": "InvoiceCheckType"
+            },
             "InvoiceResource": {
                 "type": "object",
                 "properties": {
@@ -4178,6 +4215,28 @@
                             "extracted_invoice_number": {
                                 "type": "string",
                                 "description": "Extracted invoice number."
+                            },
+                            "check_results": {
+                                "type": [
+                                    "array",
+                                    "null"
+                                ],
+                                "description": "The automated checks run on the invoice, in order. Null for invoices read before checks existed.",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "$ref": "#/components/schemas/InvoiceCheckType"
+                                        },
+                                        "result": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "result"
+                                    ]
+                                }
                             },
                             "created_at": {
                                 "type": "string",
@@ -4694,6 +4753,10 @@
                                 "description": "ISO 8601 formatted date-time."
                             },
                             "response_status_code": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
                                 "description": "HTTP status code returned by the webhook target. Null when the\nattempt never received a response (connection failure, timeout)."
                             }
                         }
@@ -4850,7 +4913,7 @@
                                 "type": "array",
                                 "description": "The event types this subscription listens to.",
                                 "items": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/WebhookEventType"
                                 }
                             },
                             "secret": {
