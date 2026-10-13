@@ -4160,6 +4160,7 @@
                     "document_is_invoice",
                     "supplier_name_and_abn_found",
                     "abn_passes_checksum",
+                    "bank_details_well_formed",
                     "abn_registered_for_gst",
                     "document_is_tax_invoice",
                     "bank_details_unchanged"

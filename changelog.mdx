@@ -4,6 +4,16 @@ description: "See the latest ezyshield updates, improvements, and platform chang
 rss: true
 ---
 
+<Update label="October 12, 2026" tags={["Improvement", "Bug"]}>
+  ## Existing contacts are matched when you connect Xero or MYOB
+
+  When you connect Xero or MYOB, contacts already in ezyshield are now matched to their records there instead of being duplicated on both sides. Suppliers are matched by ABN and employees by name. When exactly one record matches on each side, they become a single contact that keeps the details from both, with your accounting software taking priority. Disconnecting your accounting software now also unlinks your contacts, so connecting again matches them afresh.
+
+  ## Invoices with malformed bank details no longer update contacts
+
+  Invoices whose BSB or account number is in the wrong format, or that show one without the other, are now marked invalid, so a misread bank account can't create or update a contact. The reason appears in the invoice's activity log and in `check_results` on the [Invoice](/api-reference/invoices) object.
+</Update>
+
 <Update label="October 8, 2026" tags={["Feature", "Improvement"]}>
   ## Automatic invoice checks
 
