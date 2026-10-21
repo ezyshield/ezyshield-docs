@@ -1,5 +1,5 @@
 {
-    "openapi": "3.1.0",
+    "openapi": "3.1.2",
     "info": {
         "title": "ezyshield",
         "version": "0.0.1"
@@ -4433,7 +4433,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Business name. When present, business_abn is required and business checks are run.",
+                        "description": "Business name. Business checks run only when business_abn is also present; a name without an ABN is ignored.",
                         "maxLength": 255
                     },
                     "business_abn": {
@@ -4441,7 +4441,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Australian Business Number (ABN). Must be 11 digits. Required when business_name is present."
+                        "description": "Australian Business Number (ABN). Must be 11 digits. Must be omitted when business_name is omitted."
                     },
                     "account_name": {
                         "type": [
