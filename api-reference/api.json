@@ -4433,7 +4433,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Business name. Business checks run only when business_abn is also present; a name without an ABN is ignored.",
+                        "description": "Business name. When present, business checks are run. A business name without business_abn fails verification.",
                         "maxLength": 255
                     },
                     "business_abn": {
@@ -4441,7 +4441,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "Australian Business Number (ABN). Must be 11 digits. Must be omitted when business_name is omitted."
+                        "description": "Australian Business Number (ABN). Must be 11 digits. When present, business checks are run. An ABN without business_name fails verification."
                     },
                     "account_name": {
                         "type": [
@@ -4625,6 +4625,7 @@
                     "bank_account_is_active",
                     "bank_account_confirmed",
                     "account_name_matches_bank_account",
+                    "business_details_provided",
                     "abn_exists",
                     "abn_is_active",
                     "abn_registered_for_gst",
