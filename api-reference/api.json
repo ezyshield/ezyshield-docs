@@ -4628,6 +4628,7 @@
                     "business_details_provided",
                     "abn_exists",
                     "abn_is_active",
+                    "company_is_active",
                     "abn_registered_for_gst",
                     "abn_owns_business_name",
                     "abn_owns_bank_account",
